@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import SelectParam from './../components/selectParam';
+import { parameters } from './../defaults';
 import { api } from './../helpers';
 
 class Root extends Component {
@@ -24,6 +26,7 @@ class Root extends Component {
 
     return (
       <div className="root">
+        <SelectParam parameters={parameters.countries} />
         {this.state.news.map(news => (
           <div key={news.title} className={classes.container}>
             <img src={news.urlToImage} alt={news.url} />
