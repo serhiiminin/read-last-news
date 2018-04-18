@@ -1,0 +1,74 @@
+{
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "rules": {
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ],
+      "function-paren-newline": "off",
+      "import/exports-last": "error",
+      "import/first": "off",
+      "import/no-named-as-default-member": "off",
+      "import/newline-after-import": [
+        "error",
+        {
+          "count": 1
+        }
+      ],
+      "import/order": [
+        "error",
+        {
+          "groups": [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index"
+          ]
+        }
+      ],
+      "import/prefer-default-export": "warn",
+      "jsx-a11y/href-no-hash": "off",
+      "jsx-a11y/anchor-is-valid": [
+        "error",
+        {
+          "aspects": [
+            "noHref",
+            "invalidHref",
+            "preferButton"
+          ]
+        }
+      ],
+      "max-len": [
+        "error",
+        120,
+        2,
+        {
+          "ignoreUrls": true,
+          "ignoreComments": false,
+          "ignoreRegExpLiterals": true,
+          "ignoreStrings": true,
+          "ignoreTemplateLiterals": true
+        }
+      ],
+      "newline-after-var": [
+        "error"
+      ],
+      "no-underscore-dangle": "off",
+      "object-curly-newline": [
+        "error",
+        {
+          "consistent": true
+        }
+      ],
+      "react/no-typos": "off",
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    },
+    "globals": {
+        "document": true,
+         "foo": true,
+         "window": true
+    }
+  }
