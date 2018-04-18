@@ -55,7 +55,7 @@ const parameters = {
     ve: 'Venezuela (Bolivarian Republic)',
     za: 'South Africa',
   },
-  category: {
+  categories: {
     business: 'Business',
     entertainment: 'Entertainment',
     general: 'General',
