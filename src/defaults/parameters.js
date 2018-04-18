@@ -1,5 +1,5 @@
 const parameters = {
-  country: {
+  countries: {
     ae: 'United Arab Emirates',
     ar: 'Argentina',
     at: 'Austria',
