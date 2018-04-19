@@ -1,6 +1,10 @@
 const parameters = {
   country: 'country',
   category: 'category',
+  defaultParams: {
+    country: 'us',
+    category: 'science',
+  },
   countries: {
     ae: 'United Arab Emirates',
     ar: 'Argentina',

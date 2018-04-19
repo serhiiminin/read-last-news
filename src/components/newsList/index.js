@@ -26,7 +26,7 @@ class NewsList extends Component {
     return (
       <div className="news-list">
         {this.state.newsList.map(newsItem => (
-          <NewsItem newsItem={newsItem} key={newsItem.title} />
+          <NewsItem newsItem={newsItem} key={`${newsItem.title}_${newsItem.url}`} />
           ))}
       </div>
     );

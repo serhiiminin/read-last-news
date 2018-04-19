@@ -1,4 +1,4 @@
-import { BASE_API_URL, API_KEY } from './defaults';
+import { apiData, parameters } from './../defaults';
 
 const checkStatus = response => {
   if (response.status >= 200 && response.status < 300) {
@@ -21,10 +21,10 @@ const fetchJSON = url =>
 const api = params => {
   const searchUrl = Object.keys(params).length !== 0
     ? new window.URLSearchParams(params)
-    : new window.URLSearchParams({ country: 'us', category: 'general' });
+    : new window.URLSearchParams(parameters.defaultParams);
 
-  searchUrl.append('apiKey', API_KEY);
-  return fetchJSON(`${BASE_API_URL}/top-headlines?${searchUrl.toString()}`);
+  searchUrl.append('apiKey', apiData.API_KEY);
+  return fetchJSON(`${apiData.BASE_API_URL}/top-headlines?${searchUrl.toString()}`);
 };
 
 export default api;
