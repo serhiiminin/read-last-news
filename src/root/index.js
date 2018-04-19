@@ -1,27 +1,18 @@
-import React, { Component } from 'react';
-import { api } from './../helpers';
+import React from 'react';
+import PropTypes from 'prop-types';
+import App from './../app';
 
-class Root extends Component {
-  state={
-    news: [],
-  };
-  componentDidMount() {
-    api({ country: 'ua', category: 'sport', pageSize: 100, q: ''})
-      .then(response => this.setState({news: response.articles}))
-  }
-  render() {
-    const { classes } = this.props;
-    return (
-      <div className="root">
-        {this.state.news.map(news => (
-          <div key={news.title} className={classes.container}>
-            <img src={news.urlToImage} alt={news.url} />
-            <p>{news.title}</p>
-          </div>
-        ))}
-      </div>
-    );
-  }
-}
+const Root = ({ classes }) => (
+  <div className={classes.container}>
+    <App />
+  </div>
+);
+
+Root.propTypes = {
+  classes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+};
+Root.defaultProps = {
+  classes: null,
+};
 
 export default Root;
