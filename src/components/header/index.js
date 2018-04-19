@@ -4,8 +4,14 @@ import { parameters } from './../../defaults';
 
 const Header = () => (
   <header className="header">
-    <SelectParam parameters={parameters.countries} />
-    <SelectParam parameters={parameters.categories} />
+    <SelectParam
+      parameters={parameters.countries}
+      defaultValue="us"
+    />
+    <SelectParam
+      parameters={parameters.categories}
+      defaultValue="business"
+    />
   </header>
 );
 
