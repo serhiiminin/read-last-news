@@ -1,4 +1,10 @@
 const parameters = {
+  country: 'country',
+  category: 'category',
+  defaultParams: {
+    country: 'us',
+    category: 'science',
+  },
   countries: {
     ae: 'United Arab Emirates',
     ar: 'Argentina',
@@ -55,7 +61,7 @@ const parameters = {
     ve: 'Venezuela (Bolivarian Republic)',
     za: 'South Africa',
   },
-  category: {
+  categories: {
     business: 'Business',
     entertainment: 'Entertainment',
     general: 'General',
