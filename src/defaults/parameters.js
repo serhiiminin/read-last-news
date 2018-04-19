@@ -1,4 +1,6 @@
 const parameters = {
+  country: 'country',
+  category: 'category',
   countries: {
     ae: 'United Arab Emirates',
     ar: 'Argentina',

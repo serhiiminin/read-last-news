@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { parseSearchParams } from '../../enhancers';
 import { NewsItem } from './..';
 import { api } from './../../helpers';
 
@@ -12,12 +13,12 @@ class NewsList extends Component {
     newsList: [],
   };
   componentDidMount() {
-    api({ country: 'ua' })
+    api(parseSearchParams(this.props.location.search))
       .then(({ articles }) => this.setState({ newsList: articles }));
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.location.search !== nextProps.location.search) {
-      api({ country: 'us' })
+      api(parseSearchParams(nextProps.location.search))
         .then(({ articles }) => this.setState({ newsList: articles }));
     }
   }
