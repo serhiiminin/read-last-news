@@ -1,12 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import SelectParam from './../components/selectParam';
-import { parameters } from './../defaults';
-import { api } from './../helpers';
 import App from './../app';
 
-const Root = () => (
-  <App />
+const Root = ({ classes }) => (
+  <div className={classes.container}>
+    <App />
+  </div>
 );
+
+Root.propTypes = {
+  classes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+};
+Root.defaultProps = {
+  classes: null,
+};
 
 export default Root;
