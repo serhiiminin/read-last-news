@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -5,7 +7,11 @@ import { parseSearchParams } from '../../enhancers';
 import { SelectParam } from './..';
 import { parameters } from './../../defaults';
 
-const Header = props => {
+type Props = {
+  location: Object,
+}
+
+const Header = (props: Props) => {
   const { location } = props;
   const parsedLocation = parseSearchParams(location.search);
 

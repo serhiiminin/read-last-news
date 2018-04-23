@@ -1,10 +1,12 @@
+// @flow
+
 import { apiData, parameters } from './../defaults';
 
-const checkStatus = response => {
+const checkStatus = (response: Object) => {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
-  const error = new Error(response.statusText);
+  const error: Object = new Error(response.statusText);
 
   error.response = response;
   throw error;
@@ -18,7 +20,7 @@ const fetchJSON = url =>
     .then(parseJSON)
     .catch(error => console.log(error));
 
-const api = params => {
+const api = (params: Object) => {
   const searchUrl = Object.keys(params).length !== 0
     ? new window.URLSearchParams(params)
     : new window.URLSearchParams(parameters.defaultParams);
