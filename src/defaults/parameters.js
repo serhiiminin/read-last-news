@@ -70,6 +70,13 @@ const parameters = {
     sports: 'Sports',
     technology: 'Technology',
   },
+  pageSize: {
+    paramName: 'pageSize',
+    min: 0,
+    max: 100,
+    step: 1,
+    defaultValue: 20,
+  },
 };
 
 export default parameters;
