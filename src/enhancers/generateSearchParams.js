@@ -1,4 +1,6 @@
-const generateSearchParams = (previousSearchLine, newSearchParams) => {
+// @flow
+
+const generateSearchParams = (previousSearchLine: string, newSearchParams: Object): string => {
   if (!previousSearchLine) return `?${new window.URLSearchParams(newSearchParams).toString()}`;
 
   const updatedSearchParams = new window.URLSearchParams(previousSearchLine);

@@ -1,4 +1,6 @@
-const parseSearchParams = searchParams => {
+// @flow
+
+const parseSearchParams = (searchParams: string): Object => {
   if (!searchParams) return {};
   const params = new window.URLSearchParams(searchParams);
 

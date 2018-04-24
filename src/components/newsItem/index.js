@@ -1,9 +1,24 @@
+// @flow
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import styles from './styles';
 
-const NewsItemCmp = ({ newsItem, classes }) => (
+
+type Props = {
+  newsItem: {
+    title: string,
+    description: string,
+    url: string,
+    urlToImage: string,
+  },
+  classes: {
+    'news-item': string,
+  },
+};
+
+const NewsItemCmp = ({ newsItem, classes }: Props) => (
   <div className={classes['news-item']}>
     <p>{newsItem.title}</p>
     <p>{newsItem.description}</p>

@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -5,7 +7,18 @@ import { parseSearchParams } from '../../enhancers';
 import { NewsItem } from './..';
 import { api } from './../../helpers';
 
-class NewsList extends Component {
+type State = {
+  newsList: Array<{
+    title: string,
+    url: string,
+  }>,
+};
+
+type Props = {
+  location: Object,
+};
+
+class NewsList extends Component<Props, State> {
   static propTypes = {
     location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   };
