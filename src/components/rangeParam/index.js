@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { generateSearchParams } from '../../enhancers';
@@ -15,17 +15,27 @@ type Props = {
   history: Object,
 };
 
-const RangeParam = ({ min, max, step, defaultValue, location, history }: Props) => (
-  <input
-    type="range"
-    min={min}
-    max={max}
-    step={step}
-    defaultValue={defaultValue}
-    onMouseUp={event =>
-      history.push(generateSearchParams(location.search, { [parameters.pageSize.paramName]: event.target.value }))}
-  />
-);
+const RangeParam = ({ min, max, step, defaultValue, location, history }: Props) => {
+  const numberRange: React.ElementRef<C> = React.createRef();
+
+  return (
+    <React.Fragment>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        defaultValue={defaultValue}
+        onChange={event => { numberRange.current.innerHTML = event.target.value; }}
+        onMouseUp={event =>
+          history.push(generateSearchParams(location.search, { [parameters.pageSize.paramName]: event.target.value }))
+        }
+      />
+      <span ref={numberRange}>{defaultValue}</span>
+    </React.Fragment>
+
+  );
+};
 
 RangeParam.propTypes = {
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
