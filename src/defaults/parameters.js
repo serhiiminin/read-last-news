@@ -5,6 +5,10 @@ const parameters = {
     country: 'us',
     category: 'general',
   },
+  choose: {
+    country: 'Choose country',
+    category: 'Choose category',
+  },
   countries: {
     ae: 'United Arab Emirates',
     ar: 'Argentina',
