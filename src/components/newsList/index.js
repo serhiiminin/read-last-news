@@ -42,6 +42,7 @@ class NewsList extends Component<Props, State> {
           <NewsItem newsItem={newsItem} key={`${newsItem.title}_${newsItem.url}`} />
           ))}
       </div>
+
     );
   }
 }

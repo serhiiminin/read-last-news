@@ -1,10 +1,12 @@
 // @flow
 
 import React from 'react';
-import { NewsList } from './..';
+import { ErrorBoundary, NewsList } from './..';
 
 const Main = () => (
-  <NewsList />
+  <ErrorBoundary>
+    <NewsList />
+  </ErrorBoundary>
 );
 
 export default Main;

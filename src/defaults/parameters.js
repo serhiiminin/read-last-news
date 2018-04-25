@@ -3,7 +3,7 @@ const parameters = {
   category: 'category',
   defaultParams: {
     country: 'us',
-    category: 'science',
+    category: 'general',
   },
   countries: {
     ae: 'United Arab Emirates',
