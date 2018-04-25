@@ -4,7 +4,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { parseSearchParams } from '../../enhancers';
-import { SelectParam } from './..';
+import { SelectParam, RangeParam } from './..';
 import { parameters } from './../../defaults';
 
 type Props = {
@@ -30,6 +30,12 @@ const Header = (props: Props) => {
         defaultValue={Object.keys(parsedLocation).length && parsedLocation.category
           ? parsedLocation.category
           : parameters.defaultParams.category}
+      />
+      <RangeParam
+        min={parameters.pageSize.min}
+        max={parameters.pageSize.max}
+        step={parameters.pageSize.step}
+        defaultValue={parameters.pageSize.defaultValue}
       />
     </header>
   );

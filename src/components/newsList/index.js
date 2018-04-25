@@ -32,7 +32,7 @@ class NewsList extends Component<Props, State> {
   componentWillReceiveProps(nextProps) {
     if (this.props.location.search !== nextProps.location.search) {
       api(parseSearchParams(nextProps.location.search))
-        .then(({ articles }) => this.setState({ newsList: articles }));
+        .then(({ articles }) => this.setState({ newsList: articles }, () => console.log(this.state)));
     }
   }
   render() {
