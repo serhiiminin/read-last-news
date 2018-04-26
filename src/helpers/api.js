@@ -20,13 +20,13 @@ const fetchJSON = url =>
     .then(parseJSON)
     .catch(error => console.log(error));
 
-const api = (params: Object) => {
+const api = (params: Object, typeData: string) => {
   const searchUrl = Object.keys(params).length !== 0
     ? new window.URLSearchParams(params)
     : new window.URLSearchParams(parameters.defaultParams);
 
   searchUrl.append('apiKey', apiData.API_KEY);
-  return fetchJSON(`${apiData.BASE_API_URL}/top-headlines?${searchUrl.toString()}`);
+  return fetchJSON(`${apiData.BASE_API_URL}/${typeData}?${searchUrl.toString()}`);
 };
 
 export default api;

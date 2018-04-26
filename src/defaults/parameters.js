@@ -1,4 +1,9 @@
 const parameters = {
+  typeData: {
+    topHeadlines: 'top-headlines',
+    everything: 'everything',
+    sources: 'sources',
+  },
   country: 'country',
   category: 'category',
   defaultParams: {

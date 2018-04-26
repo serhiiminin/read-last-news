@@ -18,7 +18,7 @@ type Props = {
   },
 };
 
-const NewsItemCmp = ({ newsItem, classes }: Props) => (
+const NewsItem = ({ newsItem, classes }: Props) => (
   <div className={classes['news-item']}>
     <p>{newsItem.title}</p>
     <p>{newsItem.description}</p>
@@ -29,11 +29,10 @@ const NewsItemCmp = ({ newsItem, classes }: Props) => (
   </div>
 );
 
-NewsItemCmp.propTypes = {
+NewsItem.propTypes = {
   newsItem: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-const NewsItem = injectSheet(styles)(NewsItemCmp);
 
-export default NewsItem;
+export default injectSheet(styles)(NewsItem);

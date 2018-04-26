@@ -3,8 +3,10 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import injectSheet from 'react-jss';
 import { generateSearchParams } from '../../enhancers';
 import { parameters } from '../../defaults';
+import styles from './styles';
 
 type Props = {
   min: number,
@@ -13,14 +15,17 @@ type Props = {
   defaultValue: number,
   location: Object,
   history: Object,
+  classes: Object,
 };
 
-const RangeParam = ({ min, max, step, defaultValue, location, history }: Props) => {
+const RangeParam = ({ min, max, step, defaultValue, location, history, classes }: Props) => {
   const numberRange: React.ElementRef<Object> = React.createRef();
 
   return (
     <React.Fragment>
       <input
+        disabled={!location.search}
+        className={!location.search ? classes['range-param'] : classes['range-param-hidden']}
         type="range"
         min={min}
         max={max}
@@ -46,4 +51,4 @@ RangeParam.propTypes = {
   defaultValue: PropTypes.number.isRequired,
 };
 
-export default withRouter(RangeParam);
+export default withRouter(injectSheet(styles)(RangeParam));

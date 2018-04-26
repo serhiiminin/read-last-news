@@ -31,12 +31,12 @@ class NewsList extends Component<Props, State> {
       ? parseSearchParams(this.props.location.search)
       : parameters.defaultParams;
 
-    api(parseSearchParams(request))
+    api(request, parameters.typeData.topHeadlines)
       .then(({ articles }) => this.setState({ newsList: articles }));
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.location.search !== nextProps.location.search) {
-      api(parseSearchParams(nextProps.location.search))
+      api(parseSearchParams(nextProps.location.search), parameters.typeData.topHeadlines)
         .then(({ articles }) => this.setState({ newsList: articles }));
     }
   }
