@@ -12,8 +12,16 @@ type Props = {
 const App = ({ classes }: Props) => (
   <div className={classes.container}>
     <Header />
-    <Sidebar />
-    <Main />
+    <div className={classes.content}>
+      <div className={classes.content__sidebar}>
+        <Sidebar />
+      </div>
+      <div className={classes.content__main}>
+        <Main />
+      </div>
+
+    </div>
+
   </div>
 );
 

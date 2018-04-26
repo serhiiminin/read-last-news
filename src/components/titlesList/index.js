@@ -13,9 +13,8 @@ type State = {
 
 type Props = {
   location: Object,
+  history: Object,
 };
-
-const isCountry = 'sd';
 
 class TitlesList extends React.Component<Props, State> {
   state = {
@@ -32,6 +31,7 @@ class TitlesList extends React.Component<Props, State> {
   }
   render() {
     const { titlesList } = this.state;
+    const { history } = this.props;
 
     return (
       <ul>
@@ -40,6 +40,7 @@ class TitlesList extends React.Component<Props, State> {
             key={id}
             name={id}
             title={name}
+            history={history}
           />
         ))}
       </ul>
