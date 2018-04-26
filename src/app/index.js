@@ -1,20 +1,24 @@
+// @flow
+
 import React from 'react';
 import injectSheet from 'react-jss';
 import PropTypes from 'prop-types';
-import { Main, Header } from './../components';
+import { Main, Header, Sidebar } from './../components';
 import styles from './styles';
 
-const AppCmp = ({ classes }) => (
+type Props = {
+  classes: Object,
+}
+const App = ({ classes }: Props) => (
   <div className={classes.container}>
     <Header />
+    <Sidebar />
     <Main />
   </div>
 );
 
-AppCmp.propTypes = {
+App.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-const App = injectSheet(styles)(AppCmp);
-
-export default App;
+export default injectSheet(styles)(App);
