@@ -18,6 +18,7 @@ const Header = (props: Props) => {
   return (
     <header className="header">
       <SelectParam
+        choose={parameters.choose.country}
         parameterType={parameters.country}
         parameters={parameters.countries}
         defaultValue={Object.keys(parsedLocation).length && parsedLocation.country
@@ -25,6 +26,7 @@ const Header = (props: Props) => {
           : parameters.defaultParams.country}
       />
       <SelectParam
+        choose={parameters.choose.category}
         parameterType={parameters.category}
         parameters={parameters.categories}
         defaultValue={Object.keys(parsedLocation).length && parsedLocation.category

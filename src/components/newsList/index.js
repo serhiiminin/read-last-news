@@ -1,9 +1,10 @@
 // @flow
 
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { parseSearchParams } from '../../enhancers';
+import { parameters } from '../../defaults';
 import { NewsItem } from './..';
 import { api } from './../../helpers';
 
@@ -26,12 +27,16 @@ class NewsList extends Component<Props, State> {
     newsList: [],
   };
   componentDidMount() {
-    api(parseSearchParams(this.props.location.search))
+    const request = Object.keys(parseSearchParams(this.props.location.search)).length
+      ? parseSearchParams(this.props.location.search)
+      : parameters.defaultParams;
+
+    api(request, parameters.typeData.topHeadlines)
       .then(({ articles }) => this.setState({ newsList: articles }));
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.location.search !== nextProps.location.search) {
-      api(parseSearchParams(nextProps.location.search))
+      api(parseSearchParams(nextProps.location.search), parameters.typeData.topHeadlines)
         .then(({ articles }) => this.setState({ newsList: articles }));
     }
   }

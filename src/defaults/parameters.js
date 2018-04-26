@@ -1,9 +1,18 @@
 const parameters = {
+  typeData: {
+    topHeadlines: 'top-headlines',
+    everything: 'everything',
+    sources: 'sources',
+  },
   country: 'country',
   category: 'category',
   defaultParams: {
     country: 'us',
     category: 'general',
+  },
+  choose: {
+    country: 'Choose country',
+    category: 'Choose category',
   },
   countries: {
     ae: 'United Arab Emirates',
