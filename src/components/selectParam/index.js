@@ -16,7 +16,7 @@ type Props = {
 };
 
 const SelectParam = ({ parameterType, parameters, isMultiple, defaultValue, choose, history, location }: Props) => {
-  const paramsList: Array<Array<string>> = Object.entries(parameters);
+  const paramsList: Array<[string, mixed]> = Object.entries(parameters);
 
   return (
     <select
@@ -26,9 +26,11 @@ const SelectParam = ({ parameterType, parameters, isMultiple, defaultValue, choo
     >
       <option value={choose} disabled>{choose}</option>
       {paramsList
-        .sort(([, firstValue], [, secondValue]) => firstValue.localeCompare(secondValue))
+        .sort(([, firstValue], [, secondValue]) =>
+          (typeof firstValue === 'string' && typeof secondValue === 'string'
+            ? firstValue.localeCompare(secondValue) : 0))
         .map(([key, value]) => (
-          <option value={key} key={key} >{value}</option>
+          <option value={key} key={key} >{typeof value === 'string' ? value : null}</option>
         ))}
     </select>
   );

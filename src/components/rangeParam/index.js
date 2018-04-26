@@ -16,7 +16,7 @@ type Props = {
 };
 
 const RangeParam = ({ min, max, step, defaultValue, location, history }: Props) => {
-  const numberRange: React.ElementRef<C> = React.createRef();
+  const numberRange: React.ElementRef<Object> = React.createRef();
 
   return (
     <React.Fragment>
