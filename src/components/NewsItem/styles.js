@@ -1,7 +1,11 @@
+import { variables } from '../../styles';
+
 const styles = {
   'news-item': {
     padding: '5px',
+    margin: '10px',
     width: '250px',
+    background: variables.colors.sky,
     '& .img-wrapper': {
 
     },
@@ -10,7 +14,6 @@ const styles = {
     },
     '& p': {
       margin: '5px 0',
-      background: '#ff0',
     },
     '& .title': {
       margin: '0',
