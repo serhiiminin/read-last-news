@@ -41,14 +41,16 @@ class NewsList extends Component<Props, State> {
     }
   }
   render() {
-    return (
-      <div className="news-list">
-        {this.state.newsList.map(newsItem => (
-          <NewsItem newsItem={newsItem} key={`${newsItem.title}_${newsItem.url}`} />
+    return !this.state.newsList.length
+      ? <div>There is no news for your search</div>
+      : (
+        <div className="news-list">
+          {this.state.newsList.map(newsItem => (
+            <NewsItem newsItem={newsItem} key={`${newsItem.title}_${newsItem.url}`} />
           ))}
-      </div>
+        </div>
 
-    );
+      );
   }
 }
 

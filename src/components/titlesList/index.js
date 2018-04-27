@@ -23,7 +23,6 @@ class TitlesList extends React.Component<Props, State> {
   componentDidMount() {
     const initRequest = parseSearchParams(this.props.location.search);
 
-    console.log(initRequest);
     api(initRequest, parameters.typeData.sources)
       .then(({ sources }) => this.setState({ titlesList: sources }));
   }
