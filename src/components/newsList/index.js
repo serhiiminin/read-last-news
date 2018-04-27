@@ -27,11 +27,11 @@ class NewsList extends Component<Props, State> {
     newsList: [],
   };
   componentDidMount() {
-    const request = Object.keys(parseSearchParams(this.props.location.search)).length
+    const initRequest = Object.keys(parseSearchParams(this.props.location.search)).length !== 0
       ? parseSearchParams(this.props.location.search)
       : parameters.defaultParams;
 
-    api(request, parameters.typeData.topHeadlines)
+    api(initRequest, parameters.typeData.topHeadlines)
       .then(({ articles }) => this.setState({ newsList: articles }));
   }
   componentWillReceiveProps(nextProps) {

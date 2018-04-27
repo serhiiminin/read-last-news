@@ -6,6 +6,8 @@ const parameters = {
   },
   country: 'country',
   category: 'category',
+  sources: 'sources',
+  q: 'q',
   defaultParams: {
     country: 'us',
     category: 'general',
