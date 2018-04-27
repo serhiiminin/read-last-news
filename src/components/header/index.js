@@ -4,7 +4,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { parseSearchParams } from '../../enhancers';
-import { SelectParam, RangeParam, TitlesList } from './..';
+import { SelectParam, RangeParam } from './..';
 import { parameters } from './../../defaults';
 
 type Props = {

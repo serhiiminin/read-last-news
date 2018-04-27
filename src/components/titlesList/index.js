@@ -23,27 +23,40 @@ class TitlesList extends React.Component<Props, State> {
   componentDidMount() {
     const initRequest = parseSearchParams(this.props.location.search);
 
-    api({ country: 'us' }, parameters.typeData.sources)
-      .then(({ sources }) => this.setState({ titlesList: sources }, console.log(sources)));
+    console.log(initRequest);
+    api(initRequest, parameters.typeData.sources)
+      .then(({ sources }) => this.setState({ titlesList: sources }));
   }
   componentWillReceiveProps(nextProps) {
-
+    if (this.props.location.search !== nextProps.location.search) {
+      api(parseSearchParams(nextProps.location.search), parameters.typeData.sources)
+        .then(({ sources }) => this.setState({ titlesList: sources }));
+    }
   }
   render() {
     const { titlesList } = this.state;
     const { history } = this.props;
 
     return (
-      <ul>
-        {titlesList.map(({ id, name }) => (
-          <TitleItem
-            key={id}
-            name={id}
-            title={name}
-            history={history}
-          />
-        ))}
-      </ul>
+      <React.Fragment>
+        <h3>Sources</h3>
+        {
+          !titlesList.length
+            ? <div>Empty</div>
+            : (
+              <ul>
+                {titlesList.map(({ id, name }) => (
+                  <TitleItem
+                    key={id}
+                    name={id}
+                    title={name}
+                    history={history}
+                  />
+                ))}
+              </ul>
+            )
+        }
+      </React.Fragment>
     );
   }
 }
