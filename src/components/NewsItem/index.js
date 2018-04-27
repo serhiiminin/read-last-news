@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import styles from './styles';
 
-
 type Props = {
   newsItem: {
     title: string,
@@ -13,19 +12,20 @@ type Props = {
     url: string,
     urlToImage: string,
   },
-  classes: {
-    'news-item': string,
-  },
+  classes: Object,
 };
 
 const NewsItem = ({ newsItem, classes }: Props) => (
   <div className={classes['news-item']}>
-    <p>{newsItem.title}</p>
-    <p>{newsItem.description}</p>
-    <p>{newsItem.url}</p>
-    <a href={newsItem.url} target="_blank">
-      <img src={newsItem.urlToImage} alt={newsItem.title} />
-    </a>
+    <div className="img-wrapper">
+      <a href={newsItem.url} target="_blank">
+        <img className="img" src={newsItem.urlToImage} alt={newsItem.title} />
+      </a>
+    </div>
+    <div className="details">
+      <h5 className="title">{newsItem.title}</h5>
+      <p className="description">{newsItem.description}</p>
+    </div>
   </div>
 );
 

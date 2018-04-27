@@ -1,11 +1,13 @@
 // @flow
 
 import * as React from 'react';
+import injectSheet from 'react-jss';
 import { withRouter } from 'react-router-dom';
 import { parameters } from '../../defaults';
 import { parseSearchParams } from '../../enhancers';
 import { api } from '../../helpers';
 import { TitleItem } from './..';
+import styles from './styles';
 
 type State = {
   titlesList: Array<Object>
@@ -14,6 +16,7 @@ type State = {
 type Props = {
   location: Object,
   history: Object,
+  classes: Object,
 };
 
 class TitlesList extends React.Component<Props, State> {
@@ -34,7 +37,7 @@ class TitlesList extends React.Component<Props, State> {
   }
   render() {
     const { titlesList } = this.state;
-    const { history } = this.props;
+    const { history, classes } = this.props;
 
     return (
       <React.Fragment>
@@ -43,7 +46,7 @@ class TitlesList extends React.Component<Props, State> {
           !titlesList.length
             ? <div>Empty</div>
             : (
-              <ul>
+              <ul className={classes['titles-list']}>
                 {titlesList.map(({ id, name }) => (
                   <TitleItem
                     key={id}
@@ -61,4 +64,4 @@ class TitlesList extends React.Component<Props, State> {
 }
 
 
-export default withRouter(TitlesList);
+export default withRouter(injectSheet(styles)(TitlesList));

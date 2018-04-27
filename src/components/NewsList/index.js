@@ -2,11 +2,13 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import injectSheet from 'react-jss';
 import { withRouter } from 'react-router-dom';
 import { parseSearchParams } from '../../enhancers';
 import { parameters } from '../../defaults';
 import { NewsItem } from './..';
 import { api } from './../../helpers';
+import styles from './styles';
 
 type State = {
   newsList: Array<{
@@ -17,6 +19,7 @@ type State = {
 
 type Props = {
   location: Object,
+  classes: Object,
 };
 
 class NewsList extends Component<Props, State> {
@@ -41,10 +44,12 @@ class NewsList extends Component<Props, State> {
     }
   }
   render() {
+    const { classes } = this.props;
+
     return !this.state.newsList.length
       ? <div>There is no news for your search</div>
       : (
-        <div className="news-list">
+        <div className={classes['news-list']}>
           {this.state.newsList.map(newsItem => (
             <NewsItem newsItem={newsItem} key={`${newsItem.title}_${newsItem.url}`} />
           ))}
@@ -54,4 +59,4 @@ class NewsList extends Component<Props, State> {
   }
 }
 
-export default withRouter(NewsList);
+export default withRouter(injectSheet(styles)(NewsList));
