@@ -2,6 +2,7 @@
   "name": "read-last-news",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://serhiiminin.github.io",
   "dependencies": {
     "hoek": "^5.0.3",
     "jss-global": "^3.0.0",

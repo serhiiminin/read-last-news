@@ -16,16 +16,16 @@ type Props = {
   location: Object,
   history: Object,
   classes: Object,
+  disabled: boolean,
 };
 
-const RangeParam = ({ min, max, step, defaultValue, location, history, classes }: Props) => {
+const RangeParam = ({ min, max, step, defaultValue, location, history, classes, disabled }: Props) => {
   const numberRange: React.ElementRef<Object> = React.createRef();
 
   return (
-    <React.Fragment>
+    <div className={!disabled ? classes['range-param'] : classes['range-param-hidden']}>
       <input
-        disabled={!location.search}
-        className={!location.search ? classes['range-param'] : classes['range-param-hidden']}
+        disabled={disabled}
         type="range"
         min={min}
         max={max}
@@ -37,7 +37,7 @@ const RangeParam = ({ min, max, step, defaultValue, location, history, classes }
         }
       />
       <span ref={numberRange}>{defaultValue}</span>
-    </React.Fragment>
+    </div>
 
   );
 };

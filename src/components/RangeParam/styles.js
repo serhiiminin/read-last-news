@@ -1,10 +1,11 @@
 const styles = {
   'range-param': {
-    '&-hidden': {
-      opacity: '0.5',
-      display: 'none',
-    },
+    opacity: '1',
   },
+  'range-param-hidden': {
+    opacity: '0.5',
+  },
+
 };
 
 export default styles;
