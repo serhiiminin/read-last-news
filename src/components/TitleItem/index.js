@@ -2,23 +2,25 @@
 
 import * as React from 'react';
 import injectSheet from 'react-jss';
+import { Checkbox } from 'material-ui';
 import styles from './styles';
 
 type Props = {
   name: string,
   title: string,
-  history: Object,
   classes: Object,
+  checkedTitles: Object,
+  onChange: Function,
 }
-const TitleItem = ({ name, title, history, classes }: Props) => (
+const TitleItem = ({ name, title, classes, checkedTitles, onChange }: Props) => (
   <li value={name} className={classes['titles-item']}>
-    <input
+    <Checkbox
       id={name}
-      type="checkbox"
-      name={name}
-      onChange={e => history.push(e.target.name)}
+      label={title}
+      value={name}
+      checked={checkedTitles[name]}
+      onCheck={event => onChange(event.target.value)}
     />
-    <label htmlFor={name}>{title}</label>
   </li>
 );
 

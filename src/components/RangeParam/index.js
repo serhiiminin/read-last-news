@@ -44,6 +44,7 @@ class RangeParam extends React.Component<Props, State> {
           max={max}
           step={step}
           value={rangeValue}
+          disabled={disabled}
           onChange={(event, value) => this.setState({ rangeValue: value })}
           onDragStop={() =>
             history.push(generateSearchParams(location.search, { [parameters.pageSize.paramName]: rangeValue }))}
