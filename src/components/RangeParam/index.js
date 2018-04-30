@@ -4,6 +4,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import injectSheet from 'react-jss';
+import Slider from 'material-ui/Slider';
 import { generateSearchParams } from '../../enhancers';
 import { parameters } from '../../defaults';
 import styles from './styles';
@@ -19,28 +20,40 @@ type Props = {
   disabled: boolean,
 };
 
-const RangeParam = ({ min, max, step, defaultValue, location, history, classes, disabled }: Props) => {
-  const numberRange: React.ElementRef<Object> = React.createRef();
+type State = {
+  rangeValue: number,
+}
 
-  return (
-    <div className={!disabled ? classes['range-param'] : classes['range-param-hidden']}>
-      <input
-        disabled={disabled}
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        defaultValue={defaultValue}
-        onChange={event => { numberRange.current.innerHTML = event.target.value; }}
-        onMouseUp={event =>
-          history.push(generateSearchParams(location.search, { [parameters.pageSize.paramName]: event.target.value }))
-        }
-      />
-      <span ref={numberRange}>{defaultValue}</span>
-    </div>
+class RangeParam extends React.Component<Props, State> {
+  state = {
+    rangeValue: 0,
+  };
+  componentWillMount() {
+    this.setState({
+      rangeValue: this.props.defaultValue,
+    });
+  }
+  render() {
+    const { min, max, step, location, history, classes, disabled } = this.props;
+    const { rangeValue } = this.state;
 
-  );
-};
+    return (
+      <div className={!disabled ? classes['range-param'] : classes['range-param-hidden']}>
+        <Slider
+          min={min}
+          max={max}
+          step={step}
+          value={rangeValue}
+          onChange={(event, value) => this.setState({ rangeValue: value })}
+          onDragStop={() =>
+            history.push(generateSearchParams(location.search, { [parameters.pageSize.paramName]: rangeValue }))}
+        />
+        <span>{this.state.rangeValue}</span>
+      </div>
+
+    );
+  }
+}
 
 RangeParam.propTypes = {
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
