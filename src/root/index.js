@@ -1,18 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import App from './../app';
+// @flow
 
-const Root = ({ classes }) => (
-  <div className={classes.container}>
-    <App />
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import injectSheet from 'react-jss';
+import App from './../app';
+import styles from './styles';
+
+type Props = {
+  classes: Object,
+}
+
+const Root = ({ classes }: Props) => (
+  <div className={classes.root}>
+    <Router>
+      <Route path="/" component={App} />
+    </Router>
   </div>
 );
 
 Root.propTypes = {
-  classes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-};
-Root.defaultProps = {
-  classes: null,
+  classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default Root;
+export default injectSheet(styles)(Root);

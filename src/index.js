@@ -1,11 +1,11 @@
+// @flow
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import injectSheet from 'react-jss';
 import Root from './root';
 import registerServiceWorker from './registerServiceWorker';
-import styles from './styles';
 
-const RootCmp = injectSheet(styles)(Root);
+const root = window.document.getElementById('root');
 
-ReactDOM.render(<RootCmp />, document.getElementById('root'));
+ReactDOM.render(<Root />, root);
 registerServiceWorker();

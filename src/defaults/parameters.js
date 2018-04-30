@@ -1,4 +1,21 @@
 const parameters = {
+  typeData: {
+    topHeadlines: 'top-headlines',
+    everything: 'everything',
+    sources: 'sources',
+  },
+  country: 'country',
+  category: 'category',
+  sources: 'sources',
+  q: 'q',
+  defaultParams: {
+    country: 'us',
+    category: 'general',
+  },
+  choose: {
+    country: 'Choose country',
+    category: 'Choose category',
+  },
   countries: {
     ae: 'United Arab Emirates',
     ar: 'Argentina',
@@ -63,6 +80,13 @@ const parameters = {
     science: 'Science',
     sports: 'Sports',
     technology: 'Technology',
+  },
+  pageSize: {
+    paramName: 'pageSize',
+    min: 0,
+    max: 100,
+    step: 1,
+    defaultValue: 20,
   },
 };
 

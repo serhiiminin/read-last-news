@@ -1,11 +1,32 @@
-import React from 'react';
-import { Main, Header } from './../components';
+// @flow
 
-const App = () => (
-  <React.Fragment>
+import React from 'react';
+import injectSheet from 'react-jss';
+import PropTypes from 'prop-types';
+import { Main, Header, Sidebar } from './../components';
+import styles from './styles';
+
+type Props = {
+  classes: Object,
+}
+const App = ({ classes }: Props) => (
+  <div className={classes.container}>
     <Header />
-    <Main />
-  </React.Fragment>
+    <div className={classes.content}>
+      <div className={classes.content__sidebar}>
+        <Sidebar />
+      </div>
+      <div className={classes.content__main}>
+        <Main />
+      </div>
+
+    </div>
+
+  </div>
 );
 
-export default App;
+App.propTypes = {
+  classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+};
+
+export default injectSheet(styles)(App);
