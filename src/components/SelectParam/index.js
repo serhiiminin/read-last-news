@@ -34,7 +34,7 @@ const SelectParam = (
       <SelectField
         floatingLabelText={choose}
         value={defaultValue}
-        style={{ maxWidth: '200px' }}
+        style={styles['select-param']}
         onChange={(event, index, value) =>
           history.push(generateSearchParams(location.search, { [parameterType]: value }))}
       >
