@@ -4,27 +4,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { SelectField, MenuItem } from 'material-ui';
-import { withRouter } from 'react-router-dom';
-import { generateSearchParams } from './../../helpers';
 import styles from './styles';
 
 type Props = {
-  parameterType: string,
   parameters: Object,
   defaultValue: string,
   choose: string,
-  history: Object,
-  location: Object,
+  onChange: Function,
   classes: Object,
 };
 
 const SelectParam = (
-  { parameterType,
-    parameters,
+  { parameters,
     defaultValue,
     choose,
-    history,
-    location,
+    onChange,
     classes,
   }: Props) => {
   const paramsList: Array<[string, mixed]> = Object.entries(parameters);
@@ -35,8 +29,7 @@ const SelectParam = (
         floatingLabelText={choose}
         value={defaultValue}
         style={styles['select-param']}
-        onChange={(event, index, value) =>
-          history.push(generateSearchParams(location.search, { [parameterType]: value }))}
+        onChange={onChange}
       >
         {paramsList
           .sort(([, firstValue], [, secondValue]) =>
@@ -51,10 +44,7 @@ const SelectParam = (
 };
 
 SelectParam.propTypes = {
-  parameterType: PropTypes.string.isRequired,
   parameters: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   defaultValue: PropTypes.string,
   choose: PropTypes.string,
 };
@@ -63,4 +53,4 @@ SelectParam.defaultProps = {
   choose: null,
 };
 
-export default withRouter(injectSheet(styles)(SelectParam));
+export default injectSheet(styles)(SelectParam);

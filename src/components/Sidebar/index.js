@@ -6,38 +6,58 @@ import injectSheet from 'react-jss';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import { parseSearchParams } from '../../helpers';
+import { generateSearchParams, parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
 import { TitlesList, SelectParam, RangeParam } from './..';
 import styles from './styles';
 
 type Props = {
   location: Object,
+  history: Object,
+  match: Object,
   classes: Object,
 }
 
 type State = {
   open: boolean,
+  country: string,
 }
 
 class Sidebar extends React.Component<Props, State> {
   state = {
     open: false,
+    country: parameters.defaultParams.country,
   };
+  componentWillMount() {
+    if (!this.props.match.params.countryId) {
+      this.setState({ open: true });
+    }
+    const currentParams = parseSearchParams(this.props.location.search, this.props.match.params.countryId);
+
+    this.setState({
+      country: currentParams.country,
+    });
+  }
   render() {
-    const { location, classes } = this.props;
-    const parsedLocation = parseSearchParams(location.search);
+    const { location, history, match, classes } = this.props;
+    const parsedLocation = parseSearchParams(location.search, match.params.countryId);
     const actions = [
       <FlatButton
         label="Cancel"
         primary
-        onClick={() => this.setState({ open: false })}
+        onClick={() => this.setState({
+          country: match.params.countryId,
+          open: false,
+        })}
       />,
       <FlatButton
         label="Submit"
         primary
         keyboardFocused
-        onClick={() => this.setState({ open: false })}
+        onClick={() => {
+          history.push(`/${this.state.country}`);
+          this.setState({ open: false });
+        }}
       />,
     ];
 
@@ -53,27 +73,26 @@ class Sidebar extends React.Component<Props, State> {
         >
           <SelectParam
             choose={parameters.choose.country}
-            parameterType={parameters.country}
             parameters={parameters.countries}
-            defaultValue={Object.keys(parsedLocation).length && parsedLocation.country
-              ? parsedLocation.country
-              : parameters.defaultParams.country}
+            defaultValue={this.state.country || parameters.defaultParams.country}
+            onChange={(event, index, value) => this.setState({ country: value })}
           />
         </Dialog>
         <SelectParam
           choose={parameters.choose.category}
-          parameterType={parameters.category}
           parameters={parameters.categories}
           defaultValue={Object.keys(parsedLocation).length && parsedLocation.category
             ? parsedLocation.category
             : parameters.defaultParams.category}
+          onChange={(event, index, value) =>
+            history.push(generateSearchParams(location.search, { [parameters.category]: value }))}
         />
         <RangeParam
           min={parameters.pageSize.min}
           max={parameters.pageSize.max}
           step={parameters.pageSize.step}
           defaultValue={parameters.pageSize.defaultValue}
-          disabled={!location.search}
+          disabled={!location.search && !match.params.countryId}
         />
         <TitlesList />
       </aside>

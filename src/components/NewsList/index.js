@@ -18,6 +18,7 @@ type State = {
 
 type Props = {
   location: Object,
+  match: Object,
   classes: Object,
 };
 
@@ -29,7 +30,9 @@ class NewsList extends Component<Props, State> {
     newsList: [],
   };
   componentDidMount() {
-    const initRequest = Object.keys(parseSearchParams(this.props.location.search)).length !== 0
+    const initRequest = Object.keys(
+      parseSearchParams(this.props.location.search, this.props.match.params.countryId),
+    ).length !== 0
       ? parseSearchParams(this.props.location.search)
       : parameters.defaultParams;
 
@@ -37,8 +40,11 @@ class NewsList extends Component<Props, State> {
       .then(({ articles }) => this.setState({ newsList: articles }));
   }
   componentWillReceiveProps(nextProps) {
-    if (this.props.location.search !== nextProps.location.search) {
-      api(parseSearchParams(nextProps.location.search), parameters.typeData.topHeadlines)
+    if (this.props.location.search !== nextProps.location.search
+      || this.props.match.params.countryId !== nextProps.match.params.countryId) {
+      const queryParams = parseSearchParams(nextProps.location.search, nextProps.match.params.countryId);
+
+      api(queryParams, parameters.typeData.topHeadlines)
         .then(({ articles }) => this.setState({ newsList: articles }));
     }
   }

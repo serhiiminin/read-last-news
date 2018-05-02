@@ -1,10 +1,17 @@
 // @flow
+import { parameters } from '../defaults';
 
-const parseSearchParams = (searchParams: string): Object => {
-  if (!searchParams) return {};
+const parseSearchParams = (searchParams: string, country: string): Object => {
   const params = new window.URLSearchParams(searchParams);
 
-  return Object.assign({}, ...Array.from(params.entries()).map(([key, value]) => ({ [key]: value })));
+  const queryParams = Object.assign({}, ...Array.from(params.entries()).map(([key, value]) => ({ [key]: value })));
+
+  return !country
+    ? queryParams
+    : {
+      ...queryParams,
+      [parameters.country]: country,
+    };
 };
 
 export default parseSearchParams;

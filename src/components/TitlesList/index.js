@@ -16,6 +16,7 @@ type State = {
 type Props = {
   location: Object,
   history: Object,
+  match: Object,
   classes: Object,
 };
 
@@ -36,7 +37,7 @@ class TitlesList extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    const initRequest = parseSearchParams(this.props.location.search);
+    const initRequest = parseSearchParams(this.props.location.search, this.props.match.params.countryId);
 
     api(initRequest, parameters.typeData.sources)
       .then(({ sources }) => {
@@ -48,8 +49,9 @@ class TitlesList extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.location.search !== nextProps.location.search) {
-      api(parseSearchParams(nextProps.location.search), parameters.typeData.sources)
+    if (this.props.location.search !== nextProps.location.search
+      || this.props.match.params.countryId !== nextProps.match.params.countryId) {
+      api(parseSearchParams(nextProps.location.search, this.props.match.params.countryId), parameters.typeData.sources)
         .then(({ sources }) => this.setState({ titlesList: sources }));
     }
   }
