@@ -3,6 +3,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import Moment from 'react-moment';
+import FlatButton from 'material-ui/FlatButton';
 import styles from './styles';
 
 type Props = {
@@ -11,21 +14,38 @@ type Props = {
     description: string,
     url: string,
     urlToImage: string,
+    publishedAt: string,
+    source: {
+      name: string,
+    }
   },
   classes: Object,
 };
 
 const NewsItem = ({ newsItem, classes }: Props) => (
   <div className={classes['news-item']}>
-    <div className="img-wrapper">
-      <a href={newsItem.url} target="_blank">
-        <img className="img" src={newsItem.urlToImage} alt={newsItem.title} />
-      </a>
-    </div>
-    <div className="details">
-      <h5 className="title">{newsItem.title}</h5>
-      <p className="description">{newsItem.description}</p>
-    </div>
+    <Card
+      style={{ height: '100%' }}
+    >
+      <CardHeader
+        title={newsItem.source.name}
+        subtitle={<Moment date={newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
+      />
+      <CardMedia>
+        <img src={newsItem.urlToImage} alt={newsItem.title} />
+      </CardMedia>
+      <CardTitle title={newsItem.title} />
+      <CardText>
+        {newsItem.description}
+      </CardText>
+      <CardActions>
+        <FlatButton
+          label="Read"
+          href={newsItem.url}
+          target="_blank"
+        />
+      </CardActions>
+    </Card>
   </div>
 );
 
