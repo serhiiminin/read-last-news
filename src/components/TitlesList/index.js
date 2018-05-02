@@ -4,8 +4,7 @@ import * as React from 'react';
 import injectSheet from 'react-jss';
 import { withRouter } from 'react-router-dom';
 import { parameters } from '../../defaults';
-import { generateSearchParams, parseSearchParams } from '../../enhancers';
-import { api } from '../../helpers';
+import { generateSearchParams, parseSearchParams, api } from '../../helpers';
 import { TitleItem } from './..';
 import styles from './styles';
 

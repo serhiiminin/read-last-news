@@ -5,13 +5,12 @@ import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { SelectField, MenuItem } from 'material-ui';
 import { withRouter } from 'react-router-dom';
-import { generateSearchParams } from './../../enhancers';
+import { generateSearchParams } from './../../helpers';
 import styles from './styles';
 
 type Props = {
   parameterType: string,
   parameters: Object,
-  isMultiple: boolean,
   defaultValue: string,
   choose: string,
   history: Object,

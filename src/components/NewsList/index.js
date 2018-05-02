@@ -4,10 +4,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { withRouter } from 'react-router-dom';
-import { parseSearchParams } from '../../enhancers';
+import { parseSearchParams, api } from '../../helpers';
 import { parameters } from '../../defaults';
 import { NewsItem } from './..';
-import { api } from './../../helpers';
 import styles from './styles';
 
 type State = {

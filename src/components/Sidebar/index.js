@@ -4,7 +4,7 @@ import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import injectSheet from 'react-jss';
 import { parameters } from '../../defaults';
-import { parseSearchParams } from '../../enhancers';
+import { parseSearchParams } from '../../helpers';
 import { TitlesList, SelectParam, RangeParam } from './..';
 import styles from './styles';
 

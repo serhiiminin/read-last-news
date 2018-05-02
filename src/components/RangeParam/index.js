@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import injectSheet from 'react-jss';
 import Slider from 'material-ui/Slider';
-import { generateSearchParams } from '../../enhancers';
+import { generateSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
 import styles from './styles';
 
