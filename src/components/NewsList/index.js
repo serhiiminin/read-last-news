@@ -33,7 +33,7 @@ class NewsList extends Component<Props, State> {
     const initRequest = Object.keys(
       parseSearchParams(this.props.location.search, this.props.match.params.countryId),
     ).length !== 0
-      ? parseSearchParams(this.props.location.search)
+      ? parseSearchParams(this.props.location.search, this.props.match.params.countryId)
       : parameters.defaultParams;
 
     api(initRequest, parameters.typeData.topHeadlines)

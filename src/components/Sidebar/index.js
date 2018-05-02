@@ -8,6 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import { generateSearchParams, parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
+import { variables } from '../../styles';
 import { TitlesList, SelectParam, RangeParam } from './..';
 import styles from './styles';
 
@@ -55,7 +56,7 @@ class Sidebar extends React.Component<Props, State> {
         primary
         keyboardFocused
         onClick={() => {
-          history.push(`/${this.state.country}`);
+          history.push(`/${this.state.country || parameters.defaultParams.country}`);
           this.setState({ open: false });
         }}
       />,
@@ -63,7 +64,12 @@ class Sidebar extends React.Component<Props, State> {
 
     return (
       <aside className={classes.sidebar}>
-        <RaisedButton label={parameters.choose.country} onClick={() => this.setState({ open: true })} />
+        <RaisedButton
+          label={parameters.choose.country}
+          onClick={() => this.setState({ open: true })}
+          labelColor={variables.colors.plaster}
+          backgroundColor={variables.colors.blue}
+        />
         <Dialog
           title={parameters.choose.country}
           actions={actions}
