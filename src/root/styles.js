@@ -8,6 +8,9 @@ const styles = {
     minHeight: '100vh',
     minWidth: '100vw',
   },
+  '@global body': {
+    overflowX: 'hidden !important',
+  },
 };
 
 export default styles;

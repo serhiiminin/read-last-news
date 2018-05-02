@@ -55,8 +55,8 @@ class TitlesList extends React.Component<Props, State> {
     }
   }
 
-  handleOnChange(title) {
-    this.setState({
+  handleOnChange(title: String) {
+    return this.setState({
       checkedTitles: {
         ...this.state.checkedTitles,
         [title]: !this.state.checkedTitles[title],
