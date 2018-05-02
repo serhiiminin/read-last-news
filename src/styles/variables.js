@@ -1,10 +1,10 @@
 const variables = {
   colors: {
     text: '#333333',
-    sky: '#75B1A9',
-    sunglow: '#D9B44A',
-    mountains: '#4F6457',
-    mist: '#ACD0C0',
+    blue: '#2988BC',
+    sea: '#2F496E',
+    plaster: '#F4EADE',
+    coral: '#ED8C72',
   },
 };
 

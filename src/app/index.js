@@ -3,7 +3,7 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 import PropTypes from 'prop-types';
-import { Main, Header, Sidebar } from './../components';
+import { Main, Header, Sidebar, Footer } from './../components';
 import styles from './styles';
 
 type Props = {
@@ -19,7 +19,7 @@ const App = ({ classes }: Props) => (
       <div className={classes.content__main}>
         <Main />
       </div>
-
+      <Footer />
     </div>
 
   </div>

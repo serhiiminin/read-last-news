@@ -32,7 +32,11 @@ const NewsItem = ({ newsItem, classes }: Props) => (
         subtitle={<Moment date={newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
       />
       <CardMedia>
-        <img src={newsItem.urlToImage} alt={newsItem.title} />
+        <img
+          className={classes.img}
+          src={newsItem.urlToImage}
+          alt={newsItem.title}
+        />
       </CardMedia>
       <CardTitle title={newsItem.title} />
       <CardText>
