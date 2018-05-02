@@ -3,13 +3,13 @@ import { variables } from '../styles';
 
 const styles = {
   '@global': Normalize,
+  '@global body': {
+    overflowX: 'hidden',
+  },
   root: {
-    background: variables.colors.mist,
+    background: variables.colors.plaster,
     minHeight: '100vh',
     minWidth: '100vw',
-  },
-  '@global body': {
-    overflowX: 'hidden !important',
   },
 };
 
