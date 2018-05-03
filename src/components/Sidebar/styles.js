@@ -5,7 +5,8 @@ const styles = {
     padding: '15px 10px 10px 0',
   },
   'modal-wrapper': {
-    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
   },
   button: {
     background: variables.colors.blue,

@@ -81,6 +81,7 @@ class Sidebar extends React.Component<Props, State> {
           modal={false}
           open={this.state.open}
           onRequestClose={() => this.setState({ open: false })}
+          style={{ margin: '0 auto' }}
         >
           <div className={classes['modal-wrapper']}>
             <SelectParam
