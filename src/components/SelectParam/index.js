@@ -15,6 +15,7 @@ type Props = {
   choose: string,
   onChange: Function,
   classes: Object,
+  disabled: Boolean
 };
 
 const muiTheme = getMuiTheme({
@@ -29,6 +30,7 @@ const SelectParam = (
     choose,
     onChange,
     classes,
+    disabled,
   }: Props) => {
   const paramsList: Array<[string, mixed]> = Object.entries(parameters);
 
@@ -40,6 +42,7 @@ const SelectParam = (
           value={defaultValue}
           style={styles['select-param']}
           onChange={onChange}
+          disabled={disabled}
         >
           {paramsList
           .sort(([, firstValue], [, secondValue]) =>
@@ -58,10 +61,12 @@ SelectParam.propTypes = {
   parameters: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   defaultValue: PropTypes.string,
   choose: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 SelectParam.defaultProps = {
   defaultValue: null,
   choose: null,
+  disabled: false,
 };
 
 export default injectSheet(styles)(SelectParam);

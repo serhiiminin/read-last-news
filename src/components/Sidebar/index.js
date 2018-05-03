@@ -29,6 +29,7 @@ class Sidebar extends React.Component<Props, State> {
     open: false,
     country: parameters.defaultParams.country,
   };
+
   componentWillMount() {
     if (!this.props.match.params.countryId) {
       this.setState({ open: true });
@@ -39,6 +40,7 @@ class Sidebar extends React.Component<Props, State> {
       country: currentParams.country,
     });
   }
+
   render() {
     const { location, history, match, classes } = this.props;
     const parsedLocation = parseSearchParams(location.search, match.params.countryId);
@@ -50,6 +52,7 @@ class Sidebar extends React.Component<Props, State> {
           country: match.params.countryId,
           open: false,
         })}
+        style={styles.button}
       />,
       <FlatButton
         label="Submit"
@@ -59,6 +62,7 @@ class Sidebar extends React.Component<Props, State> {
           history.push(`/${this.state.country || parameters.defaultParams.country}`);
           this.setState({ open: false });
         }}
+        style={styles.button}
       />,
     ];
 
@@ -77,12 +81,14 @@ class Sidebar extends React.Component<Props, State> {
           open={this.state.open}
           onRequestClose={() => this.setState({ open: false })}
         >
-          <SelectParam
-            choose={parameters.choose.country}
-            parameters={parameters.countries}
-            defaultValue={this.state.country || parameters.defaultParams.country}
-            onChange={(event, index, value) => this.setState({ country: value })}
-          />
+          <div className={classes['modal-wrapper']}>
+            <SelectParam
+              choose={parameters.choose.country}
+              parameters={parameters.countries}
+              defaultValue={this.state.country || parameters.defaultParams.country}
+              onChange={(event, index, value) => this.setState({ country: value })}
+            />
+          </div>
         </Dialog>
         <SelectParam
           choose={parameters.choose.category}
@@ -92,6 +98,7 @@ class Sidebar extends React.Component<Props, State> {
             : parameters.defaultParams.category}
           onChange={(event, index, value) =>
             history.push(generateSearchParams(location.search, { [parameters.category]: value }))}
+          disabled={!parsedLocation.country}
         />
         <RangeParam
           min={parameters.pageSize.min}
