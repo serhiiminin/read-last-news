@@ -2,15 +2,22 @@
   "name": "read-last-news",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://serhiiminin.github.io",
   "dependencies": {
     "hoek": "^5.0.3",
+    "jss-global": "^3.0.0",
+    "material-ui": "^0.20.0",
+    "moment": "^2.22.1",
+    "normalize.jss": "^1.0.3",
     "npm": "^6.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-jss": "^8.4.0",
+    "react-moment": "^0.7.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "recompose": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",

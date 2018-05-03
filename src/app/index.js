@@ -3,7 +3,8 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 import PropTypes from 'prop-types';
-import { Main, Header, Sidebar } from './../components';
+import { compose } from 'recompose';
+import { Main, Header, Sidebar, Footer } from './../components';
 import styles from './styles';
 
 type Props = {
@@ -19,7 +20,7 @@ const App = ({ classes }: Props) => (
       <div className={classes.content__main}>
         <Main />
       </div>
-
+      <Footer />
     </div>
 
   </div>
@@ -29,4 +30,8 @@ App.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default injectSheet(styles)(App);
+const enhance = compose(
+  injectSheet(styles),
+);
+
+export default enhance(App);

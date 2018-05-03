@@ -1,11 +1,12 @@
-export { default as SelectParam } from './selectParam';
-export { default as Header } from './header';
-export { default as Sidebar } from './sidebar';
-export { default as Main } from './main';
-export { default as NewsItem } from './newsItem';
-export { default as NewsList } from './newsList';
-export { default as RangeParam } from './rangeParam';
-export { default as TitlesList } from './titlesList';
-export { default as TitleItem } from './titleItem';
-export { default as ErrorBoundary } from './errorBoundary';
+export { default as SelectParam } from './SelectParam';
+export { default as Header } from './Header';
+export { default as Footer } from './Footer';
+export { default as Sidebar } from './Sidebar';
+export { default as Main } from './Main';
+export { default as NewsItem } from './NewsItem';
+export { default as NewsList } from './NewsList';
+export { default as RangeParam } from './RangeParam';
+export { default as TitlesList } from './TitlesList';
+export { default as TitleItem } from './TitleItem';
+export { default as ErrorBoundary } from './ErrorBoundary';
 

@@ -1,0 +1,122 @@
+// @flow
+
+import * as React from 'react';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
+import injectSheet from 'react-jss';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import { generateSearchParams, parseSearchParams } from '../../helpers';
+import { parameters } from '../../defaults';
+import { variables } from '../../styles';
+import { TitlesList, SelectParam, RangeParam } from './..';
+import styles from './styles';
+
+type Props = {
+  location: Object,
+  history: Object,
+  match: Object,
+  classes: Object,
+}
+
+type State = {
+  open: boolean,
+  country: string,
+}
+
+class Sidebar extends React.Component<Props, State> {
+  state = {
+    open: false,
+    country: parameters.defaultParams.country,
+  };
+
+  componentWillMount() {
+    if (!this.props.match.params.countryId) {
+      this.setState({ open: true });
+    }
+    const currentParams = parseSearchParams(this.props.location.search, this.props.match.params.countryId);
+
+    this.setState({
+      country: currentParams.country,
+    });
+  }
+
+  render() {
+    const { location, history, match, classes } = this.props;
+    const parsedLocation = parseSearchParams(location.search, match.params.countryId);
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        primary
+        onClick={() => this.setState({
+          country: match.params.countryId,
+          open: false,
+        })}
+        style={styles.button}
+      />,
+      <FlatButton
+        label="Submit"
+        primary
+        keyboardFocused
+        onClick={() => {
+          history.push(`/${this.state.country || parameters.defaultParams.country}`);
+          this.setState({ open: false });
+        }}
+        style={styles.button}
+      />,
+    ];
+
+    return (
+      <aside className={classes.sidebar}>
+        <RaisedButton
+          label={parameters.choose.country}
+          onClick={() => this.setState({ open: true })}
+          labelColor={variables.colors.plaster}
+          backgroundColor={variables.colors.blue}
+        />
+        <Dialog
+          title={parameters.choose.country}
+          actions={actions}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={() => this.setState({ open: false })}
+        >
+          <div className={classes['modal-wrapper']}>
+            <SelectParam
+              choose={parameters.choose.country}
+              parameters={parameters.countries}
+              defaultValue={this.state.country || parameters.defaultParams.country}
+              onChange={(event, index, value) => this.setState({ country: value })}
+            />
+          </div>
+        </Dialog>
+        <SelectParam
+          choose={parameters.choose.category}
+          parameters={parameters.categories}
+          defaultValue={Object.keys(parsedLocation).length && parsedLocation.category
+            ? parsedLocation.category
+            : parameters.defaultParams.category}
+          onChange={(event, index, value) =>
+            history.push(generateSearchParams(location.search, { [parameters.category]: value }))}
+          disabled={!parsedLocation.country}
+        />
+        <RangeParam
+          min={parameters.pageSize.min}
+          max={parameters.pageSize.max}
+          step={parameters.pageSize.step}
+          defaultValue={parameters.pageSize.defaultValue}
+          disabled={!location.search && !match.params.countryId}
+        />
+        <TitlesList />
+      </aside>
+    );
+  }
+}
+
+const enhance = compose(
+  withRouter,
+  injectSheet(styles),
+);
+
+export default enhance(Sidebar);

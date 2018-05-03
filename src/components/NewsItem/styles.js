@@ -1,9 +1,10 @@
 const styles = {
   'news-item': {
     padding: '5px',
-    '& p': {
-      margin: '5px 0',
-      background: '#ff0',
+    margin: '1%',
+    width: '30%',
+    img: {
+      display: 'none',
     },
   },
 };
