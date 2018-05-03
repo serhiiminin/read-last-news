@@ -6,7 +6,7 @@ import { compose } from 'recompose';
 import injectSheet from 'react-jss';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import { RaisedButton } from '../../customizedMuiComponents';
 import { generateSearchParams, parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
 import { variables } from '../../styles';
