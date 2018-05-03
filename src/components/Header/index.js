@@ -2,6 +2,7 @@
 
 import React from 'react';
 import injectSheet from 'react-jss';
+import { compose } from 'recompose';
 import styles from './styles';
 
 type Props = {
@@ -17,4 +18,8 @@ const Header = (props: Props) => {
   );
 };
 
-export default injectSheet(styles)(Header);
+const enhance = compose(
+  injectSheet(styles),
+);
+
+export default enhance(Header);

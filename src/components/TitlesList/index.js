@@ -3,6 +3,7 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
 import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
 import { parameters } from '../../defaults';
 import { generateSearchParams, parseSearchParams, api } from '../../helpers';
 import { TitleItem } from './..';
@@ -98,4 +99,9 @@ class TitlesList extends React.Component<Props, State> {
   }
 }
 
-export default withRouter(injectSheet(styles)(TitlesList));
+const enhance = compose(
+  withRouter,
+  injectSheet(styles),
+);
+
+export default enhance(TitlesList);

@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
 import injectSheet from 'react-jss';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -113,4 +114,9 @@ class Sidebar extends React.Component<Props, State> {
   }
 }
 
-export default withRouter(injectSheet(styles)(Sidebar));
+const enhance = compose(
+  withRouter,
+  injectSheet(styles),
+);
+
+export default enhance(Sidebar);

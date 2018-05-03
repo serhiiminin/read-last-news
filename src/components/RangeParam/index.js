@@ -7,6 +7,7 @@ import injectSheet from 'react-jss';
 import Slider from 'material-ui/Slider';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { compose } from 'recompose';
 import { generateSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
 import styles from './styles';
@@ -74,4 +75,9 @@ RangeParam.propTypes = {
   defaultValue: PropTypes.number.isRequired,
 };
 
-export default withRouter(injectSheet(styles)(RangeParam));
+const enhance = compose(
+  withRouter,
+  injectSheet(styles),
+);
+
+export default enhance(RangeParam);

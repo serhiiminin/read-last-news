@@ -5,6 +5,7 @@ import * as React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import injectSheet from 'react-jss';
+import { compose } from 'recompose';
 import App from './../app';
 import styles from './styles';
 
@@ -26,4 +27,8 @@ Root.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default injectSheet(styles)(Root);
+const enhance = compose(
+  injectSheet(styles),
+);
+
+export default enhance(Root);

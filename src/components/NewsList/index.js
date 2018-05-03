@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
 import { parseSearchParams, api } from '../../helpers';
 import { parameters } from '../../defaults';
 import { NewsItem } from './..';
@@ -64,4 +65,9 @@ class NewsList extends Component<Props, State> {
   }
 }
 
-export default withRouter(injectSheet(styles)(NewsList));
+const enhance = compose(
+  withRouter,
+  injectSheet(styles),
+);
+
+export default enhance(NewsList);

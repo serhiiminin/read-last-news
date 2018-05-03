@@ -6,6 +6,7 @@ import injectSheet from 'react-jss';
 import { SelectField, MenuItem } from 'material-ui';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { compose } from 'recompose';
 import { variables } from '../../styles';
 import styles from './styles';
 
@@ -69,4 +70,8 @@ SelectParam.defaultProps = {
   disabled: false,
 };
 
-export default injectSheet(styles)(SelectParam);
+const enhance = compose(
+  injectSheet(styles),
+);
+
+export default enhance(SelectParam);

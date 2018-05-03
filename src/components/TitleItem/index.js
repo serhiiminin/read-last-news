@@ -5,6 +5,7 @@ import injectSheet from 'react-jss';
 import { Checkbox } from 'material-ui';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { compose } from 'recompose';
 import { variables } from '../../styles';
 import styles from './styles';
 
@@ -36,4 +37,8 @@ const TitleItem = ({ name, title, classes, checkedTitles, onChange }: Props) => 
   </li>
 );
 
-export default injectSheet(styles)(TitleItem);
+const enhance = compose(
+  injectSheet(styles),
+);
+
+export default enhance(TitleItem);
