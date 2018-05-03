@@ -4,10 +4,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { withRouter } from 'react-router-dom';
-import { parseSearchParams } from '../../enhancers';
+import { parseSearchParams, api } from '../../helpers';
 import { parameters } from '../../defaults';
 import { NewsItem } from './..';
-import { api } from './../../helpers';
 import styles from './styles';
 
 type State = {
@@ -19,6 +18,7 @@ type State = {
 
 type Props = {
   location: Object,
+  match: Object,
   classes: Object,
 };
 
@@ -30,16 +30,21 @@ class NewsList extends Component<Props, State> {
     newsList: [],
   };
   componentDidMount() {
-    const initRequest = Object.keys(parseSearchParams(this.props.location.search)).length !== 0
-      ? parseSearchParams(this.props.location.search)
+    const initRequest = Object.keys(
+      parseSearchParams(this.props.location.search, this.props.match.params.countryId),
+    ).length !== 0
+      ? parseSearchParams(this.props.location.search, this.props.match.params.countryId)
       : parameters.defaultParams;
 
     api(initRequest, parameters.typeData.topHeadlines)
       .then(({ articles }) => this.setState({ newsList: articles }));
   }
   componentWillReceiveProps(nextProps) {
-    if (this.props.location.search !== nextProps.location.search) {
-      api(parseSearchParams(nextProps.location.search), parameters.typeData.topHeadlines)
+    if (this.props.location.search !== nextProps.location.search
+      || this.props.match.params.countryId !== nextProps.match.params.countryId) {
+      const queryParams = parseSearchParams(nextProps.location.search, nextProps.match.params.countryId);
+
+      api(queryParams, parameters.typeData.topHeadlines)
         .then(({ articles }) => this.setState({ newsList: articles }));
     }
   }

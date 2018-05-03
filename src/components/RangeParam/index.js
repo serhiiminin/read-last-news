@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import injectSheet from 'react-jss';
 import Slider from 'material-ui/Slider';
-import { generateSearchParams } from '../../enhancers';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { generateSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
 import styles from './styles';
 
@@ -24,6 +26,10 @@ type State = {
   rangeValue: number,
 }
 
+const muiTheme = getMuiTheme({
+  slider: styles.slider,
+});
+
 class RangeParam extends React.Component<Props, State> {
   state = {
     rangeValue: 0,
@@ -39,16 +45,19 @@ class RangeParam extends React.Component<Props, State> {
 
     return (
       <div className={!disabled ? classes['range-param'] : classes['range-param-hidden']}>
-        <Slider
-          min={min}
-          max={max}
-          step={step}
-          value={rangeValue}
-          disabled={disabled}
-          onChange={(event, value) => this.setState({ rangeValue: value })}
-          onDragStop={() =>
-            history.push(generateSearchParams(location.search, { [parameters.pageSize.paramName]: rangeValue }))}
-        />
+        <MuiThemeProvider muiTheme={muiTheme}>
+          <Slider
+            min={min}
+            max={max}
+            step={step}
+            value={rangeValue}
+            disabled={disabled}
+            onChange={(event, value) => this.setState({ rangeValue: value })}
+            onDragStop={() =>
+              history.push(generateSearchParams(location.search, { [parameters.pageSize.paramName]: rangeValue }))
+            }
+          />
+        </MuiThemeProvider>
         <span>{this.state.rangeValue}</span>
       </div>
 

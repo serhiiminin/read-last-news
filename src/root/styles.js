@@ -5,6 +5,7 @@ const styles = {
   '@global': Normalize,
   '@global body': {
     overflowX: 'hidden',
+    color: variables.colors.text,
   },
   root: {
     background: variables.colors.plaster,

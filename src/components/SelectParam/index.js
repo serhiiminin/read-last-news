@@ -4,64 +4,69 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { SelectField, MenuItem } from 'material-ui';
-import { withRouter } from 'react-router-dom';
-import { generateSearchParams } from './../../enhancers';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { variables } from '../../styles';
 import styles from './styles';
 
 type Props = {
-  parameterType: string,
   parameters: Object,
-  isMultiple: boolean,
   defaultValue: string,
   choose: string,
-  history: Object,
-  location: Object,
+  onChange: Function,
   classes: Object,
+  disabled: Boolean
 };
 
+const muiTheme = getMuiTheme({
+  menuItem: {
+    selectedTextColor: variables.colors.blue,
+  },
+});
+
 const SelectParam = (
-  { parameterType,
-    parameters,
+  { parameters,
     defaultValue,
     choose,
-    history,
-    location,
+    onChange,
     classes,
+    disabled,
   }: Props) => {
   const paramsList: Array<[string, mixed]> = Object.entries(parameters);
 
   return (
     <div className={classes['select-param']}>
-      <SelectField
-        floatingLabelText={choose}
-        value={defaultValue}
-        style={{ maxWidth: '200px' }}
-        onChange={(event, index, value) =>
-          history.push(generateSearchParams(location.search, { [parameterType]: value }))}
-      >
-        {paramsList
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <SelectField
+          floatingLabelText={choose}
+          value={defaultValue}
+          style={styles['select-param']}
+          onChange={onChange}
+          disabled={disabled}
+        >
+          {paramsList
           .sort(([, firstValue], [, secondValue]) =>
             (typeof firstValue === 'string' && typeof secondValue === 'string'
               ? firstValue.localeCompare(secondValue) : 0))
           .map(([key, value]) => (
             <MenuItem value={key} primaryText={value} key={key} />
           ))}
-      </SelectField>
+        </SelectField>
+      </MuiThemeProvider>
     </div>
   );
 };
 
 SelectParam.propTypes = {
-  parameterType: PropTypes.string.isRequired,
   parameters: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   defaultValue: PropTypes.string,
   choose: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 SelectParam.defaultProps = {
   defaultValue: null,
   choose: null,
+  disabled: false,
 };
 
-export default withRouter(injectSheet(styles)(SelectParam));
+export default injectSheet(styles)(SelectParam);
