@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import injectSheet from 'react-jss';
 import Dialog from 'material-ui/Dialog';
-// import FlatButton from 'material-ui/FlatButton';
 import { RaisedButton, FlatButton } from '../../customizedMuiComponents';
 import { generateSearchParams, parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
