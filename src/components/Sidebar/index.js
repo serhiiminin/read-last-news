@@ -5,11 +5,10 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import injectSheet from 'react-jss';
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import { RaisedButton } from '../../customizedMuiComponents';
+// import FlatButton from 'material-ui/FlatButton';
+import { RaisedButton, FlatButton } from '../../customizedMuiComponents';
 import { generateSearchParams, parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
-import { variables } from '../../styles';
 import { TitlesList, SelectParam, RangeParam } from './..';
 import styles from './styles';
 
@@ -53,7 +52,6 @@ class Sidebar extends React.Component<Props, State> {
           country: match.params.countryId,
           open: false,
         })}
-        style={styles.button}
       />,
       <FlatButton
         label="Submit"
@@ -63,7 +61,6 @@ class Sidebar extends React.Component<Props, State> {
           history.push(`/${this.state.country || parameters.defaultParams.country}`);
           this.setState({ open: false });
         }}
-        style={styles.button}
       />,
     ];
 
@@ -72,8 +69,6 @@ class Sidebar extends React.Component<Props, State> {
         <RaisedButton
           label={parameters.choose.country}
           onClick={() => this.setState({ open: true })}
-          labelColor={variables.colors.plaster}
-          backgroundColor={variables.colors.blue}
         />
         <Dialog
           title={parameters.choose.country}

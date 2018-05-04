@@ -5,6 +5,7 @@
   "homepage": "http://serhiiminin.github.io",
   "dependencies": {
     "hoek": "^5.0.3",
+    "jscodeshift": "^0.5.0",
     "jss-global": "^3.0.0",
     "material-ui": "^0.20.0",
     "moment": "^2.22.1",

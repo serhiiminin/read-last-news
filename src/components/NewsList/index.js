@@ -40,7 +40,7 @@ class NewsList extends Component<Props, State> {
     api(initRequest, parameters.typeData.topHeadlines)
       .then(({ articles }) => this.setState({ newsList: articles }));
   }
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     if (this.props.location.search !== nextProps.location.search
       || this.props.match.params.countryId !== nextProps.match.params.countryId) {
       const queryParams = parseSearchParams(nextProps.location.search, nextProps.match.params.countryId);
