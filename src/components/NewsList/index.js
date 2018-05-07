@@ -53,7 +53,7 @@ class NewsList extends Component<Props, State> {
     const { classes } = this.props;
 
     return !this.state.newsList.length
-      ? <div>There is no news for your search</div>
+      ? <div className={classes['news-list-empty']}>There is no news for your search</div>
       : (
         <div className={classes['news-list']}>
           {this.state.newsList.map(newsItem => (
