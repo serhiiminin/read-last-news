@@ -1,6 +1,12 @@
+import { variables } from '../../styles';
+
 const styles = {
+  'titles-empty': {
+    fontStyle: 'italic',
+    opacity: '.5',
+  },
   'titles-list': {
-    margin: '0',
+    margin: variables.margins.no,
     padding: '0',
   },
 };

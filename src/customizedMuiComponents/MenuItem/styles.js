@@ -1,9 +1,12 @@
+import { variables } from '../../styles';
+
 const styles = {
   style: {
     '&:selected': {
-      background: '#f00',
+      background: variables.colors.blue,
     },
   },
+  touchRippleColor: variables.colors.blue,
 };
 
 export default styles;

@@ -13,9 +13,7 @@ const SelectFieldCustomized = ({ children, ...props }: Props) => (
     {...props}
     {...styles}
   >
-    <React.Fragment>
-      {children}
-    </React.Fragment>
+    {children}
   </SelectField>
 );
 

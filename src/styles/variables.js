@@ -7,6 +7,7 @@ const variables = {
     coral: '#ED8C72',
   },
   margins: {
+    no: '0',
     small: '5px',
     medium: '10px',
     large: '15px',
