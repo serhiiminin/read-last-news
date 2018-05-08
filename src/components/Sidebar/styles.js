@@ -1,6 +1,8 @@
+import { variables } from '../../styles';
+
 const styles = {
   sidebar: {
-    padding: '15px 10px 10px 0',
+    paddingRight: variables.paddings.medium,
   },
   'modal-wrapper': {
     display: 'flex',

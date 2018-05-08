@@ -1,6 +1,12 @@
+import { variables } from '../../styles';
+
 const styles = {
   header: {
-    padding: '10px 0',
+    padding: `${variables.paddings.medium} ${variables.paddings.no}`,
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 };
 
