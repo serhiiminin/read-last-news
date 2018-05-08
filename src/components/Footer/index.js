@@ -1,12 +1,20 @@
 import React from 'react';
 import injectSheet from 'react-jss';
+import { compose } from 'recompose';
 import styles from './styles';
 
 type Props = {
   classes: Object,
 }
 const Footer = ({ classes }: Props) => (
-  <div className={classes.footer}>Footer</div>
+  <footer className={classes.footer}>
+    <h4>Contact me:</h4>
+    <p>minin.serhii@gmail.com</p>
+  </footer>
 );
 
-export default injectSheet(styles)(Footer);
+const enhance = compose(
+  injectSheet(styles),
+);
+
+export default enhance(Footer);

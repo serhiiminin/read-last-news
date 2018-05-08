@@ -3,9 +3,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import { compose } from 'recompose';
 import Moment from 'react-moment';
-import FlatButton from 'material-ui/FlatButton';
+import { CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui';
+import { Card, FlatButton } from './../../customizedMuiComponents';
 import styles from './styles';
 
 type Props = {
@@ -58,5 +59,8 @@ NewsItem.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
+const enhance = compose(
+  injectSheet(styles),
+);
 
-export default injectSheet(styles)(NewsItem);
+export default enhance(NewsItem);

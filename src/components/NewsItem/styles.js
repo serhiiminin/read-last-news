@@ -1,8 +1,10 @@
+import variables from '../../styles/variables';
+
 const styles = {
   'news-item': {
-    padding: '5px',
-    margin: '1%',
-    width: '30%',
+    margin: `${variables.margins.no} ${variables.margins.no} 1.33% 1.33%`,
+    padding: variables.paddings.no,
+    width: '32%',
     img: {
       display: 'none',
     },

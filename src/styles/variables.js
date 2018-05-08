@@ -6,6 +6,18 @@ const variables = {
     plaster: '#F4EADE',
     coral: '#ED8C72',
   },
+  margins: {
+    no: '0',
+    small: '5px',
+    medium: '10px',
+    large: '15px',
+  },
+  paddings: {
+    no: '0',
+    small: '5px',
+    medium: '10px',
+    large: '15px',
+  },
 };
 
 export default variables;

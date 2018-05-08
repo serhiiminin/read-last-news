@@ -2,13 +2,12 @@
 
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
 import injectSheet from 'react-jss';
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import { RaisedButton, FlatButton } from '../../customizedMuiComponents';
 import { generateSearchParams, parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
-import { variables } from '../../styles';
 import { TitlesList, SelectParam, RangeParam } from './..';
 import styles from './styles';
 
@@ -52,7 +51,6 @@ class Sidebar extends React.Component<Props, State> {
           country: match.params.countryId,
           open: false,
         })}
-        style={styles.button}
       />,
       <FlatButton
         label="Submit"
@@ -62,7 +60,6 @@ class Sidebar extends React.Component<Props, State> {
           history.push(`/${this.state.country || parameters.defaultParams.country}`);
           this.setState({ open: false });
         }}
-        style={styles.button}
       />,
     ];
 
@@ -71,8 +68,6 @@ class Sidebar extends React.Component<Props, State> {
         <RaisedButton
           label={parameters.choose.country}
           onClick={() => this.setState({ open: true })}
-          labelColor={variables.colors.plaster}
-          backgroundColor={variables.colors.blue}
         />
         <Dialog
           title={parameters.choose.country}
@@ -80,6 +75,7 @@ class Sidebar extends React.Component<Props, State> {
           modal={false}
           open={this.state.open}
           onRequestClose={() => this.setState({ open: false })}
+          style={{ margin: '0 auto' }}
         >
           <div className={classes['modal-wrapper']}>
             <SelectParam
@@ -113,4 +109,9 @@ class Sidebar extends React.Component<Props, State> {
   }
 }
 
-export default withRouter(injectSheet(styles)(Sidebar));
+const enhance = compose(
+  withRouter,
+  injectSheet(styles),
+);
+
+export default enhance(Sidebar);
