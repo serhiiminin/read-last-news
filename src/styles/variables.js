@@ -1,9 +1,9 @@
 const variables = {
   colors: {
     text: '#333333',
+    background: '#F4EADE',
     blue: '#2988BC',
     sea: '#2F496E',
-    plaster: '#F4EADE',
     coral: '#ED8C72',
   },
   margins: {

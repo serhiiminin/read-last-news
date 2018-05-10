@@ -1,10 +1,10 @@
 import { variables } from '../../styles';
 
 const styles = {
-  labelColor: variables.colors.plaster,
+  labelColor: variables.colors.background,
   backgroundColor: variables.colors.blue,
   style: {
-    background: variables.colors.plaster,
+    background: variables.colors.background,
   },
 };
 

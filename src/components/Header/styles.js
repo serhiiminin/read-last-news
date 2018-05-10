@@ -11,7 +11,7 @@ const styles = {
   link: {
     color: variables.colors.text,
     textDecoration: 'none',
-    fontFamily: 'KlaberFraktur',
+    fontFamily: 'WalbaumFraktur, sans-serif',
   },
 };
 

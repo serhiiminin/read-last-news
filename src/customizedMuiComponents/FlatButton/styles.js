@@ -10,7 +10,7 @@ const styles = {
     marginLeft: margins.small,
   },
   labelStyle: {
-    color: colors.plaster,
+    color: colors.background,
   },
 };
 
