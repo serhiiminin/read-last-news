@@ -79,7 +79,7 @@ class TitlesList extends React.Component<Props, State> {
         <h3>Sources</h3>
         {
           !titlesList.length
-            ? <div>Empty</div>
+            ? <div className={classes['titles-empty']}>Empty</div>
             : (
               <ul className={classes['titles-list']}>
                 {titlesList.map(({ id, name }) => (

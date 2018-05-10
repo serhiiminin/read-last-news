@@ -3,10 +3,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
-import Moment from 'react-moment';
-import FlatButton from 'material-ui/FlatButton';
 import { compose } from 'recompose';
+import Moment from 'react-moment';
+import { CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui';
+import { Card, FlatButton } from './../../customizedMuiComponents';
 import styles from './styles';
 
 type Props = {

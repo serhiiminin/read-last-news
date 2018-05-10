@@ -7,7 +7,10 @@ type Props = {
   classes: Object,
 }
 const Footer = ({ classes }: Props) => (
-  <div className={classes.footer}>Footer</div>
+  <footer className={classes.footer}>
+    <h4>Contact me:</h4>
+    <p>minin.serhii@gmail.com</p>
+  </footer>
 );
 
 const enhance = compose(
