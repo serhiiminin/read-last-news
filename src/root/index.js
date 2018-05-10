@@ -17,7 +17,7 @@ const Root = ({ classes }: Props) => (
   <div className={classes.root}>
     <MuiThemeProvider>
       <Router>
-        <Route path="/:countryId?" component={App} />
+        <Route path="/" component={App} />
       </Router>
     </MuiThemeProvider>
   </div>
