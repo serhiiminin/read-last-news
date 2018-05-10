@@ -30,9 +30,6 @@ class Sidebar extends React.Component<Props, State> {
   };
 
   componentWillMount() {
-    if (!this.props.match.params.countryId) {
-      this.setState({ open: true });
-    }
     const currentParams = parseSearchParams(this.props.location.search, this.props.match.params.countryId);
 
     this.setState({

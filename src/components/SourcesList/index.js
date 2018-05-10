@@ -27,7 +27,7 @@ const getAllActiveTitles = titles =>
     .map(([key]) => key)
     .join(',');
 
-class TitlesList extends React.Component<Props, State> {
+class SourcesList extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -104,4 +104,4 @@ const enhance = compose(
   injectSheet(styles),
 );
 
-export default enhance(TitlesList);
+export default enhance(SourcesList);
