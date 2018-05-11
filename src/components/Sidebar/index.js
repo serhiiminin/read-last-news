@@ -54,7 +54,13 @@ class Sidebar extends React.Component<Props, State> {
         primary
         keyboardFocused
         onClick={() => {
-          history.push(`/${this.state.country || parameters.defaultParams.country}`);
+          history.push(
+            generateSearchParams(
+              location.search,
+              { [parameters.country]: this.state.country || parameters.defaultParams.country },
+              ),
+          );
+
           this.setState({ open: false });
         }}
       />,

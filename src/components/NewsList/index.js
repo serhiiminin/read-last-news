@@ -15,6 +15,7 @@ type State = {
     title: string,
     url: string,
   }>,
+  isLoading: boolean,
 };
 
 type Props = {
@@ -27,40 +28,56 @@ class NewsList extends Component<Props, State> {
   static propTypes = {
     location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   };
-  state = {
-    newsList: [],
-  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      newsList: [],
+      isLoading: false,
+    };
+    this.renderNews = this.renderNews.bind(this);
+  }
+
   componentDidMount() {
     const initRequest = Object.keys(
-      parseSearchParams(this.props.location.search, this.props.match.params.countryId),
-    ).length !== 0
-      ? parseSearchParams(this.props.location.search, this.props.match.params.countryId)
+      parseSearchParams(this.props.location.search)).length !== 0
+      ? parseSearchParams(this.props.location.search)
       : parameters.defaultParams;
 
-    api(initRequest, parameters.typeData.topHeadlines)
-      .then(({ articles }) => this.setState({ newsList: articles }));
+    this.renderNews(initRequest);
   }
   componentWillReceiveProps(nextProps: Props) {
-    if (this.props.location.search !== nextProps.location.search
-      || this.props.match.params.countryId !== nextProps.match.params.countryId) {
-      const queryParams = parseSearchParams(nextProps.location.search, nextProps.match.params.countryId);
+    if (this.props.location.search !== nextProps.location.search) {
+      const queryParams = parseSearchParams(nextProps.location.search);
 
-      api(queryParams, parameters.typeData.topHeadlines)
-        .then(({ articles }) => this.setState({ newsList: articles }));
+      this.renderNews(queryParams);
     }
   }
+  renderNews = (request: Object) =>
+    Promise.resolve()
+      .then(() => this.setState({ isLoading: true }))
+      .then(() => api(request, parameters.typeData.topHeadlines))
+      .then(({ articles }) => this.setState({
+        newsList: articles,
+        isLoading: false,
+      }));
+
   render() {
     const { classes } = this.props;
+    const { newsList, isLoading } = this.state;
 
-    return !this.state.newsList.length
-      ? <div className={classes['news-list-empty']}>There is no news for your search</div>
+    return !newsList.length
+      ? <div className={classes['news-list-empty']}>There is no news</div>
       : (
         <div className={classes['news-list']}>
-          {this.state.newsList.map(newsItem => (
-            <NewsItem newsItem={newsItem} key={`${newsItem.title}_${newsItem.url}`} />
+          {newsList.map((newsItem, key) => (
+            <NewsItem
+              isLoading={isLoading}
+              newsItem={newsItem}
+              key={`${newsItem && newsItem.title}` || key}
+            />
           ))}
         </div>
-
       );
   }
 }

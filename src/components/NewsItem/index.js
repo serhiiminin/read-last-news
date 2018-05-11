@@ -20,33 +20,34 @@ type Props = {
       name: string,
     }
   },
+  isLoading: boolean,
   classes: Object,
 };
 
-const NewsItem = ({ newsItem, classes }: Props) => (
-  <div className={classes['news-item']}>
+const NewsItem = ({ newsItem, isLoading, classes }: Props) => (
+  <div className={`${classes['news-item']} ${isLoading ? classes['news-item-loading'] : ''}`}>
     <Card
       style={{ height: '100%' }}
     >
       <CardHeader
-        title={newsItem.source.name}
-        subtitle={<Moment date={newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
+        title={newsItem && newsItem.source && newsItem.source.name}
+        subtitle={<Moment date={newsItem && newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
       />
       <CardMedia>
         <img
           className={classes.img}
-          src={newsItem.urlToImage}
-          alt={newsItem.title}
+          src={newsItem && newsItem.urlToImage}
+          alt={newsItem && newsItem.title}
         />
       </CardMedia>
-      <CardTitle title={newsItem.title} />
+      <CardTitle title={newsItem && newsItem.title} />
       <CardText>
-        {newsItem.description}
+        {newsItem && newsItem.description}
       </CardText>
       <CardActions>
         <FlatButton
           label="Read"
-          href={newsItem.url}
+          href={newsItem && newsItem.url}
           target="_blank"
         />
       </CardActions>
@@ -55,8 +56,23 @@ const NewsItem = ({ newsItem, classes }: Props) => (
 );
 
 NewsItem.propTypes = {
-  newsItem: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  newsItem: PropTypes.shape({
+    autor: PropTypes.string,
+    description: PropTypes.string,
+    publishedAt: PropTypes.string,
+    source: PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+    }),
+    title: PropTypes.string,
+    url: PropTypes.string,
+    urlToImage: PropTypes.string,
+  }),
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+};
+
+NewsItem.defaultProps = {
+  newsItem: {},
 };
 
 const enhance = compose(

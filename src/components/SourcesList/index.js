@@ -17,7 +17,6 @@ type State = {
 type Props = {
   location: Object,
   history: Object,
-  match: Object,
   classes: Object,
 };
 
