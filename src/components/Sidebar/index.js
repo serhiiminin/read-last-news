@@ -57,7 +57,10 @@ class Sidebar extends React.Component<Props, State> {
           history.push(
             generateSearchParams(
               location.search,
-              { [parameters.country]: this.state.country || parameters.defaultParams.country },
+              {
+                [parameters.country]: this.state.country || parameters.defaultParams.country,
+                [parameters.sources]: '',
+              },
               ),
           );
 
@@ -96,7 +99,11 @@ class Sidebar extends React.Component<Props, State> {
             ? parsedLocation.category
             : parameters.defaultParams.category}
           onChange={(event, index, value) =>
-            history.push(generateSearchParams(location.search, { [parameters.category]: value }))}
+            history.push(generateSearchParams(location.search,
+              {
+                [parameters.category]: value,
+                [parameters.sources]: '',
+              }))}
           disabled={!parsedLocation.country}
         />
         <RangeParam

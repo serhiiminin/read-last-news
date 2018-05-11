@@ -5,13 +5,15 @@ const generateSearchParams = (previousSearchLine: string, newSearchParams: Objec
 
   const updatedSearchParams = new window.URLSearchParams(previousSearchLine);
 
-  const newKeyValue = Object.entries(newSearchParams)[0];
+  Object.entries(newSearchParams).forEach(([key, value]) => {
+    if (value) {
+      updatedSearchParams.set(key, value);
+    } else {
+      updatedSearchParams.delete(key);
+    }
+  });
 
-  if (newKeyValue[1]) {
-    updatedSearchParams.set(newKeyValue[0], newKeyValue[1]);
-  } else {
-    updatedSearchParams.delete(newKeyValue[0]);
-  }
+
   return `?${updatedSearchParams.toString()}`;
 };
 

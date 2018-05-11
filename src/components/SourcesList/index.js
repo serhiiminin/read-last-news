@@ -36,16 +36,7 @@ class SourcesList extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.renderSources(this.props.location.search)
-      .then(titles => {
-        const parsedSourcesFromUrl = parseSearchParams(this.props.location.search)[parameters.sources].split(',');
-        const checkedSources = Object.assign({},
-          ...titles.map(({ id }) =>
-            ({ [id]: parsedSourcesFromUrl.some(source => source === id) })));
-
-        return checkedSources;
-      })
-      .then(titles => this.setState({ checkedSources: titles }));
+    this.renderSources(this.props.location.search);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -78,6 +69,17 @@ class SourcesList extends React.Component<Props, State> {
       .then(({ sources }) => {
         this.setState({ sourcesList: sources });
         return sources;
+      })
+      .then(titles => {
+        const parsedSourcesFromUrl = parseSearchParams(this.props.location.search)[parameters.sources] &&
+          parseSearchParams(this.props.location.search)[parameters.sources].split(',');
+        const checkedSources = Object.assign({},
+          ...titles.map(({ id }) =>
+            ({ [id]: parsedSourcesFromUrl ? parsedSourcesFromUrl.some(source => source === id) : false })));
+
+        this.setState({ checkedSources });
+
+        return checkedSources;
       });
   };
 
