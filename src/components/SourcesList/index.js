@@ -37,7 +37,14 @@ class SourcesList extends React.Component<Props, State> {
 
   componentDidMount() {
     this.renderSources(this.props.location.search)
-      .then(titles => Object.assign({}, ...titles.map(({ id }) => ({ [id]: false }))))
+      .then(titles => {
+        const parsedSourcesFromUrl = parseSearchParams(this.props.location.search)[parameters.sources].split(',');
+        const checkedSources = Object.assign({},
+          ...titles.map(({ id }) =>
+            ({ [id]: parsedSourcesFromUrl.some(source => source === id) })));
+
+        return checkedSources;
+      })
       .then(titles => this.setState({ checkedSources: titles }));
   }
 
