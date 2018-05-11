@@ -7,7 +7,11 @@ const generateSearchParams = (previousSearchLine: string, newSearchParams: Objec
 
   const newKeyValue = Object.entries(newSearchParams)[0];
 
-  updatedSearchParams.set(newKeyValue[0], newKeyValue[1]);
+  if (newKeyValue[1]) {
+    updatedSearchParams.set(newKeyValue[0], newKeyValue[1]);
+  } else {
+    updatedSearchParams.delete(newKeyValue[0]);
+  }
   return `?${updatedSearchParams.toString()}`;
 };
 

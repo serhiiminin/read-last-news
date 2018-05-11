@@ -39,12 +39,12 @@ class NewsList extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const initRequest = Object.keys(
+    const queryParams = Object.keys(
       parseSearchParams(this.props.location.search)).length !== 0
       ? parseSearchParams(this.props.location.search)
       : parameters.defaultParams;
 
-    this.renderNews(initRequest);
+    this.renderNews(queryParams);
   }
   componentWillReceiveProps(nextProps: Props) {
     if (this.props.location.search !== nextProps.location.search) {
@@ -53,14 +53,19 @@ class NewsList extends Component<Props, State> {
       this.renderNews(queryParams);
     }
   }
-  renderNews = (request: Object) =>
-    Promise.resolve()
+  renderNews = (queryParams: Object) => {
+    const request = !queryParams[parameters.sources]
+      ? queryParams
+      : { [parameters.sources]: queryParams[parameters.sources] };
+
+    return Promise.resolve()
       .then(() => this.setState({ isLoading: true }))
       .then(() => api(request, parameters.typeData.topHeadlines))
       .then(({ articles }) => this.setState({
         newsList: articles,
         isLoading: false,
       }));
+  };
 
   render() {
     const { classes } = this.props;
