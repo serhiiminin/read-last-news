@@ -72,7 +72,8 @@ class Sidebar extends React.Component<Props, State> {
     return (
       <aside className={classes.sidebar}>
         <RaisedButton
-          label={parameters.choose.country}
+          label={parameters.countries[parseSearchParams(this.props.location.search).country]
+            || parameters.choose.country}
           keyboardFocused={!this.state.country}
           fullWidth
           onClick={() => this.setState({ open: true })}
