@@ -6,6 +6,9 @@ const styles = {
   style: {
     background: variables.colors.background,
   },
+  labelStyle: {
+    textTransform: 'none',
+  },
 };
 
 export default styles;

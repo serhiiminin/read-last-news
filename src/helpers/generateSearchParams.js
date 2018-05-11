@@ -1,20 +1,17 @@
 // @flow
 
 const generateSearchParams = (previousSearchLine: string, newSearchParams: Object): string => {
-  if (!previousSearchLine) return `?${new window.URLSearchParams(newSearchParams).toString()}`;
-
-  const updatedSearchParams = new window.URLSearchParams(previousSearchLine);
+  const searchParams = new window.URLSearchParams(previousSearchLine);
 
   Object.entries(newSearchParams).forEach(([key, value]) => {
     if (value) {
-      updatedSearchParams.set(key, value);
+      searchParams.set(key, value);
     } else {
-      updatedSearchParams.delete(key);
+      searchParams.delete(key);
     }
   });
 
-
-  return `?${updatedSearchParams.toString()}`;
+  return `?${searchParams.toString()}`;
 };
 
 export default generateSearchParams;

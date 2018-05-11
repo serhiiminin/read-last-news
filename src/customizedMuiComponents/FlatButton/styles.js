@@ -11,6 +11,7 @@ const styles = {
   },
   labelStyle: {
     color: colors.background,
+    textTransform: 'none',
   },
 };
 
