@@ -7,14 +7,17 @@ const parameters = {
   country: 'country',
   category: 'category',
   sources: 'sources',
+  pageSize: 'pageSize',
   q: 'q',
   defaultParams: {
     country: 'us',
     category: 'general',
+    pageSize: '20',
   },
   choose: {
     country: 'Choose country',
     category: 'Choose category',
+    pageSize: 'Page size',
   },
   countries: {
     ae: 'United Arab Emirates',
@@ -81,12 +84,13 @@ const parameters = {
     sports: 'Sports',
     technology: 'Technology',
   },
-  pageSize: {
-    paramName: 'pageSize',
-    min: 1,
-    max: 100,
-    step: 1,
-    defaultValue: 10,
+  pageSizes: {
+    1: 1,
+    5: 5,
+    10: 10,
+    20: 20,
+    50: 50,
+    100: 100,
   },
 };
 

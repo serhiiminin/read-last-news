@@ -8,7 +8,7 @@ import { Dialog } from 'material-ui';
 import { RaisedButton, FlatButton, TextField } from '../../customizedMuiComponents';
 import { generateSearchParams, parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
-import { SourcesList, SelectParam, RangeParam } from './..';
+import { SourcesList, SelectParam } from './..';
 import styles from './styles';
 
 type Props = {
@@ -77,7 +77,6 @@ class Sidebar extends React.Component<Props, State> {
               },
               ),
           );
-
           this.setState({ open: false });
         }}
       />,
@@ -121,19 +120,22 @@ class Sidebar extends React.Component<Props, State> {
                 [parameters.category]: value,
                 [parameters.sources]: '',
               }))}
-          disabled={!parsedLocation.country}
-        />
-        <RangeParam
-          min={parameters.pageSize.min}
-          max={parameters.pageSize.max}
-          step={parameters.pageSize.step}
-          defaultValue={parameters.pageSize.defaultValue}
-          disabled={!location.search && !match.params.countryId}
         />
         <TextField
-          id="text-field-controlled"
-          hintText="Hint Text"
+          hintText="Search news"
           onChange={this.handleChange}
+        />
+        <SelectParam
+          choose={parameters.choose.pageSize}
+          parameters={parameters.pageSizes}
+          defaultValue={parsedLocation[parameters.pageSize] || parameters.defaultParams.pageSize}
+          onChange={(event, index, value) =>
+            history.push(generateSearchParams(
+              location.search,
+              {
+                [parameters.pageSize]: value,
+              }))}
+          disabled={!parsedLocation.category && !parsedLocation.country}
         />
         <SourcesList />
       </aside>

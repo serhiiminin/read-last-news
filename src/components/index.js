@@ -6,7 +6,6 @@ export { default as Main } from './Main';
 export { default as Status } from './Status';
 export { default as NewsItem } from './NewsItem';
 export { default as NewsList } from './NewsList';
-export { default as RangeParam } from './RangeParam';
 export { default as SourcesList } from './SourcesList';
 export { default as SourcesItem } from './SourcesItem';
 export { default as ErrorBoundary } from './ErrorBoundary';
