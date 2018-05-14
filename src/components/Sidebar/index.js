@@ -24,18 +24,32 @@ type State = {
 }
 
 class Sidebar extends React.Component<Props, State> {
-  state = {
-    open: false,
-    country: parameters.defaultParams.country,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      country: parameters.defaultParams.country,
+    };
+    this.inputTimer = null;
+    this.handleChange = this.handleChange.bind(this);
+  }
+
 
   componentWillMount() {
+    this.inputTimer = null;
     const currentParams = parseSearchParams(this.props.location.search, this.props.match.params.countryId);
 
     this.setState({
       country: currentParams.country,
     });
   }
+
+  handleChange = (event, value) => {
+    clearTimeout(this.inputTimer);
+
+    this.inputTimer = setTimeout(() =>
+      this.props.history.push(generateSearchParams(this.props.location.search, { q: value })), 500);
+  };
 
   render() {
     const { location, history, match, classes } = this.props;
@@ -119,7 +133,7 @@ class Sidebar extends React.Component<Props, State> {
         <TextField
           id="text-field-controlled"
           hintText="Hint Text"
-          onChange={e => console.log(e.target.value)}
+          onChange={this.handleChange}
         />
         <SourcesList />
       </aside>

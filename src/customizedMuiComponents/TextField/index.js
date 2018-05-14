@@ -11,4 +11,4 @@ const TextFieldCustomized = (props: Object) => (
   />
 );
 
-export default TextField;
+export default TextFieldCustomized;
