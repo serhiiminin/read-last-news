@@ -4,11 +4,11 @@ import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import injectSheet from 'react-jss';
-import Dialog from 'material-ui/Dialog';
-import { RaisedButton, FlatButton } from '../../customizedMuiComponents';
+import { Dialog } from 'material-ui';
+import { RaisedButton, FlatButton, TextField } from '../../customizedMuiComponents';
 import { generateSearchParams, parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
-import { TitlesList, SelectParam, RangeParam } from './..';
+import { SourcesList, SelectParam, RangeParam } from './..';
 import styles from './styles';
 
 type Props = {
@@ -116,7 +116,12 @@ class Sidebar extends React.Component<Props, State> {
           defaultValue={parameters.pageSize.defaultValue}
           disabled={!location.search && !match.params.countryId}
         />
-        <TitlesList />
+        <TextField
+          id="text-field-controlled"
+          hintText="Hint Text"
+          onChange={e => console.log(e.target.value)}
+        />
+        <SourcesList />
       </aside>
     );
   }

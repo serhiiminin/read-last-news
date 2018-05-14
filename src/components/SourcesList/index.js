@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { parameters } from '../../defaults';
 import { generateSearchParams, parseSearchParams, api } from '../../helpers';
-import { TitleItem } from './..';
+import { SourcesItem } from './..';
 import styles from './styles';
 
 type State = {
@@ -96,7 +96,7 @@ class SourcesList extends React.Component<Props, State> {
             : (
               <ul className={classes['titles-list']}>
                 {sourcesList.map(({ id, name }) => (
-                  <TitleItem
+                  <SourcesItem
                     key={id}
                     name={id}
                     title={name}
