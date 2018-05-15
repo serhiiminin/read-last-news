@@ -37,7 +37,7 @@ class Sidebar extends React.Component<Props, State> {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const currentParams = parseSearchParams(this.props.location.search, this.props.match.params.countryId);
 
     this.setState({

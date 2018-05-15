@@ -46,7 +46,7 @@ class NewsList extends Component<Props, State> {
 
     this.renderNews(queryParams);
   }
-  componentWillReceiveProps(nextProps: Props) {
+  componentDidUpdate(nextProps: Props) {
     if (this.props.location.search !== nextProps.location.search) {
       const queryParams = parseSearchParams(nextProps.location.search);
 

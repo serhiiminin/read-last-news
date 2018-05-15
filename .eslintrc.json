@@ -10,6 +10,7 @@
       "import/exports-last": "error",
       "import/first": "off",
       "import/no-named-as-default-member": "off",
+      "react/no-did-mount-set-state": "off",
       "import/newline-after-import": [
         "error",
         {
