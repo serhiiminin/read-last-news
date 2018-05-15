@@ -16,27 +16,28 @@ type Props = {
   history: Object,
   match: Object,
   classes: Object,
-}
+};
 
 type State = {
   open: boolean,
   country: string,
-}
+};
+
+const INPUT_TIMEOUT = 500;
 
 class Sidebar extends React.Component<Props, State> {
+  inputTimer: TimeoutID
+
   constructor(props) {
     super(props);
     this.state = {
       open: false,
       country: parameters.defaultParams.country,
     };
-    this.inputTimer = null;
     this.handleChange = this.handleChange.bind(this);
   }
 
-
   componentWillMount() {
-    this.inputTimer = null;
     const currentParams = parseSearchParams(this.props.location.search, this.props.match.params.countryId);
 
     this.setState({
@@ -44,11 +45,15 @@ class Sidebar extends React.Component<Props, State> {
     });
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.inputTimer);
+  }
+
   handleChange = (event, value) => {
     clearTimeout(this.inputTimer);
 
     this.inputTimer = setTimeout(() =>
-      this.props.history.push(generateSearchParams(this.props.location.search, { q: value })), 500);
+      this.props.history.push(generateSearchParams(this.props.location.search, { q: value })), INPUT_TIMEOUT);
   };
 
   render() {
