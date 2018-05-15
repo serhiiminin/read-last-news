@@ -27,13 +27,15 @@ type Props = {
 const NewsItem = ({ newsItem, isLoading, classes }: Props) => (
   <div className={`${classes['news-item']} ${isLoading ? classes['news-item-loading'] : ''}`}>
     <Card
-      style={{ height: '100%' }}
+      style={isLoading ? styles.cardLoading : styles.card}
     >
       <CardHeader
         title={newsItem && newsItem.source && newsItem.source.name}
         subtitle={<Moment date={newsItem && newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
       />
-      <CardMedia>
+      <CardMedia
+        style={isLoading ? styles.loading : {}}
+      >
         <img
           className={classes.img}
           src={newsItem && newsItem.urlToImage}

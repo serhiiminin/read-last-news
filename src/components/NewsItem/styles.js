@@ -13,6 +13,17 @@ const styles = {
   'news-item-loading': {
     opacity: '0.8',
   },
+  card: {
+    height: '100%',
+  },
+  cardLoading: {
+    height: '100%',
+    opacity: '0.8',
+  },
+  loading: {
+    minHeight: '200px',
+    background: variables.colors.text,
+  },
 };
 
 export default styles;

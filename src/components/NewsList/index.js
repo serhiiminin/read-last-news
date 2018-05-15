@@ -71,7 +71,7 @@ class NewsList extends Component<Props, State> {
     const { classes } = this.props;
     const { newsList, isLoading } = this.state;
 
-    return !newsList.length
+    const loadedList = !newsList.length
       ? <div className={classes['news-list-empty']}>There is no news</div>
       : (
         <div className={classes['news-list']}>
@@ -80,6 +80,20 @@ class NewsList extends Component<Props, State> {
               isLoading={isLoading}
               newsItem={newsItem}
               key={`${newsItem && newsItem.title}` || key}
+            />
+          ))}
+        </div>
+      );
+
+    return !isLoading
+      ? loadedList
+      : (
+        <div className={classes['news-list']}>
+          {Array(12).fill(null).map((newsItem, key) => (
+            <NewsItem
+              isLoading={isLoading}
+              newsItem={newsItem}
+              key={(newsItem && newsItem.title) || key}
             />
           ))}
         </div>
