@@ -14,7 +14,7 @@ type Props = {
   onChange: Function,
 }
 
-const TitleItem = ({ name, title, classes, checkedTitles, onChange }: Props) => (
+const SourcesItem = ({ name, title, classes, checkedTitles, onChange }: Props) => (
   <li value={name} className={classes['titles-item']}>
     <Checkbox
       id={name}
@@ -30,4 +30,4 @@ const enhance = compose(
   injectSheet(styles),
 );
 
-export default enhance(TitleItem);
+export default enhance(SourcesItem);

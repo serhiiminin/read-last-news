@@ -4,11 +4,11 @@ import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import injectSheet from 'react-jss';
-import Dialog from 'material-ui/Dialog';
-import { RaisedButton, FlatButton } from '../../customizedMuiComponents';
+import { Dialog } from 'material-ui';
+import { RaisedButton, FlatButton, TextField } from '../../customizedMuiComponents';
 import { generateSearchParams, parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
-import { TitlesList, SelectParam, RangeParam } from './..';
+import { SourcesList, SelectParam } from './..';
 import styles from './styles';
 
 type Props = {
@@ -16,29 +16,45 @@ type Props = {
   history: Object,
   match: Object,
   classes: Object,
-}
+};
 
 type State = {
   open: boolean,
   country: string,
-}
+};
+
+const INPUT_TIMEOUT = 500;
 
 class Sidebar extends React.Component<Props, State> {
-  state = {
-    open: false,
-    country: parameters.defaultParams.country,
-  };
+  inputTimer: TimeoutID
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      country: parameters.defaultParams.country,
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
 
   componentWillMount() {
-    if (!this.props.match.params.countryId) {
-      this.setState({ open: true });
-    }
     const currentParams = parseSearchParams(this.props.location.search, this.props.match.params.countryId);
 
     this.setState({
       country: currentParams.country,
     });
   }
+
+  componentWillUnmount() {
+    clearTimeout(this.inputTimer);
+  }
+
+  handleChange = (event, value) => {
+    clearTimeout(this.inputTimer);
+
+    this.inputTimer = setTimeout(() =>
+      this.props.history.push(generateSearchParams(this.props.location.search, { q: value })), INPUT_TIMEOUT);
+  };
 
   render() {
     const { location, history, match, classes } = this.props;
@@ -57,7 +73,15 @@ class Sidebar extends React.Component<Props, State> {
         primary
         keyboardFocused
         onClick={() => {
-          history.push(`/${this.state.country || parameters.defaultParams.country}`);
+          history.push(
+            generateSearchParams(
+              location.search,
+              {
+                [parameters.country]: this.state.country || parameters.defaultParams.country,
+                [parameters.sources]: '',
+              },
+              ),
+          );
           this.setState({ open: false });
         }}
       />,
@@ -66,7 +90,10 @@ class Sidebar extends React.Component<Props, State> {
     return (
       <aside className={classes.sidebar}>
         <RaisedButton
-          label={parameters.choose.country}
+          label={parameters.countries[parseSearchParams(this.props.location.search).country]
+            || parameters.choose.country}
+          keyboardFocused={!this.state.country}
+          fullWidth
           onClick={() => this.setState({ open: true })}
         />
         <Dialog
@@ -93,17 +120,29 @@ class Sidebar extends React.Component<Props, State> {
             ? parsedLocation.category
             : parameters.defaultParams.category}
           onChange={(event, index, value) =>
-            history.push(generateSearchParams(location.search, { [parameters.category]: value }))}
-          disabled={!parsedLocation.country}
+            history.push(generateSearchParams(location.search,
+              {
+                [parameters.category]: value,
+                [parameters.sources]: '',
+              }))}
         />
-        <RangeParam
-          min={parameters.pageSize.min}
-          max={parameters.pageSize.max}
-          step={parameters.pageSize.step}
-          defaultValue={parameters.pageSize.defaultValue}
-          disabled={!location.search && !match.params.countryId}
+        <TextField
+          hintText="Search news"
+          onChange={this.handleChange}
         />
-        <TitlesList />
+        <SelectParam
+          choose={parameters.choose.pageSize}
+          parameters={parameters.pageSizes}
+          defaultValue={parsedLocation[parameters.pageSize] || parameters.defaultParams.pageSize}
+          onChange={(event, index, value) =>
+            history.push(generateSearchParams(
+              location.search,
+              {
+                [parameters.pageSize]: value,
+              }))}
+          disabled={!parsedLocation.category && !parsedLocation.country}
+        />
+        <SourcesList />
       </aside>
     );
   }
