@@ -1,13 +1,18 @@
 // @flow
 
 import React from 'react';
-import { Checkbox } from 'material-ui';
+import { Checkbox, FormControlLabel } from 'material-ui';
 import styles from './styles';
 
 const CheckboxCustomized = (props: Object) => (
-  <Checkbox
-    {...props}
-    {...styles}
+  <FormControlLabel
+    control={
+      <Checkbox
+        {...props}
+        {...styles}
+      />
+    }
+    label={props.label}
   />
 );
 

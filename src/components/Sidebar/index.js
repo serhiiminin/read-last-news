@@ -4,7 +4,7 @@ import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import injectSheet from 'react-jss';
-import { Dialog } from 'material-ui';
+import { Dialog, DialogContent, DialogActions } from 'material-ui';
 import { Button, TextField } from '../../customizedMuiComponents';
 import { generateSearchParams, parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
@@ -34,7 +34,7 @@ class Sidebar extends React.Component<Props, State> {
       open: false,
       country: parameters.defaultParams.country,
     };
-    this._handleChange = this._handleChange.bind(this);
+    this._handleInputChange = this._handleInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -49,43 +49,20 @@ class Sidebar extends React.Component<Props, State> {
     clearTimeout(this.inputTimer);
   }
 
-  _handleChange = (event, value) => {
+  _handleInputChange = event => {
     clearTimeout(this.inputTimer);
+    console.log(event.target.value);
+    const value = event.target.value;
 
     this.inputTimer = setTimeout(() =>
-      this.props.history.push(generateSearchParams(this.props.location.search, { q: value })), INPUT_TIMEOUT);
+      this.props.history.push(
+        generateSearchParams(this.props.location.search, { q: value }),
+      ), INPUT_TIMEOUT);
   };
 
   render() {
     const { location, history, match, classes } = this.props;
     const parsedLocation = parseSearchParams(location.search, match.params.countryId);
-    const actions = [
-      <Button
-        primary
-        onClick={() => this.setState({
-          country: match.params.countryId,
-          open: false,
-        })}
-      >Cancel
-      </Button>,
-      <Button
-        primary
-        keyboardFocused
-        onClick={() => {
-          history.push(
-            generateSearchParams(
-              location.search,
-              {
-                [parameters.country]: this.state.country || parameters.defaultParams.country,
-                [parameters.sources]: '',
-              },
-              ),
-          );
-          this.setState({ open: false });
-        }}
-      >Submit
-      </Button>,
-    ];
 
     return (
       <aside className={classes.sidebar}>
@@ -99,20 +76,42 @@ class Sidebar extends React.Component<Props, State> {
         </Button>
         <Dialog
           title={parameters.choose.country}
-          actions={actions}
           modal={false}
           open={this.state.open}
-          onRequestClose={() => this.setState({ open: false })}
-          style={{ margin: '0 auto' }}
+          onClose={() => this.setState({ open: false })}
         >
-          <div className={classes['modal-wrapper']}>
-            <SelectParam
-              choose={parameters.choose.country}
-              parameters={parameters.countries}
-              defaultValue={this.state.country || parameters.defaultParams.country}
-              onChange={(event, index, value) => this.setState({ country: value })}
-            />
-          </div>
+          <DialogContent>
+            <div className={classes['modal-wrapper']}>
+              <SelectParam
+                choose={parameters.choose.country}
+                parameters={parameters.countries}
+                defaultValue={this.state.country || parameters.defaultParams.country}
+                onChange={event => this.setState({ country: event.target.value })}
+              />
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              primary
+              onClick={() => this.setState({
+                country: match.params.countryId,
+                open: false,
+              })}
+            >Cancel
+            </Button>
+            <Button
+              primary
+              keyboardFocused
+              onClick={() => {
+                history.push(generateSearchParams(
+                    location.search,
+                    { [parameters.country]: this.state.country || parameters.defaultParams.country,
+                      [parameters.sources]: '' }));
+                this.setState({ open: false });
+              }}
+            >Submit
+            </Button>
+          </DialogActions>
         </Dialog>
         <SelectParam
           choose={parameters.choose.category}
@@ -120,16 +119,16 @@ class Sidebar extends React.Component<Props, State> {
           defaultValue={Object.keys(parsedLocation).length && parsedLocation.category
             ? parsedLocation.category
             : parameters.defaultParams.category}
-          onChange={(event, index, value) =>
+          onChange={event =>
             history.push(generateSearchParams(location.search,
               {
-                [parameters.category]: value,
+                [parameters.category]: event.target.value,
                 [parameters.sources]: '',
               }))}
         />
         <TextField
-          hintText="Search news"
-          onChange={this.handleChange}
+          label="Search news"
+          onChange={this._handleInputChange}
         />
         <SelectParam
           choose={parameters.choose.pageSize}

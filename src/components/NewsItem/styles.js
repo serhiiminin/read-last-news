@@ -17,7 +17,7 @@ const styles = {
     height: '100%',
   },
   cardLoading: {
-    height: '100%',
+    height: '200px',
     opacity: '0.8',
   },
   loading: {

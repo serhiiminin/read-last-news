@@ -21,7 +21,7 @@ const SourcesItem = ({ name, title, classes, checkedTitles, onChange }: Props) =
       label={title}
       value={name}
       checked={checkedTitles[name]}
-      onCheck={event => onChange(event.target.value)}
+      onChange={event => onChange(event.target.value)}
     />
   </li>
 );

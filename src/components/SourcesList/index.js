@@ -45,7 +45,7 @@ class SourcesList extends React.Component<Props, State> {
     }
   }
 
-  handleOnChange = (title: String) =>
+  _handleOnChange = (title: String) =>
     this.setState({
       checkedSources: {
         ...this.state.checkedSources,
@@ -100,7 +100,7 @@ class SourcesList extends React.Component<Props, State> {
                     name={id}
                     title={name}
                     checkedTitles={checkedSources}
-                    onChange={this.handleOnChange}
+                    onChange={this._handleOnChange}
                   />
                 ))}
               </ul>

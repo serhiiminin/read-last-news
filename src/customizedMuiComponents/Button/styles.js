@@ -1,13 +1,9 @@
 import { variables } from '../../styles';
 
 const styles = {
-  labelColor: variables.colors.background,
-  backgroundColor: variables.colors.blue,
-  style: {
-    background: variables.colors.background,
-  },
-  labelStyle: {
-    textTransform: 'none',
+  root: {
+    background: variables.colors.blue,
+    color: variables.colors.background,
   },
 };
 

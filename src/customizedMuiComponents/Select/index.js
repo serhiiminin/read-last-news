@@ -8,7 +8,7 @@ type Props = {
   children: React.Node,
 }
 
-const SelectFieldCustomized = ({ children, ...props }: Props) => (
+const SelectCustomized = ({ children, ...props }: Props) => (
   <Select
     {...props}
     {...styles}
@@ -17,4 +17,4 @@ const SelectFieldCustomized = ({ children, ...props }: Props) => (
   </Select>
 );
 
-export default SelectFieldCustomized;
+export default SelectCustomized;

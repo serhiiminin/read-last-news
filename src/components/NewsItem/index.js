@@ -34,14 +34,10 @@ const NewsItem = ({ newsItem, isLoading, classes }: Props) => (
         subheader={<Moment date={newsItem && newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
       />
       <CardMedia
-        style={isLoading ? styles.loading : {}}
-      >
-        <img
-          className={classes.img}
-          src={newsItem && newsItem.urlToImage}
-          alt={newsItem && newsItem.title}
-        />
-      </CardMedia>
+        style={isLoading ? styles.loading : { height: '200px' }}
+        image={newsItem && newsItem.urlToImage}
+        title={newsItem && newsItem.title}
+      />
       <Typography component="h2">{newsItem && newsItem.title}</Typography>
       <Typography component="p">{newsItem && newsItem.description}</Typography>
       <CardActions>
