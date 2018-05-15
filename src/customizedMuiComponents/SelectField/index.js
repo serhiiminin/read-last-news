@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import { SelectField } from 'material-ui';
+import { Select } from 'material-ui';
 import styles from './styles';
 
 type Props = {
@@ -9,12 +9,12 @@ type Props = {
 }
 
 const SelectFieldCustomized = ({ children, ...props }: Props) => (
-  <SelectField
+  <Select
     {...props}
     {...styles}
   >
     {children}
-  </SelectField>
+  </Select>
 );
 
 export default SelectFieldCustomized;

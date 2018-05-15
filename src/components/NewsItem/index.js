@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { compose } from 'recompose';
 import Moment from 'react-moment';
-import { CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui';
-import { Card, FlatButton } from './../../customizedMuiComponents';
+import { CardActions, CardHeader, CardMedia, Typography } from 'material-ui';
+import { Card, Button } from './../../customizedMuiComponents';
 import styles from './styles';
 
 type Props = {
@@ -31,7 +31,7 @@ const NewsItem = ({ newsItem, isLoading, classes }: Props) => (
     >
       <CardHeader
         title={newsItem && newsItem.source && newsItem.source.name}
-        subtitle={<Moment date={newsItem && newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
+        subheader={<Moment date={newsItem && newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
       />
       <CardMedia
         style={isLoading ? styles.loading : {}}
@@ -42,16 +42,14 @@ const NewsItem = ({ newsItem, isLoading, classes }: Props) => (
           alt={newsItem && newsItem.title}
         />
       </CardMedia>
-      <CardTitle title={newsItem && newsItem.title} />
-      <CardText>
-        {newsItem && newsItem.description}
-      </CardText>
+      <Typography component="h2">{newsItem && newsItem.title}</Typography>
+      <Typography component="p">{newsItem && newsItem.description}</Typography>
       <CardActions>
-        <FlatButton
-          label="Read"
+        <Button
           href={newsItem && newsItem.url}
           target="_blank"
-        />
+        >Read
+        </Button>
       </CardActions>
     </Card>
   </div>

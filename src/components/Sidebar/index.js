@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import injectSheet from 'react-jss';
 import { Dialog } from 'material-ui';
-import { RaisedButton, FlatButton, TextField } from '../../customizedMuiComponents';
+import { Button, TextField } from '../../customizedMuiComponents';
 import { generateSearchParams, parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
 import { SourcesList, SelectParam } from './..';
@@ -34,7 +34,7 @@ class Sidebar extends React.Component<Props, State> {
       open: false,
       country: parameters.defaultParams.country,
     };
-    this.handleChange = this.handleChange.bind(this);
+    this._handleChange = this._handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -49,7 +49,7 @@ class Sidebar extends React.Component<Props, State> {
     clearTimeout(this.inputTimer);
   }
 
-  handleChange = (event, value) => {
+  _handleChange = (event, value) => {
     clearTimeout(this.inputTimer);
 
     this.inputTimer = setTimeout(() =>
@@ -60,16 +60,15 @@ class Sidebar extends React.Component<Props, State> {
     const { location, history, match, classes } = this.props;
     const parsedLocation = parseSearchParams(location.search, match.params.countryId);
     const actions = [
-      <FlatButton
-        label="Cancel"
+      <Button
         primary
         onClick={() => this.setState({
           country: match.params.countryId,
           open: false,
         })}
-      />,
-      <FlatButton
-        label="Submit"
+      >Cancel
+      </Button>,
+      <Button
         primary
         keyboardFocused
         onClick={() => {
@@ -84,18 +83,20 @@ class Sidebar extends React.Component<Props, State> {
           );
           this.setState({ open: false });
         }}
-      />,
+      >Submit
+      </Button>,
     ];
 
     return (
       <aside className={classes.sidebar}>
-        <RaisedButton
-          label={parameters.countries[parseSearchParams(this.props.location.search).country]
-            || parameters.choose.country}
+        <Button
           keyboardFocused={!this.state.country}
+          variant="raised"
           fullWidth
           onClick={() => this.setState({ open: true })}
-        />
+        >{parameters.countries[parseSearchParams(this.props.location.search).country]
+          || parameters.choose.country}
+        </Button>
         <Dialog
           title={parameters.choose.country}
           actions={actions}
