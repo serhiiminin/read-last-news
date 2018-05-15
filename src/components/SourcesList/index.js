@@ -39,7 +39,7 @@ class SourcesList extends React.Component<Props, State> {
     this.renderSources(this.props.location.search);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     if (this.props.location.search !== nextProps.location.search) {
       this.renderSources(nextProps.location.search);
     }
@@ -82,7 +82,6 @@ class SourcesList extends React.Component<Props, State> {
         return checkedSources;
       });
   };
-
   render() {
     const { sourcesList, checkedSources } = this.state;
     const { classes } = this.props;
