@@ -107,7 +107,7 @@ class Sidebar extends React.Component<Props, State> {
         <SourcesList />
         <Dialog
           title={parameters.choose.country}
-          modal={false}
+          modal="false"
           open={this.state.open}
           onClose={() => this.setState({ open: false })}
           fullWidth
@@ -124,7 +124,7 @@ class Sidebar extends React.Component<Props, State> {
           </DialogContent>
           <DialogActions>
             <Button
-              primary
+              primary="true"
               onClick={() => this.setState({
                 country: match.params.countryId,
                 open: false,
@@ -132,7 +132,7 @@ class Sidebar extends React.Component<Props, State> {
             >Cancel
             </Button>
             <Button
-              primary
+              primary="true"
               focusRipple
               onClick={() => {
                 history.push(generateSearchParams(

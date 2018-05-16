@@ -18,6 +18,10 @@ const variables = {
     medium: '10px',
     large: '15px',
   },
+  hover: {
+    opacity: '.8',
+    transition: 'all .4s ease-in-out',
+  },
   checkbox: {
     width: '32px',
     height: '32px',

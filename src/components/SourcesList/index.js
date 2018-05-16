@@ -41,9 +41,9 @@ class SourcesList extends React.Component<Props, State> {
     this.renderSources(this.props.location.search);
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (this.props.location.search !== nextProps.location.search) {
-      this.renderSources(nextProps.location.search);
+  componentDidUpdate(prevProps: Props) {
+    if (this.props.location.search !== prevProps.location.search) {
+      this.renderSources(this.props.location.search);
     }
   }
 
