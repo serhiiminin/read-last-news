@@ -4,7 +4,10 @@ const styles = {
   sidebar: {
     paddingRight: variables.paddings.medium,
   },
-  'modal-wrapper': {
+  sidebarParamWrapper: {
+    padding: `${variables.paddings.medium} ${variables.paddings.no}`,
+  },
+  modalWrapper: {
     display: 'flex',
     justifyContent: 'center',
   },

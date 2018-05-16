@@ -1,5 +1,5 @@
 const styles = {
-  'titles-item': {
+  'titlesItem': {
     listStyle: 'none',
   },
 };

@@ -6,27 +6,31 @@ import { compose } from 'recompose';
 import { Checkbox, FormControlLabel, withStyles } from 'material-ui';
 import styles from './styles';
 
-const CheckboxCustomized = (props: Object) => {
-  const { classes } = props;
+type Props = {
+  label: string,
+  classes: Object,
+  checked: boolean,
+}
 
-  return (
-    <FormControlLabel
-      classes={{
-        root: classes.formControl,
+const CheckboxCustomized = ({ classes, label, checked, ...props }: Props) => (
+  <FormControlLabel
+    checked
+    classes={{
+        root: classes.checkboxWrapper,
       }}
-      control={
-        <Checkbox
-          {...props}
-          classes={{
+    control={
+      <Checkbox
+        {...props}
+        checked={checked}
+        classes={{
             root: classes.root,
             checked: classes.checked,
           }}
-        />
+      />
       }
-      label={props.label}
-    />
-  );
-};
+    label={label}
+  />
+);
 
 CheckboxCustomized.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types

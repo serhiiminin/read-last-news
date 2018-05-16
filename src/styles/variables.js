@@ -18,6 +18,10 @@ const variables = {
     medium: '10px',
     large: '15px',
   },
+  checkbox: {
+    width: '32px',
+    height: '32px',
+  },
 };
 
 export default variables;

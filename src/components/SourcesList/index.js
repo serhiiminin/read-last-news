@@ -1,5 +1,6 @@
 // @flow
 
+import PropTypes from 'prop-types';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 import { withRouter } from 'react-router-dom';
@@ -27,25 +28,26 @@ const getAllActiveTitles = titles =>
     .join(',');
 
 class SourcesList extends React.Component<Props, State> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sourcesList: [],
-      checkedSources: {},
-    };
-  }
+  static propTypes = {
+    location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  };
+
+  state = {
+    sourcesList: [],
+    checkedSources: {},
+  };
 
   componentDidMount() {
     this.renderSources(this.props.location.search);
   }
 
-  componentDidUpdate(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     if (this.props.location.search !== nextProps.location.search) {
       this.renderSources(nextProps.location.search);
     }
   }
 
-  _handleOnChange = (title: String) =>
+  _handleOnChange = title =>
     this.setState({
       checkedSources: {
         ...this.state.checkedSources,
@@ -99,7 +101,7 @@ class SourcesList extends React.Component<Props, State> {
                     key={id}
                     name={id}
                     title={name}
-                    checkedTitles={checkedSources}
+                    checked={checkedSources[id]}
                     onChange={this._handleOnChange}
                   />
                 ))}
