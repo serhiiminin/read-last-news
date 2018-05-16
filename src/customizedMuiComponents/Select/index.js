@@ -1,20 +1,44 @@
 // @flow
 
 import * as React from 'react';
-import { Select } from 'material-ui';
+import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+import { FormControl, Select, InputLabel, withStyles } from 'material-ui';
 import styles from './styles';
 
 type Props = {
   children: React.Node,
+  classes: Object,
+  label: string,
+  id: string,
 }
 
-const SelectCustomized = ({ children, ...props }: Props) => (
-  <Select
-    {...props}
-    {...styles}
-  >
-    {children}
-  </Select>
+const SelectCustomized = ({ children, id, label, ...props }: Props) => {
+  const { classes } = props;
+
+  return (
+    <FormControl className={classes.selectWrapper}>
+      <InputLabel htmlFor={label}>{label}</InputLabel>
+      <Select
+        id={id}
+        {...props}
+        classes={{
+          root: classes.root,
+          select: classes.select,
+        }}
+      >
+        {children}
+      </Select>
+    </FormControl>
+  );
+};
+
+SelectCustomized.propTypes = {
+  classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+};
+
+const enhance = compose(
+  withStyles(styles),
 );
 
-export default SelectCustomized;
+export default enhance(SelectCustomized);

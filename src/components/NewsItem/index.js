@@ -36,6 +36,7 @@ const NewsItem = ({ newsItem, isLoading, classes }: Props) => (
       <CardMedia
         style={isLoading ? styles.loading : { height: '200px' }}
         image={newsItem && newsItem.urlToImage}
+        src="src"
         title={newsItem && newsItem.title}
       />
       <Typography component="h2">{newsItem && newsItem.title}</Typography>

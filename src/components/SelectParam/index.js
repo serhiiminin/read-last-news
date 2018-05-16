@@ -29,9 +29,9 @@ const SelectParam = (
   return (
     <div className={classes['select-param']}>
       <Select
-        floatingLabelText={choose}
+        id={defaultValue}
+        label={choose}
         value={defaultValue}
-        style={styles['select-param']}
         onChange={onChange}
         disabled={disabled}
       >

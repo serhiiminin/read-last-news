@@ -1,6 +1,6 @@
 const styles = {
   'select-param': {
-    maxWidth: '100%',
+    width: '100%',
   },
 };
 

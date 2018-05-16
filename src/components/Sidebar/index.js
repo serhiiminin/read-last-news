@@ -67,7 +67,7 @@ class Sidebar extends React.Component<Props, State> {
     return (
       <aside className={classes.sidebar}>
         <Button
-          keyboardFocused={!this.state.country}
+          focusRipple={!this.state.country}
           variant="raised"
           fullWidth
           onClick={() => this.setState({ open: true })}
@@ -101,7 +101,7 @@ class Sidebar extends React.Component<Props, State> {
             </Button>
             <Button
               primary
-              keyboardFocused
+              focusRipple
               onClick={() => {
                 history.push(generateSearchParams(
                     location.search,
