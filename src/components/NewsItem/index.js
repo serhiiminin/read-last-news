@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { compose } from 'recompose';
 import Moment from 'react-moment';
-import { CardActions, CardHeader, CardMedia, Typography } from 'material-ui';
+import { CardActions, CardHeader, CardContent, CardMedia, Typography } from 'material-ui';
 import { Card, Button } from './../../customizedMuiComponents';
 import styles from './styles';
 
@@ -25,7 +25,7 @@ type Props = {
 };
 
 const NewsItem = ({ newsItem, isLoading, classes }: Props) => (
-  <div className={`${classes['news-item']} ${isLoading ? classes['news-item-loading'] : ''}`}>
+  <div className={classes.newsItem}>
     <Card
       style={isLoading ? styles.cardLoading : styles.card}
     >
@@ -39,8 +39,16 @@ const NewsItem = ({ newsItem, isLoading, classes }: Props) => (
         src="src"
         title={newsItem && newsItem.title}
       />
-      <Typography component="h2">{newsItem && newsItem.title}</Typography>
-      <Typography component="p">{newsItem && newsItem.description}</Typography>
+      <CardContent>
+        <Typography
+          gutterBottom
+          variant="headline"
+          component="h2"
+        >
+          {newsItem && newsItem.title}
+        </Typography>
+        <Typography component="p">{newsItem && newsItem.description}</Typography>
+      </CardContent>
       <CardActions>
         <Button
           href={newsItem && newsItem.url}

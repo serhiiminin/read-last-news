@@ -1,7 +1,7 @@
 import variables from '../../styles/variables';
 
 const styles = {
-  'news-item': {
+  newsItem: {
     margin: `${variables.margins.no} ${variables.margins.no} 1.33% 1.33%`,
     padding: variables.paddings.no,
     width: '32%',
@@ -10,14 +10,11 @@ const styles = {
       display: 'none',
     },
   },
-  'news-item-loading': {
-    opacity: '0.8',
-  },
   card: {
     height: '100%',
   },
   cardLoading: {
-    height: '200px',
+    minHeight: '200px',
     opacity: '0.8',
   },
   loading: {
