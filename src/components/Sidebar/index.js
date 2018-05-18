@@ -107,22 +107,22 @@ class Sidebar extends React.Component<Props, State> {
         </div>
         <SourcesList />
         <Dialog
-          title={parameters.choose.country}
+          fullWidth
           open={this.state.open}
           onClose={() => this.setState({ open: false })}
-          fullWidth
         >
           <DialogTitle id="choose-country">{parameters.choose.country}</DialogTitle>
           <DialogContent>
             <RadioGroup
-              country={this.state.country}
+              onChange={(event, value) => this.setState({ country: value })}
+              name={this.state.country}
             >
               {paramsCountries.map(([key, value]) => (
                 <Radio
+                  value={key}
                   label={value}
                   key={key}
                   checked={false}
-                  onChange={(event, checked) => console.log(event.target.value, checked)}
                 />
               ))}
             </RadioGroup>

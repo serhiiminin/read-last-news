@@ -9,20 +9,19 @@ import styles from './styles';
 type Props = {
   children: React.Node,
   classes: Object,
-  id: string,
   label: string,
 }
 
-const RadioCustomized = ({ label, id, ...props }: Props) => {
+const RadioCustomized = ({ label, value, ...props }: Props) => {
   const { classes } = props;
 
   return (
     <FormControlLabel
-      checked
       label={label}
+      value={value}
+      checked
       control={
         <Radio
-          id={id}
           onChange={() => console.log('sd')}
           {...props}
           classes={{

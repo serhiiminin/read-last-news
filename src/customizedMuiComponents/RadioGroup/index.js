@@ -10,22 +10,16 @@ type Props = {
   children: React.Node,
   classes: Object,
   onChange: Function,
+  country: string,
 }
 
-const RadioGroupCustomized = ({ children, country, onChange, ...props }: Props) => {
-  const { classes } = props;
-
-  return (
-    <RadioGroup
-      aria-label="country"
-      name="country"
-      value={country}
-      onChange={onChange}
-    >
-      {children}
-    </RadioGroup>
-  );
-};
+const RadioGroupCustomized = ({ children, ...restProps }: Props) => (
+  <RadioGroup
+    {...restProps}
+  >
+    {children}
+  </RadioGroup>
+);
 
 RadioGroupCustomized.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
