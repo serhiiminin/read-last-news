@@ -7,10 +7,6 @@ const styles = {
   sidebarParamWrapper: {
     padding: `${variables.paddings.medium} ${variables.paddings.no}`,
   },
-  modalWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
 };
 
 export default styles;

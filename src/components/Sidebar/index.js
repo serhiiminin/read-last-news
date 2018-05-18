@@ -4,8 +4,8 @@ import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import injectSheet from 'react-jss';
-import { Dialog, DialogContent, DialogActions } from 'material-ui';
-import { Button, TextField } from '../../customizedMuiComponents';
+import { Dialog, DialogContent, DialogActions, DialogTitle } from 'material-ui';
+import { Button, TextField, Radio, RadioGroup } from '../../customizedMuiComponents';
 import { generateSearchParams, parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
 import { SourcesList, SelectParam } from './..';
@@ -58,6 +58,7 @@ class Sidebar extends React.Component<Props, State> {
   render() {
     const { location, history, match, classes } = this.props;
     const parsedLocation = parseSearchParams(location.search, match.params.countryId);
+    const paramsCountries: Array<[string, mixed]> = Object.entries(parameters.countries);
 
     return (
       <aside className={classes.sidebar}>
@@ -107,20 +108,24 @@ class Sidebar extends React.Component<Props, State> {
         <SourcesList />
         <Dialog
           title={parameters.choose.country}
-          modal="false"
           open={this.state.open}
           onClose={() => this.setState({ open: false })}
           fullWidth
         >
+          <DialogTitle id="choose-country">{parameters.choose.country}</DialogTitle>
           <DialogContent>
-            <div className={classes.modalWrapper}>
-              <SelectParam
-                choose={parameters.choose.country}
-                parameters={parameters.countries}
-                defaultValue={this.state.country || parameters.defaultParams.country}
-                onChange={event => this.setState({ country: event.target.value })}
-              />
-            </div>
+            <RadioGroup
+              country={this.state.country}
+            >
+              {paramsCountries.map(([key, value]) => (
+                <Radio
+                  label={value}
+                  key={key}
+                  checked={false}
+                  onChange={(event, checked) => console.log(event.target.value, checked)}
+                />
+              ))}
+            </RadioGroup>
           </DialogContent>
           <DialogActions>
             <Button

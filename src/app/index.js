@@ -22,7 +22,6 @@ const App = ({ classes }: Props) => (
       </div>
       <Footer />
     </div>
-
   </div>
 );
 
