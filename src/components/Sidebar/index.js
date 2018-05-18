@@ -131,10 +131,10 @@ class Sidebar extends React.Component<Props, State> {
           <DialogActions>
             <Button
               primary="true"
-              onClick={() => this.setState({
-                country: match.params.countryId,
+              onClick={() => this.setState((prevState: Object) => ({
+                country: prevState.country,
                 open: false,
-              })}
+              }))}
             >Cancel
             </Button>
             <Button

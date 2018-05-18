@@ -27,6 +27,7 @@ const RadioCustomized = ({ label, value, onChange, checked, ...props }: Props) =
           onChange={onChange}
           classes={{
             root: classes.root,
+            checked: classes.checked,
           }}
         />}
     />
