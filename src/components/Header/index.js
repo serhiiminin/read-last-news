@@ -3,7 +3,7 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 import { compose } from 'recompose';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
 import { Status } from './..';
@@ -21,7 +21,9 @@ const Header = (props: Props) => {
 
   return (
     <header className={classes.header}>
-      <h1>Read last news</h1>
+      <h1>
+        <Link to="/" className={classes.link}>Read last news</Link>
+      </h1>
       <Status>{parameters.countries[countryName]}</Status>
     </header>
   );

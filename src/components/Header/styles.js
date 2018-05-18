@@ -8,6 +8,11 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  link: {
+    color: variables.colors.text,
+    textDecoration: 'none',
+    fontFamily: 'WalbaumFraktur, sans-serif',
+  },
 };
 
 export default styles;

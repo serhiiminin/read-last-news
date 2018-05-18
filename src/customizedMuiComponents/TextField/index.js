@@ -3,14 +3,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { MenuItem, withStyles } from 'material-ui';
+import { TextField, withStyles } from 'material-ui';
 import styles from './styles';
 
-const MenuItemCustomized = (props: Object) => {
+const TextFieldCustomized = (props: Object) => {
   const { classes } = props;
 
   return (
-    <MenuItem
+    <TextField
       {...props}
       classes={{
         root: classes.root,
@@ -19,7 +19,7 @@ const MenuItemCustomized = (props: Object) => {
   );
 };
 
-MenuItemCustomized.propTypes = {
+TextFieldCustomized.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
@@ -27,4 +27,4 @@ const enhance = compose(
   withStyles(styles),
 );
 
-export default enhance(MenuItemCustomized);
+export default enhance(TextFieldCustomized);

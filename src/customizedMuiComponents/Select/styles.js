@@ -1,5 +1,8 @@
 const styles = {
-  'select-param': {
+  root: {
+    width: '100%',
+  },
+  selectWrapper: {
     width: '100%',
   },
 };

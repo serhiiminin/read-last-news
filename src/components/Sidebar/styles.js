@@ -4,9 +4,8 @@ const styles = {
   sidebar: {
     paddingRight: variables.paddings.medium,
   },
-  'modal-wrapper': {
-    display: 'flex',
-    justifyContent: 'center',
+  sidebarParamWrapper: {
+    padding: `${variables.paddings.medium} ${variables.paddings.no}`,
   },
 };
 

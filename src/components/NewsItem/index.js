@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { compose } from 'recompose';
 import Moment from 'react-moment';
-import { CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui';
-import { Card, FlatButton } from './../../customizedMuiComponents';
+import { CardActions, CardHeader, CardContent, CardMedia, Typography } from 'material-ui';
+import { Card, Button } from './../../customizedMuiComponents';
 import styles from './styles';
 
 type Props = {
@@ -20,43 +20,64 @@ type Props = {
       name: string,
     }
   },
+  isLoading: boolean,
   classes: Object,
 };
 
-const NewsItem = ({ newsItem, classes }: Props) => (
-  <div className={classes['news-item']}>
+const NewsItem = ({ newsItem, isLoading, classes }: Props) => (
+  <div className={classes.newsItem}>
     <Card
-      style={{ height: '100%' }}
+      style={isLoading ? styles.cardLoading : styles.card}
     >
       <CardHeader
-        title={newsItem.source.name}
-        subtitle={<Moment date={newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
+        title={newsItem && newsItem.source && newsItem.source.name}
+        subheader={<Moment date={newsItem && newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
       />
-      <CardMedia>
-        <img
-          className={classes.img}
-          src={newsItem.urlToImage}
-          alt={newsItem.title}
-        />
-      </CardMedia>
-      <CardTitle title={newsItem.title} />
-      <CardText>
-        {newsItem.description}
-      </CardText>
+      <CardMedia
+        style={isLoading ? styles.loading : { height: '200px' }}
+        image={newsItem && newsItem.urlToImage}
+        src="src"
+        title={newsItem && newsItem.title}
+      />
+      <CardContent>
+        <Typography
+          gutterBottom
+          variant="headline"
+          component="h2"
+        >
+          {newsItem && newsItem.title}
+        </Typography>
+        <Typography component="p">{newsItem && newsItem.description}</Typography>
+      </CardContent>
       <CardActions>
-        <FlatButton
-          label="Read"
-          href={newsItem.url}
+        <Button
+          href={newsItem && newsItem.url}
           target="_blank"
-        />
+        >Read
+        </Button>
       </CardActions>
     </Card>
   </div>
 );
 
 NewsItem.propTypes = {
-  newsItem: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  newsItem: PropTypes.shape({
+    autor: PropTypes.string,
+    description: PropTypes.string,
+    publishedAt: PropTypes.string,
+    source: PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+    }),
+    title: PropTypes.string,
+    url: PropTypes.string,
+    urlToImage: PropTypes.string,
+  }),
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+};
+
+NewsItem.defaultProps = {
+  newsItem: {},
 };
 
 const enhance = compose(

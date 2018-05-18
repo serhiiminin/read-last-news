@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { compose } from 'recompose';
-import { SelectField, MenuItem } from '../../customizedMuiComponents';
+import { Select, MenuItem } from '../../customizedMuiComponents';
 import styles from './styles';
 
 type Props = {
@@ -28,10 +28,10 @@ const SelectParam = (
 
   return (
     <div className={classes['select-param']}>
-      <SelectField
-        floatingLabelText={choose}
+      <Select
+        id={defaultValue}
+        label={choose}
         value={defaultValue}
-        style={styles['select-param']}
         onChange={onChange}
         disabled={disabled}
       >
@@ -40,9 +40,9 @@ const SelectParam = (
             (typeof firstValue === 'string' && typeof secondValue === 'string'
               ? firstValue.localeCompare(secondValue) : 0))
           .map(([key, value]) => (
-            <MenuItem value={key} primaryText={value} key={key} />
+            <MenuItem value={key} key={key} >{value}</MenuItem>
           ))}
-      </SelectField>
+      </Select>
     </div>
   );
 };

@@ -4,11 +4,11 @@ import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import injectSheet from 'react-jss';
-import Dialog from 'material-ui/Dialog';
-import { RaisedButton, FlatButton } from '../../customizedMuiComponents';
+import { Dialog, DialogContent, DialogActions, DialogTitle } from 'material-ui';
+import { Button, TextField, Radio, RadioGroup } from '../../customizedMuiComponents';
 import { generateSearchParams, parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
-import { TitlesList, SelectParam, RangeParam } from './..';
+import { SourcesList, SelectParam } from './..';
 import styles from './styles';
 
 type Props = {
@@ -16,23 +16,24 @@ type Props = {
   history: Object,
   match: Object,
   classes: Object,
-}
+};
 
 type State = {
   open: boolean,
   country: string,
-}
+};
+
+const INPUT_TIMEOUT = 500;
 
 class Sidebar extends React.Component<Props, State> {
+  inputTimer: TimeoutID
+
   state = {
     open: false,
     country: parameters.defaultParams.country,
   };
 
-  componentWillMount() {
-    if (!this.props.match.params.countryId) {
-      this.setState({ open: true });
-    }
+  componentDidMount() {
     const currentParams = parseSearchParams(this.props.location.search, this.props.match.params.countryId);
 
     this.setState({
@@ -40,70 +41,116 @@ class Sidebar extends React.Component<Props, State> {
     });
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.inputTimer);
+  }
+
+  _handleInputChange = event => {
+    clearTimeout(this.inputTimer);
+    const { target }: Object = event;
+
+    this.inputTimer = setTimeout(() =>
+      this.props.history.push(
+        generateSearchParams(this.props.location.search, { q: target.value }),
+      ), INPUT_TIMEOUT);
+  };
+
   render() {
     const { location, history, match, classes } = this.props;
     const parsedLocation = parseSearchParams(location.search, match.params.countryId);
-    const actions = [
-      <FlatButton
-        label="Cancel"
-        primary
-        onClick={() => this.setState({
-          country: match.params.countryId,
-          open: false,
-        })}
-      />,
-      <FlatButton
-        label="Submit"
-        primary
-        keyboardFocused
-        onClick={() => {
-          history.push(`/${this.state.country || parameters.defaultParams.country}`);
-          this.setState({ open: false });
-        }}
-      />,
-    ];
+    const paramsCountries: Array<[string, mixed]> = Object.entries(parameters.countries);
 
     return (
       <aside className={classes.sidebar}>
-        <RaisedButton
-          label={parameters.choose.country}
+        <Button
+          focusRipple={!this.state.country}
+          variant="raised"
+          fullWidth
           onClick={() => this.setState({ open: true })}
-        />
+        >{parameters.countries[parseSearchParams(this.props.location.search).country]
+          || parameters.choose.country}
+        </Button>
+        <div className={classes.sidebarParamWrapper}>
+          <TextField
+            label="Search news"
+            onChange={this._handleInputChange}
+          />
+        </div>
+        <div className={classes.sidebarParamWrapper}>
+          <SelectParam
+            choose={parameters.choose.category}
+            parameters={parameters.categories}
+            defaultValue={Object.keys(parsedLocation).length && parsedLocation.category
+              ? parsedLocation.category
+              : parameters.defaultParams.category}
+            onChange={event =>
+              history.push(generateSearchParams(location.search,
+                {
+                  [parameters.category]: event.target.value,
+                  [parameters.sources]: '',
+                }))}
+          />
+        </div>
+        <div className={classes.sidebarParamWrapper}>
+          <SelectParam
+            choose={parameters.choose.pageSize}
+            parameters={parameters.pageSizes}
+            defaultValue={parsedLocation[parameters.pageSize] || parameters.defaultParams.pageSize}
+            onChange={(event, index, value) =>
+              history.push(generateSearchParams(
+                location.search,
+                {
+                  [parameters.pageSize]: value,
+                }))}
+            disabled={!parsedLocation.category && !parsedLocation.country}
+          />
+        </div>
+        <SourcesList />
         <Dialog
-          title={parameters.choose.country}
-          actions={actions}
-          modal={false}
+          fullWidth
           open={this.state.open}
-          onRequestClose={() => this.setState({ open: false })}
-          style={{ margin: '0 auto' }}
+          onClose={() => this.setState({ open: false })}
         >
-          <div className={classes['modal-wrapper']}>
-            <SelectParam
-              choose={parameters.choose.country}
-              parameters={parameters.countries}
-              defaultValue={this.state.country || parameters.defaultParams.country}
-              onChange={(event, index, value) => this.setState({ country: value })}
-            />
-          </div>
+          <DialogTitle id="choose-country">{parameters.choose.country}</DialogTitle>
+          <DialogContent>
+            <RadioGroup
+              name={this.state.country}
+              aria-label={this.state.country}
+              value={this.state.country || parameters.defaultParams.country}
+              onChange={(event, value) => this.setState({ country: value })}
+            >
+              {paramsCountries.map(([key, value]) => (
+                <Radio
+                  value={key}
+                  label={value}
+                  key={key}
+                />
+              ))}
+            </RadioGroup>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              primary="true"
+              onClick={() => this.setState((prevState: Object) => ({
+                country: prevState.country,
+                open: false,
+              }))}
+            >Cancel
+            </Button>
+            <Button
+              primary="true"
+              focusRipple
+              onClick={() => {
+                history.push(generateSearchParams(
+                    location.search,
+                    { [parameters.country]: this.state.country || parameters.defaultParams.country,
+                      [parameters.sources]: '' }));
+                this.setState({ open: false });
+              }}
+            >Submit
+            </Button>
+          </DialogActions>
         </Dialog>
-        <SelectParam
-          choose={parameters.choose.category}
-          parameters={parameters.categories}
-          defaultValue={Object.keys(parsedLocation).length && parsedLocation.category
-            ? parsedLocation.category
-            : parameters.defaultParams.category}
-          onChange={(event, index, value) =>
-            history.push(generateSearchParams(location.search, { [parameters.category]: value }))}
-          disabled={!parsedLocation.country}
-        />
-        <RangeParam
-          min={parameters.pageSize.min}
-          max={parameters.pageSize.max}
-          step={parameters.pageSize.step}
-          defaultValue={parameters.pageSize.defaultValue}
-          disabled={!location.search && !match.params.countryId}
-        />
-        <TitlesList />
       </aside>
     );
   }
