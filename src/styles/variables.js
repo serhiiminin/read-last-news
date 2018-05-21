@@ -26,6 +26,11 @@ const variables = {
     width: '32px',
     height: '32px',
   },
+  borderRadius: {
+    small: '5px',
+    medium: '10px',
+    large: '15px',
+  },
 };
 
 export default variables;

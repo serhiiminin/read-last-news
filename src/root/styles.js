@@ -14,7 +14,8 @@ const styles = {
   '@global body': {
     overflowX: 'hidden',
     color: variables.colors.text,
-    fontFamily: 'Verdana, sans-serif',
+    fontFamily: 'WalbaumFraktur, sans-serif',
+    position: 'relative',
   },
   root: {
     background: variables.colors.background,

@@ -18,7 +18,9 @@ const fetchJSON = url =>
   window.fetch(url)
     .then(checkStatus)
     .then(parseJSON)
-    .catch(error => console.log(error));
+    .catch(error => {
+      throw new Error(error);
+    });
 
 const api = (params: Object, typeData: string) => {
   const searchUrl = Object.keys(params).length !== 0
