@@ -8,11 +8,12 @@ import styles from './styles';
 
 type Props = {
   classes: Object,
+  text: String,
 }
 
-const NotificationItem = ({ classes }: Props) => (
+const NotificationItem = ({ classes, text }: Props) => (
   <li className={classes.notification}>
-    Notification
+    {text}
   </li>
 );
 

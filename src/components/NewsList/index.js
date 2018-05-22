@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { parseSearchParams, api } from '../../helpers';
 import { parameters } from '../../defaults';
-import { NewsItem, NotificationsContext } from './..';
+import { NewsItem } from './..';
 import styles from './styles';
 
 type State = {
@@ -22,11 +22,13 @@ type Props = {
   location: Object,
   match: Object,
   classes: Object,
+  showNotification: Function,
 };
 
 class NewsList extends Component<Props, State> {
   static propTypes = {
     location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    showNotification: PropTypes.func.isRequired,
   };
 
   state = {
@@ -61,7 +63,8 @@ class NewsList extends Component<Props, State> {
       .then(({ articles }) => this.setState({
         newsList: articles,
         isLoading: false,
-      }));
+      }))
+      .catch(error => this.props.showNotification(error));
   };
 
   render() {
