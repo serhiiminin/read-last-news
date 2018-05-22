@@ -9,11 +9,25 @@ import styles from './styles';
 type Props = {
   classes: Object,
   text: String,
+  type: String,
+  onClick: Function,
 }
 
-const NotificationItem = ({ classes, text }: Props) => (
-  <li className={classes.notification}>
-    {text}
+const NotificationItem = ({ classes, onClick, text, type }: Props) => (
+  <li className={`${classes.notification} ${classes[type]}`}>
+    <div>
+      <div className={classes.topLine}>
+        <div className={classes.typeText}>Type of notification</div>
+        <div>
+          <button
+            className={classes.closeButton}
+            onClick={onClick}
+          >+
+          </button>
+        </div>
+      </div>
+      <div>{text}</div>
+    </div>
   </li>
 );
 

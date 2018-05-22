@@ -35,6 +35,11 @@ const variables = {
     modal: '1000',
     notification: '1010',
   },
+  notifications: {
+    success: 'success',
+    warnings: 'warning',
+    error: 'error',
+  },
 };
 
 export default variables;

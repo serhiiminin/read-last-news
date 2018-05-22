@@ -71,8 +71,6 @@ class NewsList extends Component<Props, State> {
     const { classes } = this.props;
     const { newsList, isLoading } = this.state;
 
-    console.log(this.props);
-
     const loadedList = !newsList.length
       ? <div className={classes['news-list-empty']}>There is no news</div>
       : (

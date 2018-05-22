@@ -24,13 +24,12 @@ class Notifications extends React.Component<Props, State> {
   state = {
     errors: {},
   };
-  _showNotification = (error: Error) => {
+  _showNotification = (error: { response: Object, message: ?String }) => {
     const id = uuid();
 
-    console.log(error.response.statusText);
     this.setState({ errors: {
       ...this.state.errors,
-      [id]: error.response.statusText,
+      [id]: (error.response && error.response.statusText) || error.message,
     } });
     setTimeout(() => this.setState(prevState => {
       const prevErrors = { ...prevState }.errors;
@@ -41,23 +40,38 @@ class Notifications extends React.Component<Props, State> {
       };
     }), NOTIFICATION_TIMEOUT);
   };
+  _hideNotification = (id: String) => {
+    this.setState(prevState => {
+      const prevErrors = { ...prevState }.errors;
+
+      delete prevErrors[id];
+      return {
+        errors: prevErrors,
+      };
+    });
+  };
   render() {
     const { classes, children } = this.props;
     const notifications: Array<[string, mixed]> = Object.entries(this.state.errors);
 
-    console.log(this.state.errors);
     return (
       <React.Fragment>
-        <NotificationsContext.Provider value={this._showNotification}>
+        <NotificationsContext.Provider
+          value={{ showNotification: this._showNotification }}
+        >
           { children }
         </NotificationsContext.Provider>
         <ul className={classes.notifications}>
-          {notifications.map(([key, value]) => (
-            <NotificationItem text={value} key={key} />
+          {notifications.map(([id, value]) => (
+            <NotificationItem
+              type="error"
+              text={value}
+              key={id}
+              onClick={() => this._hideNotification(id)}
+            />
           ))}
         </ul>
       </React.Fragment>
-
     );
   }
 }

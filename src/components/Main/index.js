@@ -7,8 +7,8 @@ const Main = () => (
   <main>
     <ErrorBoundary>
       <NotificationsContext.Consumer>
-        {showNotification => (
-          <NewsList showNotification={showNotification} />
+        {notifications => (
+          <NewsList showNotification={notifications.showNotification} />
         )}
       </NotificationsContext.Consumer>
 

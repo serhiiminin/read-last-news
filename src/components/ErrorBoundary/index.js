@@ -29,7 +29,7 @@ class ErrorBoundary extends React.Component<Props, State> {
 
   render() {
     return this.state.hasError
-      ? <h1>Something went wrong.</h1>
+      ? <h3>Something went wrong.</h3>
       : this.props.children;
   }
 }

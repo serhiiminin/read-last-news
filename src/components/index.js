@@ -1,3 +1,4 @@
+// components
 export { default as SelectParam } from './SelectParam';
 export { default as Header } from './Header';
 export { default as Footer } from './Footer';
@@ -11,5 +12,7 @@ export { default as SourcesItem } from './SourcesItem';
 export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as Notifications } from './Notifications';
 export { default as NotificationItem } from './NotificationItem';
+
+// context
 export { NotificationsContext } from './Notifications';
 
