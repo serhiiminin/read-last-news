@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogActions, DialogTitle } from 'material-ui';
 import { Button, TextField, Radio, RadioGroup } from '../../customizedMuiComponents';
 import { generateSearchParams, parseSearchParams } from '../../helpers';
 import { parameters } from '../../defaults';
-import { SourcesList, SelectParam } from './..';
+import { SourcesList, SelectParam, NotificationsContext } from './..';
 import styles from './styles';
 
 type Props = {
@@ -105,7 +105,11 @@ class Sidebar extends React.Component<Props, State> {
             disabled={!parsedLocation.category && !parsedLocation.country}
           />
         </div>
-        <SourcesList />
+        <NotificationsContext.Consumer>
+          {notifications => (
+            <SourcesList showNotification={notifications.showNotification} />
+          )}
+        </NotificationsContext.Consumer>
         <Dialog
           fullWidth
           open={this.state.open}

@@ -19,6 +19,7 @@ type Props = {
   location: Object,
   history: Object,
   classes: Object,
+  showNotification: Function,
 };
 
 const getAllActiveTitles = titles =>
@@ -30,6 +31,7 @@ const getAllActiveTitles = titles =>
 class SourcesList extends React.Component<Props, State> {
   static propTypes = {
     location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    showNotification: PropTypes.func.isRequired,
   };
 
   state = {
@@ -82,7 +84,8 @@ class SourcesList extends React.Component<Props, State> {
         this.setState({ checkedSources });
 
         return checkedSources;
-      });
+      })
+      .catch(error => this.props.showNotification(error));
   };
   render() {
     const { sourcesList, checkedSources } = this.state;
