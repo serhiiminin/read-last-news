@@ -4,7 +4,7 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { Main, Header, Sidebar, Footer } from './../components';
+import { Main, Header, Sidebar, Footer, ErrorBoundary } from './../components';
 import styles from './styles';
 
 type Props = {
@@ -14,14 +14,16 @@ const App = ({ classes }: Props) => (
   <div className={classes.container}>
     <Header />
     <div className={classes.content}>
-      <div className={classes.content__sidebar}>
-        <Sidebar />
-      </div>
-      <div className={classes.content__main}>
-        <Main />
-      </div>
-      <Footer />
+      <ErrorBoundary>
+        <div className={classes.content__sidebar}>
+          <Sidebar />
+        </div>
+        <div className={classes.content__main}>
+          <Main />
+        </div>
+      </ErrorBoundary>
     </div>
+    <Footer />
   </div>
 );
 
