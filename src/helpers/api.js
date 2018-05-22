@@ -6,10 +6,11 @@ const checkStatus = (response: Object) => {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
+
   const error: Object = new Error(response.statusText);
 
   error.response = response;
-  throw new Error(error);
+  throw error;
 };
 
 const parseJSON = response => response.json();

@@ -16,25 +16,17 @@ type Props = {
 
 const theme = createMuiTheme();
 
-class Root extends React.Component<Props> {
-  componentDidCatch(error: Error, errorInfo: Object) {
-    console.log('e', error, errorInfo);
-  }
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
-        <MuiThemeProvider theme={theme}>
-          <Router>
-            <Route path="/" component={App} />
-          </Router>
-          <Notifications />
-        </MuiThemeProvider>
-      </div>
-    );
-  }
-}
+const Root = ({ classes }: Props) => (
+  <div className={classes.root}>
+    <MuiThemeProvider theme={theme}>
+      <Notifications>
+        <Router>
+          <Route path="/" component={App} />
+        </Router>
+      </Notifications>
+    </MuiThemeProvider>
+  </div>
+);
 
 Root.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types

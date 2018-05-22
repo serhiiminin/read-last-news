@@ -13,32 +13,40 @@ type State = {
 }
 type Props = {
   classes: Object,
+  children: React.Node,
 }
 
 const NOTIFICATION_TIMEOUT: number = 5000;
+
+const NotificationsContext = React.createContext();
 
 class Notifications extends React.Component<Props, State> {
   state = {
     errors: {},
   };
-  componentDidCatch(error: Object, info: Object) {
+  _showNotification = (error: Error) => {
     const id = uuid();
 
-    console.log(error, info);
+    console.log(error);
     this.setState({ errors: {
       ...this.state.errors,
       [id]: error,
     } });
-    setTimeout(() => {}, NOTIFICATION_TIMEOUT);
-  }
+    setTimeout(() => 'Hide notification', NOTIFICATION_TIMEOUT);
+  };
   render() {
-    const { classes } = this.props;
+    const { classes, children } = this.props;
 
-    console.log(this.state.errors);
     return (
-      <ul className={classes.notifications}>
-        <NotificationItem />
-      </ul>
+      <React.Fragment>
+        <NotificationsContext.Provider showNotification={this._showNotification}>
+          { children }
+        </NotificationsContext.Provider>
+        <ul className={classes.notifications}>
+          <NotificationItem />
+        </ul>
+      </React.Fragment>
+
     );
   }
 }
@@ -49,5 +57,7 @@ Notifications.propTypes = {
 const enhance = compose(
   injectSheet(styles),
 );
+
+export { NotificationsContext };
 
 export default enhance(Notifications);

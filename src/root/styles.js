@@ -16,11 +16,14 @@ const styles = {
     color: variables.colors.text,
     fontFamily: 'WalbaumFraktur, sans-serif',
     position: 'relative',
+    boxSizing: 'border-box',
+  },
+  '@global *': {
+    boxSizing: 'border-box',
   },
   root: {
     background: variables.colors.background,
     minHeight: '100vh',
-    minWidth: '100vw',
   },
 };
 

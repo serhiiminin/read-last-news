@@ -4,10 +4,12 @@ const styles = {
   notifications: {
     width: '250px',
     height: '0',
-    position: 'absolute',
+    position: 'fixed',
     right: variables.paddings.large,
     top: variables.paddings.medium,
-    zIndex: '1010',
+    zIndex: variables.zIndex.notification,
+    margin: variables.margins.no,
+    padding: variables.paddings.no,
   },
 };
 

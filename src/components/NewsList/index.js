@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { parseSearchParams, api } from '../../helpers';
 import { parameters } from '../../defaults';
-import { NewsItem } from './..';
+import { NewsItem, NotificationsContext } from './..';
 import styles from './styles';
 
 type State = {
@@ -67,6 +67,8 @@ class NewsList extends Component<Props, State> {
   render() {
     const { classes } = this.props;
     const { newsList, isLoading } = this.state;
+
+    console.log(this.props);
 
     const loadedList = !newsList.length
       ? <div className={classes['news-list-empty']}>There is no news</div>

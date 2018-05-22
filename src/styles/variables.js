@@ -31,6 +31,10 @@ const variables = {
     medium: '10px',
     large: '15px',
   },
+  zIndex: {
+    modal: '1000',
+    notification: '1010',
+  },
 };
 
 export default variables;
