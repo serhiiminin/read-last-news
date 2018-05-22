@@ -9,7 +9,7 @@ const checkStatus = (response: Object) => {
   const error: Object = new Error(response.statusText);
 
   error.response = response;
-  throw error;
+  throw new Error(error);
 };
 
 const parseJSON = response => response.json();
@@ -17,10 +17,8 @@ const parseJSON = response => response.json();
 const fetchJSON = url =>
   window.fetch(url)
     .then(checkStatus)
-    .then(parseJSON)
-    .catch(error => {
-      throw new Error(error);
-    });
+    .then(parseJSON);
+
 
 const api = (params: Object, typeData: string) => {
   const searchUrl = Object.keys(params).length !== 0
