@@ -10,14 +10,15 @@ type Props = {
   classes: Object,
   text: String,
   type: String,
+  title: String,
   onClick: Function,
 }
 
-const NotificationItem = ({ classes, onClick, text, type }: Props) => (
+const NotificationItem = ({ classes, onClick, title, text, type }: Props) => (
   <li className={`${classes.notification} ${classes[type]}`}>
     <div>
       <div className={classes.topLine}>
-        <div className={classes.typeText}>Type of notification</div>
+        <div className={classes.typeText}>{title}</div>
         <div>
           <button
             className={classes.closeButton}

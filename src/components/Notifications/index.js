@@ -40,7 +40,7 @@ class Notifications extends React.Component<Props, State> {
       };
     }), NOTIFICATION_TIMEOUT);
   };
-  _hideNotification = (id: String) => {
+  _hideNotification = (id: ?String) => {
     this.setState(prevState => {
       const prevErrors = { ...prevState }.errors;
 
@@ -64,6 +64,7 @@ class Notifications extends React.Component<Props, State> {
         <ul className={classes.notifications}>
           {notifications.map(([id, value]) => (
             <NotificationItem
+              title="Oops"
               type="error"
               text={value}
               key={id}

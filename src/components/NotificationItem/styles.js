@@ -3,11 +3,19 @@ import { variables } from '../../styles';
 const styles = {
   notification: {
     width: '100%',
-    borderRadius: variables.borderRadius.medium,
-    background: variables.colors.coral,
+    borderRadius: variables.borderRadius.small,
     padding: variables.paddings.medium,
     marginBottom: variables.margins.medium,
     listStyle: 'none',
+  },
+  error: {
+    background: variables.colors.notifications.error,
+  },
+  success: {
+    background: variables.colors.notifications.success,
+  },
+  warning: {
+    background: variables.colors.notifications.warning,
   },
   topLine: {
     display: 'flex',

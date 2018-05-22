@@ -5,6 +5,12 @@ const variables = {
     blue: '#2988BC',
     sea: '#2F496E',
     coral: '#ED8C72',
+    notifications: {
+      error: '#FFBABA',
+      success: '#DFF2BF',
+      warning: '#FEEFB3',
+      info: '#BDE5F8',
+    },
   },
   margins: {
     no: '0',
@@ -34,11 +40,6 @@ const variables = {
   zIndex: {
     modal: '1000',
     notification: '1010',
-  },
-  notifications: {
-    success: 'success',
-    warnings: 'warning',
-    error: 'error',
   },
 };
 

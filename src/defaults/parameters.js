@@ -92,6 +92,11 @@ const parameters = {
     50: 50,
     100: 100,
   },
+  notifications: {
+    success: 'success',
+    warnings: 'warning',
+    error: 'error',
+  },
 };
 
 export default parameters;
