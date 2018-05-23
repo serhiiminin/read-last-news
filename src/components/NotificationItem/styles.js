@@ -17,6 +17,9 @@ const styles = {
   warning: {
     background: variables.colors.notifications.warning,
   },
+  entered: {
+    opacity: '1',
+  },
   topLine: {
     display: 'flex',
     flexFlow: 'row wrap',

@@ -4,6 +4,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { compose } from 'recompose';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import uuid from 'uuid';
 import { NotificationItem } from './..';
 import styles from './styles';
@@ -62,15 +63,23 @@ class Notifications extends React.Component<Props, State> {
           { children }
         </NotificationsContext.Provider>
         <ul className={classes.notifications}>
-          {notifications.map(([id, value]) => (
-            <NotificationItem
-              title="Oops"
-              type="error"
-              text={value}
-              key={id}
-              onClick={() => this._hideNotification(id)}
-            />
-          ))}
+          <TransitionGroup>
+            {notifications.map(([id, value]) => (
+              <CSSTransition
+                key={id}
+                timeout={500}
+                classNames="fade"
+              >
+                <NotificationItem
+                  title="Oops"
+                  type="error"
+                  text={value}
+                  key={id}
+                  onClick={() => this._hideNotification(id)}
+                />
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
         </ul>
       </React.Fragment>
     );
