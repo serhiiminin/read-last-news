@@ -22,21 +22,19 @@ type Props = {
   location: Object,
   match: Object,
   classes: Object,
+  showNotification: Function,
 };
 
 class NewsList extends Component<Props, State> {
   static propTypes = {
     location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    showNotification: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      newsList: [],
-      isLoading: false,
-    };
-    this.renderNews = this.renderNews.bind(this);
-  }
+  state = {
+    newsList: [],
+    isLoading: false,
+  };
 
   componentDidMount() {
     const queryParams = Object.keys(
@@ -46,9 +44,10 @@ class NewsList extends Component<Props, State> {
 
     this.renderNews(queryParams);
   }
-  componentDidUpdate(nextProps: Props) {
-    if (this.props.location.search !== nextProps.location.search) {
-      const queryParams = parseSearchParams(nextProps.location.search);
+
+  componentDidUpdate(prevProps: Props) {
+    if (this.props.location.search !== prevProps.location.search) {
+      const queryParams = parseSearchParams(this.props.location.search);
 
       this.renderNews(queryParams);
     }
@@ -64,7 +63,8 @@ class NewsList extends Component<Props, State> {
       .then(({ articles }) => this.setState({
         newsList: articles,
         isLoading: false,
-      }));
+      }))
+      .catch(error => this.props.showNotification(error));
   };
 
   render() {

@@ -1,5 +1,6 @@
 // @flow
 
+import PropTypes from 'prop-types';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 import { withRouter } from 'react-router-dom';
@@ -18,6 +19,7 @@ type Props = {
   location: Object,
   history: Object,
   classes: Object,
+  showNotification: Function,
 };
 
 const getAllActiveTitles = titles =>
@@ -27,25 +29,27 @@ const getAllActiveTitles = titles =>
     .join(',');
 
 class SourcesList extends React.Component<Props, State> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sourcesList: [],
-      checkedSources: {},
-    };
-  }
+  static propTypes = {
+    location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    showNotification: PropTypes.func.isRequired,
+  };
+
+  state = {
+    sourcesList: [],
+    checkedSources: {},
+  };
 
   componentDidMount() {
     this.renderSources(this.props.location.search);
   }
 
-  componentDidUpdate(nextProps) {
-    if (this.props.location.search !== nextProps.location.search) {
-      this.renderSources(nextProps.location.search);
+  componentDidUpdate(prevProps: Props) {
+    if (this.props.location.search !== prevProps.location.search) {
+      this.renderSources(this.props.location.search);
     }
   }
 
-  handleOnChange = (title: String) =>
+  _handleOnChange = title =>
     this.setState({
       checkedSources: {
         ...this.state.checkedSources,
@@ -80,7 +84,8 @@ class SourcesList extends React.Component<Props, State> {
         this.setState({ checkedSources });
 
         return checkedSources;
-      });
+      })
+      .catch(error => this.props.showNotification(error));
   };
   render() {
     const { sourcesList, checkedSources } = this.state;
@@ -99,8 +104,8 @@ class SourcesList extends React.Component<Props, State> {
                     key={id}
                     name={id}
                     title={name}
-                    checkedTitles={checkedSources}
-                    onChange={this.handleOnChange}
+                    checked={checkedSources[id]}
+                    onChange={this._handleOnChange}
                   />
                 ))}
               </ul>

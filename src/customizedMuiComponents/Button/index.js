@@ -2,15 +2,15 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button, withStyles } from 'material-ui';
 import { compose } from 'recompose';
-import { MenuItem, withStyles } from 'material-ui';
 import styles from './styles';
 
-const MenuItemCustomized = (props: Object) => {
+const ButtonCustomized = (props: Object) => {
   const { classes } = props;
 
   return (
-    <MenuItem
+    <Button
       {...props}
       classes={{
         root: classes.root,
@@ -19,7 +19,7 @@ const MenuItemCustomized = (props: Object) => {
   );
 };
 
-MenuItemCustomized.propTypes = {
+ButtonCustomized.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
@@ -27,4 +27,4 @@ const enhance = compose(
   withStyles(styles),
 );
 
-export default enhance(MenuItemCustomized);
+export default enhance(ButtonCustomized);

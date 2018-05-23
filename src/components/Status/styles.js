@@ -1,7 +1,7 @@
 import variables from '../../styles/variables';
 
 const styles = {
-  labelStyle: {
+  root: {
     background: variables.colors.coral,
     color: variables.colors.text,
     borderRadius: '5px',

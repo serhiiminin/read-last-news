@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { compose } from 'recompose';
 import Moment from 'react-moment';
-import { CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui';
-import { Card, FlatButton } from './../../customizedMuiComponents';
+import { CardActions, CardHeader, CardContent, CardMedia, Typography } from 'material-ui';
+import { Card, Button } from './../../customizedMuiComponents';
 import styles from './styles';
 
 type Props = {
@@ -25,33 +25,36 @@ type Props = {
 };
 
 const NewsItem = ({ newsItem, isLoading, classes }: Props) => (
-  <div className={`${classes['news-item']} ${isLoading ? classes['news-item-loading'] : ''}`}>
+  <div className={classes.newsItem}>
     <Card
       style={isLoading ? styles.cardLoading : styles.card}
     >
       <CardHeader
         title={newsItem && newsItem.source && newsItem.source.name}
-        subtitle={<Moment date={newsItem && newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
+        subheader={<Moment date={newsItem && newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
       />
       <CardMedia
-        style={isLoading ? styles.loading : {}}
-      >
-        <img
-          className={classes.img}
-          src={newsItem && newsItem.urlToImage}
-          alt={newsItem && newsItem.title}
-        />
-      </CardMedia>
-      <CardTitle title={newsItem && newsItem.title} />
-      <CardText>
-        {newsItem && newsItem.description}
-      </CardText>
+        style={isLoading ? styles.loading : { height: '200px' }}
+        image={newsItem && newsItem.urlToImage}
+        src="src"
+        title={newsItem && newsItem.title}
+      />
+      <CardContent>
+        <Typography
+          gutterBottom
+          variant="headline"
+          component="h2"
+        >
+          {newsItem && newsItem.title}
+        </Typography>
+        <Typography component="p">{newsItem && newsItem.description}</Typography>
+      </CardContent>
       <CardActions>
-        <FlatButton
-          label="Read"
+        <Button
           href={newsItem && newsItem.url}
           target="_blank"
-        />
+        >Read
+        </Button>
       </CardActions>
     </Card>
   </div>

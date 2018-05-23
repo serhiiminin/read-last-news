@@ -10,18 +10,18 @@ type Props = {
   name: string,
   title: string,
   classes: Object,
-  checkedTitles: Object,
+  checked: boolean,
   onChange: Function,
 }
 
-const SourcesItem = ({ name, title, classes, checkedTitles, onChange }: Props) => (
-  <li value={name} className={classes['titles-item']}>
+const SourcesItem = ({ name, title, classes, checked, onChange }: Props) => (
+  <li value={name} className={classes.titlesItem}>
     <Checkbox
       id={name}
       label={title}
       value={name}
-      checked={checkedTitles[name]}
-      onCheck={event => onChange(event.target.value)}
+      checked={checked}
+      onChange={event => onChange(event.target.value)}
     />
   </li>
 );

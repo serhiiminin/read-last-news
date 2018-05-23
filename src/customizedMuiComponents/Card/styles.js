@@ -1,5 +1,7 @@
 const styles = {
-  height: '100%',
+  root: {
+    height: '100%',
+  },
 };
 
 export default styles;

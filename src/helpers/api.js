@@ -18,14 +18,21 @@ const fetchJSON = url =>
   window.fetch(url)
     .then(checkStatus)
     .then(parseJSON)
-    .catch(error => console.log(error));
+    .catch(error => {
+      console.log(error.status);
+      if (error.message === 'Failed to fetch' && !window.navigator.onLine) {
+        throw new Error('Check your internet connection');
+      }
+      throw new Error(error);
+    });
+
 
 const api = (params: Object, typeData: string) => {
   const searchUrl = Object.keys(params).length !== 0
     ? new window.URLSearchParams(params)
     : new window.URLSearchParams(parameters.defaultParams);
 
-  searchUrl.append('apiKey', apiData.API_KEY);
+  searchUrl.append('apiKey', apiData.API_KEY[1]);
   return fetchJSON(`${apiData.BASE_API_URL}/${typeData}?${searchUrl.toString()}`);
 };
 

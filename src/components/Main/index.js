@@ -1,12 +1,17 @@
 // @flow
 
 import React from 'react';
-import { ErrorBoundary, NewsList } from './..';
+import { ErrorBoundary, NewsList, NotificationsContext } from './..';
 
 const Main = () => (
   <main>
     <ErrorBoundary>
-      <NewsList />
+      <NotificationsContext.Consumer>
+        {notifications => (
+          <NewsList showNotification={notifications.showNotification} />
+        )}
+      </NotificationsContext.Consumer>
+
     </ErrorBoundary>
   </main>
 );
