@@ -41,6 +41,9 @@ const variables = {
     modal: '1000',
     notification: '1010',
   },
+  timeout: {
+    notification: 300,
+  },
 };
 
 export default variables;

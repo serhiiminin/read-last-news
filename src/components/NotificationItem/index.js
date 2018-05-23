@@ -4,7 +4,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { compose } from 'recompose';
-import Transition from 'react-transition-group/Transition';
 import styles from './styles';
 
 type Props = {
@@ -12,33 +11,26 @@ type Props = {
   text: String,
   type: String,
   title: String,
+  status: String,
   onClick: Function,
 }
 
-const NotificationItem = ({ classes, onClick, title, text, type }: Props) => (
-  <Transition
-    in
-    timeout={5000}
-  >
-    {state => (
-      <li className={`${classes.notification} ${classes[type]} ${classes[state]}`}>
+const NotificationItem = ({ classes, onClick, title, text, type, status }: Props) => (
+  <li className={`${classes.notification} ${classes[type]} ${classes[status]}`}>
+    <div>
+      <div className={classes.topLine}>
+        <div className={classes.typeText}>{title}</div>
         <div>
-          <div className={classes.topLine}>
-            <div className={classes.typeText}>{title}</div>
-            <div>
-              <button
-                className={classes.closeButton}
-                onClick={onClick}
-              >+
-              </button>
-            </div>
-          </div>
-          <div>{text}</div>
-          <div>{state}</div>
+          <button
+            className={classes.closeButton}
+            onClick={onClick}
+          >+
+          </button>
         </div>
-      </li>
-    )}
-  </Transition>
+      </div>
+      <div>{text}</div>
+    </div>
+  </li>
 );
 
 NotificationItem.propTypes = {
