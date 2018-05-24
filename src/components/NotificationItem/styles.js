@@ -18,22 +18,6 @@ const styles = {
   warning: {
     background: variables.colors.notifications.warning,
   },
-  entering: {
-    marginTop: '100px',
-    opacity: '0',
-  },
-  entered: {
-    marginTop: '0',
-    opacity: '1',
-  },
-  exiting: {
-    marginTop: '50px',
-    opacity: '0',
-  },
-  exited: {
-    marginTop: '50px',
-    opacity: '0',
-  },
   topLine: {
     display: 'flex',
     flexFlow: 'row wrap',
@@ -55,6 +39,22 @@ const styles = {
     '&:hover': {
       cursor: 'pointer',
     },
+  },
+  entering: {
+    marginTop: '100px',
+    opacity: '0',
+  },
+  entered: {
+    marginTop: '0',
+    opacity: '1',
+  },
+  exiting: {
+    marginTop: '50px',
+    opacity: '0',
+  },
+  exited: {
+    marginTop: '50px',
+    opacity: '0',
   },
 };
 

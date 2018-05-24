@@ -22,43 +22,47 @@ type Props = {
   },
   isLoading: boolean,
   classes: Object,
+  status: String,
 };
 
-const NewsItem = ({ newsItem, isLoading, classes }: Props) => (
-  <div className={classes.newsItem}>
-    <Card
-      style={isLoading ? styles.cardLoading : styles.card}
-    >
-      <CardHeader
-        title={newsItem && newsItem.source && newsItem.source.name}
-        subheader={<Moment date={newsItem && newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
-      />
-      <CardMedia
-        style={isLoading ? styles.loading : { height: '200px' }}
-        image={newsItem && newsItem.urlToImage}
-        src="src"
-        title={newsItem && newsItem.title}
-      />
-      <CardContent>
-        <Typography
-          gutterBottom
-          variant="headline"
-          component="h2"
-        >
-          {newsItem && newsItem.title}
-        </Typography>
-        <Typography component="p">{newsItem && newsItem.description}</Typography>
-      </CardContent>
-      <CardActions>
-        <Button
-          href={newsItem && newsItem.url}
-          target="_blank"
-        >Read
-        </Button>
-      </CardActions>
-    </Card>
-  </div>
-);
+const NewsItem = ({ newsItem, isLoading, classes, status }: Props) => {
+  console.log(status);
+  return (
+    <div className={`${classes.newsItem} ${classes[status]}`}>
+      <Card
+        style={isLoading ? styles.cardLoading : styles.card}
+      >
+        <CardHeader
+          title={newsItem && newsItem.source && newsItem.source.name}
+          subheader={<Moment date={newsItem && newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
+        />
+        <CardMedia
+          style={isLoading ? styles.loading : { height: '200px' }}
+          image={newsItem && newsItem.urlToImage}
+          src="src"
+          title={newsItem && newsItem.title}
+        />
+        <CardContent>
+          <Typography
+            gutterBottom
+            variant="headline"
+            component="h2"
+          >
+            {newsItem && newsItem.title}
+          </Typography>
+          <Typography component="p">{newsItem && newsItem.description}</Typography>
+        </CardContent>
+        <CardActions>
+          <Button
+            href={newsItem && newsItem.url}
+            target="_blank"
+          >Read
+          </Button>
+        </CardActions>
+      </Card>
+    </div>
+  );
+};
 
 NewsItem.propTypes = {
   newsItem: PropTypes.shape({

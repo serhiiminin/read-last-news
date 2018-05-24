@@ -42,7 +42,7 @@ class Notifications extends React.Component<Props, State> {
       };
     }), NOTIFICATION_TIMEOUT);
   };
-  _hideNotification = (id: ?String) => {
+  _hideNotification = id => {
     this.setState(prevState => {
       const prevErrors = { ...prevState }.errors;
 
@@ -63,29 +63,26 @@ class Notifications extends React.Component<Props, State> {
         >
           { children }
         </NotificationsContext.Provider>
-        <ul className={classes.notifications}>
-          <TransitionGroup>
-            {notifications.map(([id, value]) => (
-              <Transition
-                timeout={variables.timeout.notification}
-                unmountOnExit
-                key={id}
-              >
-                {status => (
-                  <NotificationItem
-                    title="Oops"
-                    type="error"
-                    text={value}
-                    key={id}
-                    status={status}
-                    onClick={() => this._hideNotification(id)}
-                  />
-                )}
-
-              </Transition>
-            ))}
-          </TransitionGroup>
-        </ul>
+        <TransitionGroup className={classes.notifications} component="ul">
+          {notifications.map(([id, value]) => (
+            <Transition
+              timeout={variables.timeout.notification}
+              unmountOnExit
+              key={id}
+            >
+              {status => (
+                <NotificationItem
+                  title="Oops"
+                  type="error"
+                  text={value}
+                  key={id}
+                  status={status}
+                  onClick={() => this._hideNotification(id)}
+                />
+              )}
+            </Transition>
+          ))}
+        </TransitionGroup>
       </React.Fragment>
     );
   }

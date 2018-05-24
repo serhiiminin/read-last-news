@@ -43,6 +43,7 @@ const variables = {
   },
   timeout: {
     notification: 300,
+    listBlocks: 400,
   },
 };
 
