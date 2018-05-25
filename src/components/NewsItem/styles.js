@@ -28,7 +28,7 @@ const styles = {
     opacity: '1',
   },
   exiting: {
-    opacity: '0',
+    opacity: '1',
   },
   exited: {
     opacity: '0',
