@@ -97,12 +97,13 @@ class Sidebar extends React.Component<Props, State> {
             choose={parameters.choose.pageSize}
             parameters={parameters.pageSizes}
             defaultValue={parsedLocation[parameters.pageSize] || parameters.defaultParams.pageSize}
-            onChange={(event, index, value) =>
+            onChange={event => (
               history.push(generateSearchParams(
                 location.search,
                 {
-                  [parameters.pageSize]: value,
-                }))}
+                  [parameters.pageSize]: event.target.value,
+                })))
+            }
             disabled={!parsedLocation.category && !parsedLocation.country}
           />
         </div>

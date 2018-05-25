@@ -14,15 +14,20 @@ const styles = {
     height: '100%',
   },
   cardLoading: {
-    minHeight: '200px',
-    opacity: '0.8',
+    minHeight: '300px',
+    opacity: '.8',
   },
-  loading: {
+  media: {
+    height: '200px',
+  },
+  mediaLoading: {
+    opacity: '0.5',
     minHeight: '200px',
-    background: variables.colors.text,
+    background: 'transparent',
+
   },
   entering: {
-    opacity: '0',
+    opacity: '.8',
   },
   entered: {
     opacity: '1',
