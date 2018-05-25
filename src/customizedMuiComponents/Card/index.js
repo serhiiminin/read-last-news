@@ -6,18 +6,18 @@ import { compose } from 'recompose';
 import { Card, withStyles } from 'material-ui';
 import styles from './styles';
 
-const CardCustomized = (props: Object) => {
-  const { classes } = props;
+type Props = {
+  classes: Object,
+}
 
-  return (
-    <Card
-      {...props}
-      classes={{
+const CardCustomized = ({ classes, ...restProps }: Props) => (
+  <Card
+    {...restProps}
+    classes={{
         root: classes.root,
       }}
-    />
-  );
-};
+  />
+);
 
 CardCustomized.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types

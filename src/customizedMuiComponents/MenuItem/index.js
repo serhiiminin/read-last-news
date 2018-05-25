@@ -6,18 +6,18 @@ import { compose } from 'recompose';
 import { MenuItem, withStyles } from 'material-ui';
 import styles from './styles';
 
-const MenuItemCustomized = (props: Object) => {
-  const { classes } = props;
+type Props = {
+  classes: Object,
+}
 
-  return (
-    <MenuItem
-      {...props}
-      classes={{
+const MenuItemCustomized = ({ classes, ...restProps }: Props) => (
+  <MenuItem
+    {...restProps}
+    classes={{
         root: classes.root,
       }}
-    />
-  );
-};
+  />
+);
 
 MenuItemCustomized.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types

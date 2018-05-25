@@ -13,25 +13,21 @@ type Props = {
   id: string,
 }
 
-const SelectCustomized = ({ children, id, label, ...props }: Props) => {
-  const { classes } = props;
-
-  return (
-    <FormControl className={classes.selectWrapper}>
-      <InputLabel htmlFor={label}>{label}</InputLabel>
-      <Select
-        id={id}
-        {...props}
-        classes={{
+const SelectCustomized = ({ children, id, label, classes, ...restProps }: Props) => (
+  <FormControl className={classes.selectWrapper}>
+    <InputLabel htmlFor={label}>{label}</InputLabel>
+    <Select
+      id={id}
+      {...restProps}
+      classes={{
           root: classes.root,
           select: classes.select,
         }}
-      >
-        {children}
-      </Select>
-    </FormControl>
-  );
-};
+    >
+      {children}
+    </Select>
+  </FormControl>
+);
 
 SelectCustomized.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
