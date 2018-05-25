@@ -6,10 +6,10 @@ const styles = {
   },
   style: {
     '&:selected': {
-      background: variables.colors.blue,
+      background: variables.colors.actions,
     },
   },
-  touchRippleColor: variables.colors.blue,
+  touchRippleColor: variables.colors.actions,
 };
 
 export default styles;

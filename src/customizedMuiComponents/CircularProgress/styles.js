@@ -2,7 +2,7 @@ import { variables } from '../../styles';
 
 const styles = {
   root: {
-    color: variables.colors.blue,
+    color: variables.colors.actions,
   },
 };
 

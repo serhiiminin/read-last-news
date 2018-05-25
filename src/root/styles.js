@@ -14,12 +14,13 @@ const styles = {
   '@global body': {
     overflowX: 'hidden',
     color: variables.colors.text,
-    fontFamily: 'WalbaumFraktur, sans-serif',
+    fontFamily: 'Courier New, sans-serif',
     position: 'relative',
     boxSizing: 'border-box',
   },
   '@global *': {
     boxSizing: 'border-box',
+    fontFamily: 'Courier New, sans-serif !important',
   },
   root: {
     background: variables.colors.background,

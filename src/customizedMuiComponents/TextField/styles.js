@@ -8,7 +8,7 @@ const styles = {
     maxWidth: '100%',
   },
   underlineFocusStyle: {
-    borderColor: variables.colors.blue,
+    borderColor: variables.colors.actions,
   },
 
   inputStyle: {
