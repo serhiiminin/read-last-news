@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
+import { Transition, TransitionGroup } from 'react-transition-group';
 import { parseSearchParams, api } from '../../helpers';
 import { parameters } from '../../defaults';
+import variables from '../../styles/variables';
 import { NewsItem } from './..';
 import styles from './styles';
 
@@ -71,32 +73,28 @@ class NewsList extends Component<Props, State> {
     const { classes } = this.props;
     const { newsList, isLoading } = this.state;
 
-    const loadedList = !newsList.length
+    return !newsList.length
       ? <div className={classes['news-list-empty']}>There is no news</div>
       : (
-        <div className={classes['news-list']}>
+        <TransitionGroup className={classes['news-list']}>
           {newsList.map((newsItem, key) => (
-            <NewsItem
-              isLoading={isLoading}
-              newsItem={newsItem}
+            <Transition
               key={`${newsItem && newsItem.title}` || key}
-            />
-          ))}
-        </div>
-      );
+              timeout={variables.timeout.listBlocks}
+              appear
+            >
+              {status => (
+                <NewsItem
+                  isLoading={isLoading}
+                  newsItem={newsItem}
+                  key={`${newsItem && newsItem.title}` || key}
+                  status={status}
+                />
+                )}
+            </Transition>
 
-    return !isLoading
-      ? loadedList
-      : (
-        <div className={classes['news-list']}>
-          {Array(12).fill(null).map((newsItem, key) => (
-            <NewsItem
-              isLoading={isLoading}
-              newsItem={newsItem}
-              key={(newsItem && newsItem.title) || key}
-            />
-          ))}
-        </div>
+            ))}
+        </TransitionGroup>
       );
   }
 }

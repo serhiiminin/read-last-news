@@ -22,10 +22,11 @@ type Props = {
   },
   isLoading: boolean,
   classes: Object,
+  status: String,
 };
 
-const NewsItem = ({ newsItem, isLoading, classes }: Props) => (
-  <div className={classes.newsItem}>
+const NewsItem = ({ newsItem, isLoading, classes, status }: Props) => (
+  <div className={`${classes.newsItem} ${classes[status]}`}>
     <Card
       style={isLoading ? styles.cardLoading : styles.card}
     >

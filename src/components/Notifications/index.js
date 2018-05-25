@@ -4,7 +4,9 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { compose } from 'recompose';
+import { Transition, TransitionGroup } from 'react-transition-group';
 import uuid from 'uuid';
+import variables from '../../styles/variables';
 import { NotificationItem } from './..';
 import styles from './styles';
 
@@ -40,7 +42,7 @@ class Notifications extends React.Component<Props, State> {
       };
     }), NOTIFICATION_TIMEOUT);
   };
-  _hideNotification = (id: ?String) => {
+  _hideNotification = id => {
     this.setState(prevState => {
       const prevErrors = { ...prevState }.errors;
 
@@ -61,17 +63,26 @@ class Notifications extends React.Component<Props, State> {
         >
           { children }
         </NotificationsContext.Provider>
-        <ul className={classes.notifications}>
+        <TransitionGroup className={classes.notifications} component="ul">
           {notifications.map(([id, value]) => (
-            <NotificationItem
-              title="Oops"
-              type="error"
-              text={value}
+            <Transition
+              timeout={variables.timeout.notification}
+              unmountOnExit
               key={id}
-              onClick={() => this._hideNotification(id)}
-            />
+            >
+              {status => (
+                <NotificationItem
+                  title="Oops"
+                  type="error"
+                  text={value}
+                  key={id}
+                  status={status}
+                  onClick={() => this._hideNotification(id)}
+                />
+              )}
+            </Transition>
           ))}
-        </ul>
+        </TransitionGroup>
       </React.Fragment>
     );
   }

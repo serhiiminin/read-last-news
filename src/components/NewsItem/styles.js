@@ -5,7 +5,7 @@ const styles = {
     margin: `${variables.margins.no} ${variables.margins.no} 1.33% 1.33%`,
     padding: variables.paddings.no,
     width: '32%',
-    transition: 'all .2s ease-in-out',
+    transition: `all ${variables.timeout.listBlocks}ms ease-in-out`,
     img: {
       display: 'none',
     },
@@ -20,6 +20,18 @@ const styles = {
   loading: {
     minHeight: '200px',
     background: variables.colors.text,
+  },
+  entering: {
+    opacity: '0',
+  },
+  entered: {
+    opacity: '1',
+  },
+  exiting: {
+    opacity: '1',
+  },
+  exited: {
+    opacity: '0',
   },
 };
 

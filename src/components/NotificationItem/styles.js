@@ -7,6 +7,7 @@ const styles = {
     padding: variables.paddings.medium,
     marginBottom: variables.margins.medium,
     listStyle: 'none',
+    transition: `all ${variables.timeout.notification}ms ease-in-out`,
   },
   error: {
     background: variables.colors.notifications.error,
@@ -38,6 +39,22 @@ const styles = {
     '&:hover': {
       cursor: 'pointer',
     },
+  },
+  entering: {
+    marginTop: '100px',
+    opacity: '0',
+  },
+  entered: {
+    marginTop: '0',
+    opacity: '1',
+  },
+  exiting: {
+    marginTop: '50px',
+    opacity: '0',
+  },
+  exited: {
+    marginTop: '50px',
+    opacity: '0',
   },
 };
 

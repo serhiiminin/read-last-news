@@ -11,11 +11,12 @@ type Props = {
   text: String,
   type: String,
   title: String,
+  status: String,
   onClick: Function,
 }
 
-const NotificationItem = ({ classes, onClick, title, text, type }: Props) => (
-  <li className={`${classes.notification} ${classes[type]}`}>
+const NotificationItem = ({ classes, onClick, title, text, type, status }: Props) => (
+  <li className={`${classes.notification} ${classes[type]} ${classes[status]}`}>
     <div>
       <div className={classes.topLine}>
         <div className={classes.typeText}>{title}</div>

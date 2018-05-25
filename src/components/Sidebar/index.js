@@ -73,6 +73,7 @@ class Sidebar extends React.Component<Props, State> {
         <div className={classes.sidebarParamWrapper}>
           <TextField
             label="Search news"
+            defaultValue={parsedLocation.q || ''}
             onChange={this._handleInputChange}
           />
         </div>

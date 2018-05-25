@@ -11,6 +11,11 @@ const styles = {
     margin: variables.margins.no,
     padding: variables.paddings.no,
   },
+  '@global': {
+    '.step-enter': {
+      opacity: '0',
+    },
+  },
 };
 
 export default styles;
