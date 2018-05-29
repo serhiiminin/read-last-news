@@ -14,25 +14,21 @@ type Props = {
   onChange: Function,
 }
 
-const RadioCustomized = ({ label, value, onChange, checked, ...props }: Props) => {
-  const { classes } = props;
-
-  return (
-    <FormControlLabel
-      label={label}
-      value={value}
-      control={
-        <Radio
-          checked={checked}
-          onChange={onChange}
-          classes={{
+const RadioCustomized = ({ label, value, classes, onChange, checked }: Props) => (
+  <FormControlLabel
+    label={label}
+    value={value}
+    control={
+      <Radio
+        checked={checked}
+        onChange={onChange}
+        classes={{
             root: classes.root,
             checked: classes.checked,
           }}
-        />}
-    />
-  );
-};
+      />}
+  />
+);
 
 RadioCustomized.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types

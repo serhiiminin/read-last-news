@@ -1,26 +1,24 @@
 // @flow
-
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
+import { CircularProgress, withStyles } from 'material-ui';
 import { compose } from 'recompose';
-import { MenuItem, withStyles } from 'material-ui';
 import styles from './styles';
 
-type Props = {
+type Props= {
   classes: Object,
 }
 
-const MenuItemCustomized = ({ classes, ...restProps }: Props) => (
-  <MenuItem
+const CustomizedCircularProgress = ({ classes, ...restProps }: Props) => (
+  <CircularProgress
     {...restProps}
     classes={{
       root: classes.root,
-      selected: classes.selected,
     }}
   />
 );
 
-MenuItemCustomized.propTypes = {
+CustomizedCircularProgress.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
@@ -28,4 +26,4 @@ const enhance = compose(
   withStyles(styles),
 );
 
-export default enhance(MenuItemCustomized);
+export default enhance(CustomizedCircularProgress);

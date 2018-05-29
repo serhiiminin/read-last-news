@@ -12,7 +12,7 @@ type Props = {
   checked: boolean,
 }
 
-const CheckboxCustomized = ({ classes, label, checked, ...props }: Props) => (
+const CheckboxCustomized = ({ classes, label, checked, ...restProps }: Props) => (
   <FormControlLabel
     checked
     classes={{
@@ -20,7 +20,7 @@ const CheckboxCustomized = ({ classes, label, checked, ...props }: Props) => (
       }}
     control={
       <Checkbox
-        {...props}
+        {...restProps}
         checked={checked}
         classes={{
             root: classes.root,

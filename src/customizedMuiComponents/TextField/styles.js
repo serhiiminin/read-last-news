@@ -4,15 +4,16 @@ const styles = {
   root: {
     width: '100%',
   },
-  style: {
-    maxWidth: '100%',
+  label: {
+    color: `${variables.colors.text} !important`,
   },
-  underlineFocusStyle: {
-    borderColor: variables.colors.blue,
+  textFieldRoot: {
+    '&:after': {
+      backgroundColor: `${variables.colors.actions} !important`,
+    },
   },
+  textFieldInput: {
 
-  inputStyle: {
-    color: variables.colors.text,
   },
 };
 

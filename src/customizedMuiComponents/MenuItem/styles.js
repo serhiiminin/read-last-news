@@ -3,13 +3,15 @@ import { variables } from '../../styles';
 const styles = {
   root: {
     width: '100%',
-  },
-  style: {
-    '&:selected': {
-      background: variables.colors.blue,
+    '&:hover': {
+      background: `${variables.colors.actions} !important`,
+      color: `${variables.colors.background} !important`,
     },
   },
-  touchRippleColor: variables.colors.blue,
+  selected: {
+    background: `${variables.colors.actions} !important`,
+    color: `${variables.colors.background} !important`,
+  },
 };
 
 export default styles;
