@@ -14,8 +14,9 @@ const MenuItemCustomized = ({ classes, ...restProps }: Props) => (
   <MenuItem
     {...restProps}
     classes={{
-        root: classes.root,
-      }}
+      root: classes.root,
+      selected: classes.selected,
+    }}
   />
 );
 

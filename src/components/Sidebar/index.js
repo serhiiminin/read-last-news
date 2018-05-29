@@ -21,6 +21,7 @@ type Props = {
 type State = {
   open: boolean,
   country: string,
+  input: string,
 };
 
 const INPUT_TIMEOUT = 500;
@@ -31,6 +32,7 @@ class Sidebar extends React.Component<Props, State> {
   state = {
     open: false,
     country: parameters.defaultParams.country,
+    input: '',
   };
 
   componentDidMount() {
@@ -49,10 +51,14 @@ class Sidebar extends React.Component<Props, State> {
     clearTimeout(this.inputTimer);
     const { target }: Object = event;
 
-    this.inputTimer = setTimeout(() =>
+    this.inputTimer = setTimeout(() => {
+      this.setState({
+        input: target.value,
+      });
       this.props.history.push(
         generateSearchParams(this.props.location.search, { q: target.value }),
-      ), INPUT_TIMEOUT);
+      );
+    }, INPUT_TIMEOUT);
   };
 
   render() {
@@ -60,6 +66,7 @@ class Sidebar extends React.Component<Props, State> {
     const parsedLocation = parseSearchParams(location.search, match.params.countryId);
     const paramsCountries: Array<[string, mixed]> = Object.entries(parameters.countries);
 
+    console.log(this.state.input);
     return (
       <aside className={classes.sidebar}>
         <Button
@@ -73,7 +80,7 @@ class Sidebar extends React.Component<Props, State> {
         <div className={classes.sidebarParamWrapper}>
           <TextField
             label="Search news"
-            defaultValue={parsedLocation.q || ''}
+            defaultValue={this.state.input}
             onChange={this._handleInputChange}
           />
         </div>

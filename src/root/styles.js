@@ -14,13 +14,13 @@ const styles = {
   '@global body': {
     overflowX: 'hidden',
     color: variables.colors.text,
-    fontFamily: 'Courier New, sans-serif',
+    fontFamily: 'Courier, sans-serif',
     position: 'relative',
     boxSizing: 'border-box',
   },
   '@global *': {
     boxSizing: 'border-box',
-    fontFamily: 'Courier New, sans-serif !important',
+    fontFamily: 'Courier, sans-serif !important',
   },
   root: {
     background: variables.colors.background,

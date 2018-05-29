@@ -11,6 +11,10 @@ const styles = {
       transition: variables.hover.transition,
     },
   },
+  disabled: {
+    background: variables.colors.actions,
+    color: `${variables.colors.background} !important`,
+  },
 };
 
 export default styles;

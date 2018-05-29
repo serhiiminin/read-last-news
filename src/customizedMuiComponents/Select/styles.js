@@ -1,7 +1,11 @@
 const styles = {
   root: {
     width: '100%',
-    fontFamily: 'Courier New, sans-serif',
+  },
+  select: {
+    background: 'transparent !important',
+  },
+  selectMenu: {
   },
   selectWrapper: {
     width: '100%',

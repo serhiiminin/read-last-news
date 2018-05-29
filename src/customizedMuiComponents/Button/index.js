@@ -10,8 +10,9 @@ const ButtonCustomized = ({ classes, ...restProps }: Object) => (
   <Button
     {...restProps}
     classes={{
-        root: classes.root,
-      }}
+       root: classes.root,
+       disabled: classes.disabled,
+    }}
   />
 );
 

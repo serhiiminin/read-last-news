@@ -16,14 +16,7 @@ type Props = {
   disabled: Boolean
 };
 
-const SelectParam = (
-  { parameters,
-    defaultValue,
-    choose,
-    onChange,
-    classes,
-    disabled,
-  }: Props) => {
+const SelectParam = ({ parameters, defaultValue, choose, onChange, classes, disabled }: Props) => {
   const paramsList: Array<[string, mixed]> = Object.entries(parameters);
 
   return (

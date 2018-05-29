@@ -3,7 +3,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { FormControl, Select, InputLabel, withStyles } from 'material-ui';
+import { FormControl, Select, withStyles } from 'material-ui';
+import { InputLabel } from './../../customizedMuiComponents';
 import styles from './styles';
 
 type Props = {
@@ -20,9 +21,10 @@ const SelectCustomized = ({ children, id, label, classes, ...restProps }: Props)
       id={id}
       {...restProps}
       classes={{
-          root: classes.root,
-          select: classes.select,
-        }}
+        root: classes.root,
+        select: classes.select,
+        selectMenu: classes.selectMenu,
+      }}
     >
       {children}
     </Select>

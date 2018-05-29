@@ -7,3 +7,4 @@ export { default as Card } from './Card';
 export { default as Radio } from './Radio';
 export { default as RadioGroup } from './RadioGroup';
 export { default as CircularProgress } from './CircularProgress';
+export { default as InputLabel } from './InputLabel';

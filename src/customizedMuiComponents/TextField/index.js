@@ -14,8 +14,8 @@ const TextFieldCustomized = ({ classes, ...restProps }: Props) => (
   <TextField
     {...restProps}
     classes={{
-        root: classes.root,
-      }}
+      root: classes.root,
+    }}
   />
 );
 
