@@ -11,14 +11,12 @@ type Props = {
   children: React.Node,
   classes: Object,
   label: string,
-  id: string,
-}
+};
 
-const SelectCustomized = ({ children, id, label, classes, ...restProps }: Props) => (
+const SelectCustomized = ({ children, label, classes, ...restProps }: Props) => (
   <FormControl className={classes.selectWrapper}>
     <InputLabel htmlFor={label}>{label}</InputLabel>
     <Select
-      id={id}
       {...restProps}
       classes={{
         root: classes.root,

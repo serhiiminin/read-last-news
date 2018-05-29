@@ -66,7 +66,6 @@ class Sidebar extends React.Component<Props, State> {
     const parsedLocation = parseSearchParams(location.search, match.params.countryId);
     const paramsCountries: Array<[string, mixed]> = Object.entries(parameters.countries);
 
-    console.log(this.state.input);
     return (
       <aside className={classes.sidebar}>
         <Button

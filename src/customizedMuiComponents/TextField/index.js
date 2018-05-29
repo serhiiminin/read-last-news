@@ -13,8 +13,15 @@ type Props = {
 const TextFieldCustomized = ({ classes, ...restProps }: Props) => (
   <TextField
     {...restProps}
-    classes={{
-      root: classes.root,
+    className={classes.root}
+    InputProps={{
+      classes: {
+        root: classes.textFieldRoot,
+        input: classes.textFieldInput,
+      },
+    }}
+    InputLabelProps={{
+      className: classes.label,
     }}
   />
 );

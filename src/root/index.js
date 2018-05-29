@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import injectSheet from 'react-jss';
 import { compose } from 'recompose';
 import { Notifications } from '../components';
+import variables from '../styles/variables';
 import App from './../app';
 import styles from './styles';
 
@@ -14,7 +15,16 @@ type Props = {
   classes: Object,
 }
 
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: variables.colors.messages,
+      main: variables.colors.background,
+      dark: variables.colors.actions,
+      contrastText: variables.colors.text,
+    },
+  },
+});
 
 const Root = ({ classes }: Props) => (
   <div className={classes.root}>
