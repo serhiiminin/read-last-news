@@ -25,6 +25,10 @@ const styles = {
   root: {
     background: variables.colors.background,
     minHeight: '100vh',
+    padding: `${variables.paddings.no} ${variables.paddings.medium}`,
+    '@media (min-width: 768px)': {
+      padding: variables.paddings.no,
+    },
   },
 };
 

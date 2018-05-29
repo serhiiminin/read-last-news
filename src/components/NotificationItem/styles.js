@@ -36,6 +36,7 @@ const styles = {
     borderRadius: '50%',
     transform: 'rotate(45deg)',
     fontSize: '1.2em',
+    outline: 'none',
     '&:hover': {
       cursor: 'pointer',
     },
