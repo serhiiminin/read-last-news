@@ -2,9 +2,9 @@ const variables = {
   colors: {
     text: '#333333',
     background: '#F4EADE',
-    blue: '#2988BC',
-    sea: '#2F496E',
-    coral: '#ED8C72',
+    actions: '#2988BC',
+    buttons: '#2F496E',
+    messages: '#ED8C72',
     notifications: {
       error: '#FFBABA',
       success: '#DFF2BF',
@@ -43,7 +43,7 @@ const variables = {
   },
   timeout: {
     notification: 300,
-    listBlocks: 400,
+    listBlocks: 300,
   },
 };
 

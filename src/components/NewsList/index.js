@@ -44,17 +44,17 @@ class NewsList extends Component<Props, State> {
       ? parseSearchParams(this.props.location.search)
       : parameters.defaultParams;
 
-    this.renderNews(queryParams);
+    this._renderNews(queryParams);
   }
 
   componentDidUpdate(prevProps: Props) {
     if (this.props.location.search !== prevProps.location.search) {
       const queryParams = parseSearchParams(this.props.location.search);
 
-      this.renderNews(queryParams);
+      this._renderNews(queryParams);
     }
   }
-  renderNews = (queryParams: Object) => {
+  _renderNews = (queryParams: Object) => {
     const request = !queryParams[parameters.sources]
       ? queryParams
       : { [parameters.sources]: queryParams[parameters.sources] };
@@ -74,9 +74,9 @@ class NewsList extends Component<Props, State> {
     const { newsList, isLoading } = this.state;
 
     return !newsList.length
-      ? <div className={classes['news-list-empty']}>There is no news</div>
+      ? <div className={classes.newsListEmpty}>There is no news</div>
       : (
-        <TransitionGroup className={classes['news-list']}>
+        <TransitionGroup className={classes.newsList}>
           {newsList.map((newsItem, key) => (
             <Transition
               key={`${newsItem && newsItem.title}` || key}
@@ -84,12 +84,14 @@ class NewsList extends Component<Props, State> {
               appear
             >
               {status => (
-                <NewsItem
-                  isLoading={isLoading}
-                  newsItem={newsItem}
-                  key={`${newsItem && newsItem.title}` || key}
-                  status={status}
-                />
+                <div className={classes.newsItem}>
+                  <NewsItem
+                    isLoading={isLoading}
+                    newsItem={newsItem}
+                    key={`${newsItem && newsItem.title}` || key}
+                    status={status}
+                  />
+                </div>
                 )}
             </Transition>
 

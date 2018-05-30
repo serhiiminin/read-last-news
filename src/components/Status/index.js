@@ -10,18 +10,15 @@ type Props = {
   classes: Object,
 }
 
-const Status = ({ children, ...props }: Props) => {
-  const { classes } = props;
-
-  return (
-    <Chip
-      classes={{
+const Status = ({ children, classes, ...restProps }: Props) => (
+  <Chip
+    {...restProps}
+    classes={{
         root: classes.root,
       }}
-      label={children}
-    />
-  );
-};
+    label={children}
+  />
+);
 
 const enhance = compose(
   withStyles(styles),

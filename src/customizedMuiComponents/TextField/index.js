@@ -6,18 +6,25 @@ import { compose } from 'recompose';
 import { TextField, withStyles } from 'material-ui';
 import styles from './styles';
 
-const TextFieldCustomized = (props: Object) => {
-  const { classes } = props;
+type Props = {
+  classes: Object,
+}
 
-  return (
-    <TextField
-      {...props}
-      classes={{
-        root: classes.root,
-      }}
-    />
-  );
-};
+const TextFieldCustomized = ({ classes, ...restProps }: Props) => (
+  <TextField
+    {...restProps}
+    className={classes.root}
+    InputProps={{
+      classes: {
+        root: classes.textFieldRoot,
+        input: classes.textFieldInput,
+      },
+    }}
+    InputLabelProps={{
+      className: classes.label,
+    }}
+  />
+);
 
 TextFieldCustomized.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types

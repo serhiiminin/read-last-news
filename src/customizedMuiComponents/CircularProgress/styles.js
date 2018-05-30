@@ -1,8 +1,8 @@
 import { variables } from '../../styles';
 
 const styles = {
-  checked: {
-    color: `${variables.colors.actions} !important`,
+  root: {
+    color: variables.colors.actions,
   },
 };
 

@@ -14,8 +14,7 @@ type Props = {
   location: Object,
   match: Object,
 }
-const Header = (props: Props) => {
-  const { classes, location, match } = props;
+const Header = ({ classes, location, match }: Props) => {
   const parsedUrl = parseSearchParams(location.search, match.params.countryId);
   const countryName = parsedUrl.country || parameters.defaultParams.country;
 

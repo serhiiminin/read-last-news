@@ -2,9 +2,7 @@ import variables from '../../styles/variables';
 
 const styles = {
   newsItem: {
-    margin: `${variables.margins.no} ${variables.margins.no} 1.33% 1.33%`,
-    padding: variables.paddings.no,
-    width: '32%',
+    width: '100%',
     transition: `all ${variables.timeout.listBlocks}ms ease-in-out`,
     img: {
       display: 'none',
@@ -14,15 +12,20 @@ const styles = {
     height: '100%',
   },
   cardLoading: {
-    minHeight: '200px',
-    opacity: '0.8',
+    minHeight: '300px',
+    opacity: '.8',
   },
-  loading: {
+  media: {
+    height: '200px',
+  },
+  mediaLoading: {
+    opacity: '0.5',
     minHeight: '200px',
-    background: variables.colors.text,
+    background: 'transparent',
+
   },
   entering: {
-    opacity: '0',
+    opacity: '.8',
   },
   entered: {
     opacity: '1',

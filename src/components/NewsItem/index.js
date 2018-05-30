@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { compose } from 'recompose';
 import Moment from 'react-moment';
-import { CardActions, CardHeader, CardContent, CardMedia, Typography } from 'material-ui';
-import { Card, Button } from './../../customizedMuiComponents';
+import { CardActions, CardContent, CardMedia, Typography } from 'material-ui';
+import { Card, CardHeader, Button, CircularProgress } from './../../customizedMuiComponents';
 import styles from './styles';
 
 type Props = {
@@ -31,11 +31,17 @@ const NewsItem = ({ newsItem, isLoading, classes, status }: Props) => (
       style={isLoading ? styles.cardLoading : styles.card}
     >
       <CardHeader
-        title={newsItem && newsItem.source && newsItem.source.name}
-        subheader={<Moment date={newsItem && newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />}
+        title={isLoading ?
+          <CircularProgress />
+          : newsItem && newsItem.source && newsItem.source.name
+        }
+        subheader={isLoading ?
+          null
+          : <Moment date={newsItem && newsItem.publishedAt} format="YYYY/MM/DD, HH:mm" />
+        }
       />
       <CardMedia
-        style={isLoading ? styles.loading : { height: '200px' }}
+        style={isLoading ? styles.mediaLoading : styles.media}
         image={newsItem && newsItem.urlToImage}
         src="src"
         title={newsItem && newsItem.title}
@@ -44,15 +50,16 @@ const NewsItem = ({ newsItem, isLoading, classes, status }: Props) => (
         <Typography
           gutterBottom
           variant="headline"
-          component="h2"
+          component="h5"
         >
-          {newsItem && newsItem.title}
+          {isLoading ? null : newsItem && newsItem.title}
         </Typography>
-        <Typography component="p">{newsItem && newsItem.description}</Typography>
+        <Typography component="p">{isLoading ? null : newsItem && newsItem.description}</Typography>
       </CardContent>
       <CardActions>
         <Button
           href={newsItem && newsItem.url}
+          disabled={isLoading}
           target="_blank"
         >Read
         </Button>
