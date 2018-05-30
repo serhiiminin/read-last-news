@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import { compose } from 'recompose';
 import Moment from 'react-moment';
-import { CardActions, CardHeader, CardContent, CardMedia, Typography } from 'material-ui';
-import { Card, Button, CircularProgress } from './../../customizedMuiComponents';
+import { CardActions, CardContent, CardMedia, Typography } from 'material-ui';
+import { Card, CardHeader, Button, CircularProgress } from './../../customizedMuiComponents';
 import styles from './styles';
 
 type Props = {
@@ -50,7 +50,7 @@ const NewsItem = ({ newsItem, isLoading, classes, status }: Props) => (
         <Typography
           gutterBottom
           variant="headline"
-          component="h2"
+          component="h5"
         >
           {isLoading ? null : newsItem && newsItem.title}
         </Typography>
