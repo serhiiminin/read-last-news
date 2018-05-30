@@ -12,6 +12,7 @@ export { default as SourcesItem } from './SourcesItem';
 export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as Notifications } from './Notifications';
 export { default as NotificationItem } from './NotificationItem';
+export { default as PageNotFound } from './PageNotFound';
 
 // context
 export { NotificationsContext } from './Notifications';

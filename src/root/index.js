@@ -3,10 +3,10 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import injectSheet from 'react-jss';
 import { compose } from 'recompose';
-import { Notifications } from '../components';
+import { Notifications, PageNotFound } from '../components';
 import variables from '../styles/variables';
 import App from './../app';
 import styles from './styles';
@@ -31,7 +31,10 @@ const Root = ({ classes }: Props) => (
     <MuiThemeProvider theme={theme}>
       <Notifications>
         <Router>
-          <Route path="/" component={App} />
+          <Switch>
+            <Route path="/" exact component={App} />
+            <Route component={PageNotFound} />
+          </Switch>
         </Router>
       </Notifications>
     </MuiThemeProvider>
