@@ -2,9 +2,7 @@ import variables from '../../styles/variables';
 
 const styles = {
   newsItem: {
-    margin: `${variables.margins.no} ${variables.margins.no} 1.33% 1.33%`,
-    padding: variables.paddings.no,
-    width: '32%',
+    width: '100%',
     transition: `all ${variables.timeout.listBlocks}ms ease-in-out`,
     img: {
       display: 'none',
