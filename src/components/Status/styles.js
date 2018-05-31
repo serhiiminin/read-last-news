@@ -7,6 +7,7 @@ const styles = {
     borderRadius: '5px',
     fontWeight: 'bold',
     opacity: '.6',
+    alignSelf: 'center',
   },
 };
 

@@ -19,8 +19,7 @@ const styles = {
     background: variables.colors.notifications.warning,
   },
   topLine: {
-    display: 'flex',
-    flexFlow: 'row wrap',
+    display: 'grid',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: variables.margins.medium,

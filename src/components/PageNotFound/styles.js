@@ -1,10 +1,10 @@
 const styles = {
   wrapper: {
-    display: 'flex',
+    display: 'grid',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
     minHeight: '100vh',
+    width: '100%',
   },
   buttonWrapper: {
     textAlign: 'center',
