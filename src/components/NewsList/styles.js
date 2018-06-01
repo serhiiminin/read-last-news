@@ -8,43 +8,24 @@ const styles = {
   newsList: {
     background: 'transparent',
     display: 'grid',
-    justifyContent: 'space-between',
-    alignItems: '',
-    gridAutoFlow: 'row',
-    gridTemplateColumns: '100%',
-    gridTemplateRows: '100%',
+    gridTemplateColumns: '1fr',
     '@media (min-width: 768px)': {
-      gridTemplateColumns: '100%',
+      gridTemplateColumns: '1fr',
+      columnGap: '.5rem',
+      rowGap: '.5rem',
       margin: `${variables.margins.no} ${variables.margins.no} ${variables.margins.medium}`,
     },
     '@media (min-width: 992px)': {
-      gridTemplateColumns: '49% 49%',
-      gridColumnGap: '1%',
-      gridRowGap: '1%',
+      gridTemplateColumns: 'repeat(2, 1fr)',
     },
     '@media (min-width: 1200px)': {
       gridTemplateColumns: 'repeat(3, 1fr)',
-      gridColumnGap: '1%',
-      gridRowGap: '5%',
+      gridAutoRows: 'minmax(300px, auto)',
     },
   },
   newsItem: {
-    // display: 'flex',
-    width: '100%',
-    height: '100%',
-    // margin: `${variables.margins.no} ${variables.margins.no} ${variables.margins.medium}`,
+    display: 'grid',
     padding: variables.paddings.no,
-    '@media (min-width: 768px)': {
-      width: '100%',
-      // margin: `${variables.margins.no} ${variables.margins.no} ${variables.margins.medium}`,
-    },
-    '@media (min-width: 992px)': {
-      // margin: `${variables.margins.no} ${variables.margins.no} 1% 1%`,
-    },
-    '@media (min-width: 1200px)': {
-      // width: '32%',
-      // margin: `${variables.margins.no} ${variables.margins.no} 1.33% 1.33%`,
-    },
   },
 };
 

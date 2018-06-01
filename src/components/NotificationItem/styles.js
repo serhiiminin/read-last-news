@@ -20,12 +20,15 @@ const styles = {
   },
   topLine: {
     display: 'grid',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    gridAutoFlow: 'column',
     marginBottom: variables.margins.medium,
   },
   typeText: {
     fontWeight: 'bold',
+  },
+  wrapperCloseButton: {
+    textAlign: 'right',
   },
   closeButton: {
     background: 'transparent',

@@ -20,7 +20,7 @@ const NotificationItem = ({ classes, onClick, title, text, type, status }: Props
     <div>
       <div className={classes.topLine}>
         <div className={classes.typeText}>{title}</div>
-        <div>
+        <div className={classes.wrapperCloseButton}>
           <button
             className={classes.closeButton}
             onClick={onClick}

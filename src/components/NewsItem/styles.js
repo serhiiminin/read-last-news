@@ -8,9 +8,6 @@ const styles = {
       display: 'none',
     },
   },
-  card: {
-    height: '100%',
-  },
   cardLoading: {
     minHeight: '300px',
     opacity: '.8',
