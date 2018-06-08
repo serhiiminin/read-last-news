@@ -3,15 +3,16 @@ import { variables } from '../../styles';
 const styles = {
   header: {
     padding: `${variables.paddings.medium} ${variables.paddings.no}`,
-    display: 'flex',
-    flexFlow: 'row wrap',
+    display: 'grid',
+    gridTemplateColumns: 'auto auto',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    '&>div': {
+      alignSelf: 'center',
+    },
   },
   link: {
     color: variables.colors.text,
     textDecoration: 'none',
-    fontFamily: 'WalbaumFraktur, sans-serif',
   },
 };
 

@@ -19,14 +19,16 @@ const styles = {
     background: variables.colors.notifications.warning,
   },
   topLine: {
-    display: 'flex',
-    flexFlow: 'row wrap',
-    justifyContent: 'space-between',
+    display: 'grid',
     alignItems: 'center',
+    gridAutoFlow: 'column',
     marginBottom: variables.margins.medium,
   },
   typeText: {
     fontWeight: 'bold',
+  },
+  wrapperCloseButton: {
+    textAlign: 'right',
   },
   closeButton: {
     background: 'transparent',

@@ -7,25 +7,25 @@ const styles = {
   },
   newsList: {
     background: 'transparent',
-    display: 'flex',
-    flexFlow: 'row wrap',
-  },
-  newsItem: {
-    display: 'flex',
-    width: '100%',
-    margin: `${variables.margins.no} ${variables.margins.no} ${variables.margins.medium}`,
-    padding: variables.paddings.no,
+    display: 'grid',
+    gridTemplateColumns: '1fr',
     '@media (min-width: 768px)': {
-      width: '100%',
+      gridTemplateColumns: '1fr',
+      columnGap: '.5rem',
+      rowGap: '.5rem',
       margin: `${variables.margins.no} ${variables.margins.no} ${variables.margins.medium}`,
     },
     '@media (min-width: 992px)': {
-      margin: `${variables.margins.no} ${variables.margins.no} 1% 1%`,
+      gridTemplateColumns: 'repeat(2, 1fr)',
     },
     '@media (min-width: 1200px)': {
-      width: '32%',
-      margin: `${variables.margins.no} ${variables.margins.no} 1.33% 1.33%`,
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      gridAutoRows: 'minmax(300px, auto)',
     },
+  },
+  newsItem: {
+    display: 'grid',
+    padding: variables.paddings.no,
   },
 };
 

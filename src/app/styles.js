@@ -15,34 +15,27 @@ const styles = {
     },
   },
   content: {
-    display: 'flex',
-    flexFlow: 'row wrap',
+    display: 'grid',
+    gridTemplateColumns: 'auto-flow / 100% 100%',
+    '@media (min-width: 768px)': {
+      gridTemplateColumns: '40% 60%',
+    },
+    '@media (min-width: 992px)': {
+      gridTemplateColumns: '30% 70%',
+    },
+    '@media (min-width: 1200px)': {
+      gridTemplateColumns: '20% 80%',
+    },
   },
   content__sidebar: {
     width: '100%',
     marginBottom: variables.margins.large,
     '@media (min-width: 768px)': {
-      width: '40%',
       marginBottom: variables.margins.no,
-    },
-    '@media (min-width: 992px)': {
-      width: '30%',
-    },
-    '@media (min-width: 1200px)': {
-      width: '20%',
     },
   },
   content__main: {
     width: '100%',
-    '@media (min-width: 768px)': {
-      width: '60%',
-    },
-    '@media (min-width: 992px)': {
-      width: '70%',
-    },
-    '@media (min-width: 1200px)': {
-      width: '80%',
-    },
   },
 };
 
