@@ -2,11 +2,6 @@
 
 import { apiData, parameters } from './../defaults';
 
-const apiKeys = apiData.API_KEYS;
-
-let apiKeysIterator = apiKeys[Symbol.iterator]();
-let currentApiKey = apiKeysIterator.next();
-
 const checkStatus = (response: Object) => {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -19,6 +14,32 @@ const checkStatus = (response: Object) => {
 
 const parseJson = response => response.json();
 
+function* getWorkingApiKey(keys) {
+  let timeOfFirstRequest = Date.now();
+  let differenceRequest = 0;
+  let count = 0;
+
+  for (let i = 0; i < keys.length; i += 1) {
+    if (i === keys.length - 1) {
+      if (count > 1 && differenceRequest > 0) {
+        count = 0;
+        return false;
+      }
+      yield keys[i];
+      timeOfFirstRequest = Date.now();
+      count += 1;
+      i = -1;
+    } else {
+      const timeOfLastRequest = Date.now();
+
+      differenceRequest += timeOfLastRequest - timeOfFirstRequest;
+      yield keys[i];
+    }
+  }
+  return false;
+}
+const generatorKey = getWorkingApiKey(apiData.API_KEYS);
+
 const fetchJson = url =>
   window.fetch(url)
     .then(checkStatus)
@@ -30,6 +51,8 @@ const fetchJson = url =>
       throw new Error(error);
     });
 
+let currentApiKey = generatorKey.next();
+
 const api = (params: Object, typeData: string) => {
   const searchUrl = Object.keys(params).length !== 0
     ? new window.URLSearchParams(params)
@@ -38,16 +61,19 @@ const api = (params: Object, typeData: string) => {
   if (!currentApiKey.done) {
     searchUrl.append('apiKey', currentApiKey.value);
   } else {
-    apiKeysIterator = apiKeys[Symbol.iterator]();
-    currentApiKey = apiKeysIterator.next();
-    searchUrl.append('apiKey', currentApiKey.value);
+    throw new Error('No free API keys. Try later');
   }
+
   return fetchJson(`${apiData.BASE_API_URL}/${typeData}?${searchUrl.toString()}`)
     .catch(error => {
-      currentApiKey = apiKeysIterator.next();
-      return api(params, typeData);
+      if (error.message === 'TypeError: Failed to fetch') {
+        currentApiKey = generatorKey.next();
+        return api(params, typeData);
+      }
+      return error;
     })
-    .then(response => response);
+    .then(response => response)
+    .catch(error => console.log(error));
 };
 
 export default api;
