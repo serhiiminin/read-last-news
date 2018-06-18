@@ -8,6 +8,7 @@ const styles = {
   newsList: {
     background: 'transparent',
     display: 'grid',
+    rowGap: '.5rem',
     gridTemplateColumns: '1fr',
     '@media (min-width: 768px)': {
       gridTemplateColumns: '1fr',
