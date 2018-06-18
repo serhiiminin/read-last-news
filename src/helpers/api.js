@@ -15,26 +15,16 @@ const checkStatus = (response: Object) => {
 const parseJson = response => response.json();
 
 function* getWorkingApiKey(keys) {
-  let timeOfFirstRequest = Date.now();
-  let differenceRequest = 0;
-  let count = 0;
+  const keysWithLastUsedTime = keys.map(apiKey => ({ key: apiKey, lastUsed: null }));
 
-  for (let i = 0; i < keys.length; i += 1) {
-    if (i === keys.length - 1) {
-      if (count > 1 && differenceRequest > 0) {
-        count = 0;
-        return false;
-      }
-      yield keys[i];
-      timeOfFirstRequest = Date.now();
-      count += 1;
-      i = -1;
-    } else {
-      const timeOfLastRequest = Date.now();
+  for (let i = 0; i < keysWithLastUsedTime.length; i += 1) {
+    const currentKey = keysWithLastUsedTime[i];
+    const currentTime = Date.now();
 
-      differenceRequest += timeOfLastRequest - timeOfFirstRequest;
-      yield keys[i];
-    }
+    if (currentTime - currentKey.lastUsed < 500) return false;
+    currentKey.lastUsed = currentTime;
+    yield currentKey.key;
+    if (keysWithLastUsedTime.length - 1 === i) i = -1;
   }
   return false;
 }
@@ -72,8 +62,7 @@ const api = (params: Object, typeData: string) => {
       }
       return error;
     })
-    .then(response => response)
-    .catch(error => console.log(error));
+    .then(response => response);
 };
 
 export default api;
