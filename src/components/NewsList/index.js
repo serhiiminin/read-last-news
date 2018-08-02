@@ -44,17 +44,17 @@ class NewsList extends Component<Props, State> {
       ? parseSearchParams(this.props.location.search)
       : parameters.defaultParams;
 
-    this._renderNews(queryParams);
+    this.renderNews(queryParams);
   }
 
   componentDidUpdate(prevProps: Props) {
     if (this.props.location.search !== prevProps.location.search) {
       const queryParams = parseSearchParams(this.props.location.search);
 
-      this._renderNews(queryParams);
+      this.renderNews(queryParams);
     }
   }
-  _renderNews = (queryParams: Object) => {
+  renderNews = (queryParams: Object) => {
     const request = !queryParams[parameters.sources]
       ? queryParams
       : { [parameters.sources]: queryParams[parameters.sources] };

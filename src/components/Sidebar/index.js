@@ -47,7 +47,7 @@ class Sidebar extends React.Component<Props, State> {
     clearTimeout(this.inputTimer);
   }
 
-  _handleInputChange = event => {
+  handleInputChange = event => {
     clearTimeout(this.inputTimer);
     const { target }: Object = event;
 
@@ -80,7 +80,7 @@ class Sidebar extends React.Component<Props, State> {
           <TextField
             label="Search news"
             defaultValue={this.state.input}
-            onChange={this._handleInputChange}
+            onChange={this.handleInputChange}
           />
         </div>
         <div className={classes.sidebarParamWrapper}>

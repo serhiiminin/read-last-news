@@ -26,7 +26,7 @@ class Notifications extends React.Component<Props, State> {
   state = {
     errors: {},
   };
-  _showNotification = (error: { response: Object, message: ?String }) => {
+  showNotification = (error: { response: Object, message: ?String }) => {
     const id = uuid();
 
     this.setState({ errors: {
@@ -42,7 +42,7 @@ class Notifications extends React.Component<Props, State> {
       };
     }), NOTIFICATION_TIMEOUT);
   };
-  _hideNotification = id => {
+  hideNotification = id => {
     this.setState(prevState => {
       const prevErrors = { ...prevState }.errors;
 
@@ -59,7 +59,7 @@ class Notifications extends React.Component<Props, State> {
     return (
       <React.Fragment>
         <NotificationsContext.Provider
-          value={{ showNotification: this._showNotification }}
+          value={{ showNotification: this.showNotification }}
         >
           { children }
         </NotificationsContext.Provider>
@@ -77,7 +77,7 @@ class Notifications extends React.Component<Props, State> {
                   text={value}
                   key={id}
                   status={status}
-                  onClick={() => this._hideNotification(id)}
+                  onClick={() => this.hideNotification(id)}
                 />
               )}
             </Transition>
