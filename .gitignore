@@ -23,3 +23,10 @@ yarn-debug.log*
 yarn-error.log*
 
 /.idea
+
+/.awestruct/
+/.bundle/
+/.sass-cache/
+/_site/
+/_tmp/
+/Gemfile.lock
