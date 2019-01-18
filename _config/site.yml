@@ -1,9 +1,0 @@
-profiles:
-  production:
-    base_url: http://serhiiminin.github.io/news-portal
-    deploy:
-      host: github_pages
-      # use gh-branch for repositories other than serhiiminin.github.io
-      branch: gh-pages
-      # use master branch for serhiiminin.github.io repository
-      #branch: master
