@@ -30,7 +30,7 @@ const Root = ({ classes }: Props) => (
   <div className={classes.root}>
     <MuiThemeProvider theme={theme}>
       <Notifications>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <Switch>
             <Route path="/" exact component={App} />
             <Route component={PageNotFound} />
