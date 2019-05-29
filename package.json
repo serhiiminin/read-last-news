@@ -6,7 +6,7 @@
   "dependencies": {
     "jss-global": "3.0.0",
     "material-ui": "1.0.0-beta.47",
-    "moment": "2.22.1",
+    "moment": "2.24.0",
     "normalize.jss": "1.0.3",
     "prop-types": "15.6.1",
     "react": "16.7.0",
